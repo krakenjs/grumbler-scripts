@@ -23,10 +23,6 @@
     "postinstall": "flow-typed install",
     "debug": "cross-env NODE_ENV=debug"
   },
-  "files": [
-    "dist/",
-    "src/"
-  ],
   "browserslist": [
     "IE >= 9",
     "chrome >= 27",
