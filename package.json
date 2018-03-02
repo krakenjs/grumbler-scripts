@@ -1,5 +1,5 @@
 {
-  "name": "grumbler",
+  "name": "grumbler-scripts",
   "version": "1.0.0",
   "description": "Javascript module template.",
   "main": "index.js",
@@ -48,7 +48,7 @@
     }
   ],
   "readmeFilename": "README.md",
-  "devDependencies": {
+  "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.7.7",
     "babel-eslint": "^8.0.1",
@@ -112,6 +112,5 @@
     "webpack": "^3.5.5",
     "webpack-stream": "^4.0.0",
     "yargs": "^9.0.1"
-  },
-  "dependencies": {}
+  }
 }
