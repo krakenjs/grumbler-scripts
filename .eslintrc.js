@@ -378,7 +378,7 @@ module.exports = {
         'import/no-deprecated': 'error',
         'import/no-duplicates': 'error',
         'import/no-dynamic-require': 'error',
-        'import/no-extraneous-dependencies': 'error',
+        'import/no-extraneous-dependencies': 'off',
         'import/no-internal-modules': 'off',
         'import/no-mutable-exports': 'off',
         'import/no-named-as-default': 'error',
