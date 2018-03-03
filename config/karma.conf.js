@@ -2,7 +2,7 @@
 
 import { argv } from 'yargs';
 
-export function getKarmaConfig(cfg : Object = {}) {
+export function getKarmaConfig(karma, cfg : Object = {}) {
 
     let debug          = Boolean(argv.debug);
     let quick          = Boolean(argv.quick);
@@ -60,7 +60,7 @@ export function getKarmaConfig(cfg : Object = {}) {
         ],
 
         autoWatch,
-        logLevel:  debug ? config.LOG_DEBUG : logLevel || config.LOG_WARN,
+        logLevel: debug ? karma.LOG_DEBUG : logLevel || karma.LOG_WARN,
 
         basePath: __dirname,
 
