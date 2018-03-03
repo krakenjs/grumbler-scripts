@@ -2,9 +2,7 @@
 
 import { argv } from 'yargs';
 
-import { WEBPACK_CONFIG_TEST } from './webpack.config';
-
-export default function configKarma(config : Object) {
+export function getKarmaConfig(cfg : Object = {}) {
 
     let debug          = Boolean(argv.debug);
     let quick          = Boolean(argv.quick);
@@ -54,22 +52,8 @@ export default function configKarma(config : Object) {
                     '--js-flags="--expose-gc"'
                 ],
                 debug
-            },
-
-            xPhantom: {
-                base:  'PhantomJS',
-                flags: [
-                    '--load-images=true',
-                    '--disk-cache=true',
-                    '--disk-cache-path=node_modules/.cache/phantomjs',
-                    '--max-disk-cache-size=1000000'
-                ],
-                debug
             }
-
         },
-
-        webpack: WEBPACK_CONFIG_TEST,
 
         reporters: [
             quick ? 'progress' : 'spec'
@@ -110,7 +94,9 @@ export default function configKarma(config : Object) {
             terminal: true
         },
 
-        singleRun: !keepOpen
+        singleRun: !keepOpen,
+        
+        ...cfg
     };
 
     if (browsers) {
@@ -145,5 +131,5 @@ export default function configKarma(config : Object) {
         karmaConfig.customLaunchers.xChrome.flags.push('--headless');
     }
 
-    config.set(karmaConfig);
+    return karmaConfig;
 }
