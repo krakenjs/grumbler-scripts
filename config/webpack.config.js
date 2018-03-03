@@ -50,7 +50,8 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
         },
 
         resolve: {
-            modules: [
+            extensions: [ '.js', '.jsx' ],
+            modules:    [
                 __dirname,
                 'node_modules'
             ]
