@@ -101,6 +101,7 @@
     "karma-webpack": "^2.0.3",
     "lolex": "^2.1.2",
     "mocha": "^4.0.1",
+    "npm-check-updates": "^2.14.1",
     "phantomjs-prebuilt": "^2.1.7",
     "querystring": "^0.2.0",
     "raw-loader": "^0.5.1",
