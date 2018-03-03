@@ -67,7 +67,7 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
                     loader: 'imports?define=>false,require=>false'
                 },
                 {
-                    test:    /\.js$/,
+                    test:    /\.jsx?$/,
                     exclude: /(dist)/,
                     loader:  'babel-loader'
                 },
