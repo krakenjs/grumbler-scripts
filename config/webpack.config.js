@@ -1,12 +1,12 @@
 /* @flow */
 /* eslint import/no-nodejs-modules: off */
 
-const path = require('path');
-const qs = require('querystring');
+import path from 'path';
+import qs from 'querystring';
 
-const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-const CircularDependencyPlugin = require('circular-dependency-plugin');
+import webpack from 'webpack';
+import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
+import CircularDependencyPlugin from 'circular-dependency-plugin';
 
 const FILE_NAME = 'mylibrary';
 const MODULE_NAME = 'mylibrary';
