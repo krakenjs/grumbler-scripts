@@ -21,7 +21,8 @@
     "clean": "rimraf dist coverage",
     "reinstall": "rimraf flow-typed && rimraf node_modules && npm install && flow-typed install",
     "debug": "cross-env NODE_ENV=debug",
-    "prepublish": "npm run babel"
+    "prepublish": "npm run babel",
+    "postpublish": "git checkout config"
   },
   "browserslist": [
     "IE >= 9",
