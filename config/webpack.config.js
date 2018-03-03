@@ -73,7 +73,7 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
                     loader:  'babel-loader'
                 },
                 {
-                    test:    /\.(html?|css|json)$/,
+                    test:   /\.(html?|css|json|svg)$/,
                     loader: 'raw-loader'
                 }
             ]
