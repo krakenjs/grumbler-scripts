@@ -21,7 +21,7 @@
     "clean": "rimraf dist coverage",
     "reinstall": "rimraf flow-typed && rimraf node_modules && npm install && flow-typed install",
     "debug": "cross-env NODE_ENV=debug",
-    "prepublish": "npm run babel",
+    "prepublish": "in-publish && npm run babel",
     "postpublish": "git checkout config"
   },
   "browserslist": [
@@ -86,6 +86,7 @@
     "flow-runtime": "^0.14.0",
     "flow-typed": "^2.2.0",
     "ifdef-loader": "^2.0.3",
+    "in-publish": "^2.0.0",
     "istanbul-instrumenter-loader": "^3.0.0",
     "karma": "^1.7.0",
     "karma-chrome-launcher": "^2.1.1",
