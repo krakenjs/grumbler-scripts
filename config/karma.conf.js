@@ -152,5 +152,5 @@ export function getKarmaConfig(karma, cfg : Object = {}) {
 
 export default karma =>
     karma.set(getKarmaConfig(karma, {
-        basePath: __dirname
+        basePath: process.cwd()
     }));
