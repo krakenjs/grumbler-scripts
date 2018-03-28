@@ -30,7 +30,7 @@ export function getKarmaConfig(karma, cfg : Object = {}) {
             },
 
             {
-                pattern:  'test/test.js',
+                pattern:  'test/index.js',
                 included: true,
                 served:   true
             }
