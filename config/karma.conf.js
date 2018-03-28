@@ -2,7 +2,11 @@
 
 import { argv } from 'yargs';
 
+import { getWebpackConfig } from './webpack.config';
+
 export function getKarmaConfig(karma, cfg : Object = {}) {
+
+    process.env.NODE_ENV = 'test';
 
     let debug          = Boolean(argv.debug);
     let quick          = Boolean(argv.quick);
@@ -33,7 +37,7 @@ export function getKarmaConfig(karma, cfg : Object = {}) {
         ],
 
         preprocessors: {
-            'test/test.js':         [ 'webpack',  'sourcemap' ],
+            'test/*.js':            [ 'webpack',  'sourcemap' ],
             'test/windows/**/*.js': [ 'webpack',  'sourcemap' ],
             'src/**/*.js':          [ 'coverage', 'sourcemap' ]
         },
@@ -126,10 +130,27 @@ export function getKarmaConfig(karma, cfg : Object = {}) {
             ]
         };
     }
+    
 
     if (headless) {
         karmaConfig.customLaunchers.xChrome.flags.push('--headless');
     }
 
+    if (!karmaConfig.webpack) {
+        karmaConfig.webpack = getWebpackConfig({
+            options: {
+                devtool: 'inline-source-map'
+            },
+            vars: {
+                __TEST__: true
+            }
+        });
+    }
+
     return karmaConfig;
 }
+
+export default karma =>
+    karma.set(getKarmaConfig(karma, {
+        basePath: __dirname
+    }));

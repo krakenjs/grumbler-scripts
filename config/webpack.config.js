@@ -35,7 +35,7 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
         'ifdef-triple-slash': 'false',
         ...vars
     };
-
+    
     return {
 
         entry: './src/index.js',
@@ -61,7 +61,7 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
             rules: [
                 {
                     test:    /\.js$/,
-                    loader: `ifdef-loader?${ qs.encode(PREPROCESSOR_OPTS) }`
+                    loader: `ifdef-loader?${ qs.stringify(PREPROCESSOR_OPTS) }`
                 },
                 {
                     test:   /sinon\.js$/,
