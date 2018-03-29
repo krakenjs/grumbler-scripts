@@ -39,6 +39,10 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
         vars.__TEST__ = true;
     }
 
+    for (let key of Object.keys(vars)) {
+        vars[key] = JSON.stringify(vars[key]);
+    }
+
     return {
 
         entry: './src/index.js',
