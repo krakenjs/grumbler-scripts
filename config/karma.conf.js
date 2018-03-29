@@ -4,7 +4,7 @@ import { argv } from 'yargs';
 
 import { getWebpackConfig } from './webpack.config';
 
-export function getKarmaConfig(karma, cfg : Object = {}) {
+export function getKarmaConfig(karma : Object, cfg : Object = {}) {
 
     process.env.NODE_ENV = 'test';
 
@@ -143,7 +143,7 @@ export function getKarmaConfig(karma, cfg : Object = {}) {
     return karmaConfig;
 }
 
-export default karma =>
+export default (karma : Object) =>
     karma.set(getKarmaConfig(karma, {
         basePath: process.cwd()
     }));
