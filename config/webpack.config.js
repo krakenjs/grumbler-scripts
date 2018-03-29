@@ -18,10 +18,11 @@ type WebpackConfigOptions = {
     modulename : string,
     minify? : boolean,
     options? : Object,
-    vars? : { [string] : mixed }
+    vars? : { [string] : mixed },
+    alias? : { [string] : string }
 };
 
-export function getWebpackConfig({ filename, modulename, minify = false, options = {}, vars = {} } : WebpackConfigOptions = {}) : Object {
+export function getWebpackConfig({ filename, modulename, minify = false, options = {}, vars = {}, alias = {} } : WebpackConfigOptions = {}) : Object {
 
     vars = {
         ...DEFAULT_VARS,
@@ -57,6 +58,7 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
         },
 
         resolve: {
+            alias,
             extensions: [ '.js', '.jsx' ],
             modules:    [
                 __dirname,
