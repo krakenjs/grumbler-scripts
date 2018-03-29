@@ -313,7 +313,7 @@ module.exports = {
 
         'unicorn/catch-error-name': [ 'error', { 'name': 'err' } ],
         'unicorn/explicit-length-check': 'off',
-        'unicorn/filename-case': [ 'error', { 'case': 'camelCase' } ],
+        'unicorn/filename-case': 'off',
         'unicorn/no-abusive-eslint-disable': 'error',
         'unicorn/no-process-exit': 'error',
         'unicorn/throw-new-error': 'error',
