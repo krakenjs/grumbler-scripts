@@ -137,14 +137,7 @@ export function getKarmaConfig(karma, cfg : Object = {}) {
     }
 
     if (!karmaConfig.webpack) {
-        karmaConfig.webpack = getWebpackConfig({
-            options: {
-                devtool: 'inline-source-map'
-            },
-            vars: {
-                __TEST__: true
-            }
-        });
+        karmaConfig.webpack = getWebpackConfig();
     }
 
     return karmaConfig;

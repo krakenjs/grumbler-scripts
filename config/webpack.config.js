@@ -8,9 +8,6 @@ import webpack from 'webpack';
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 
-const FILE_NAME = 'mylibrary';
-const MODULE_NAME = 'mylibrary';
-
 const DEFAULT_VARS = {
     __TEST__: false,
     __MIN__:  false
@@ -35,7 +32,13 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
         'ifdef-triple-slash': 'false',
         ...vars
     };
-    
+
+    // eslint-disable-next-line no-process-env
+    if (process.env.NODE_ENV === 'test') {
+        options.devtool = 'inline-source-map';
+        vars.__TEST__ = true;
+    }
+
     return {
 
         entry: './src/index.js',
