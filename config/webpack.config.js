@@ -21,7 +21,7 @@ type WebpackConfigOptions = {
     vars? : { [string] : mixed }
 };
 
-export function getWebpackConfig({ filename, modulename, minify = false, options = {}, vars = {} } : WebpackConfigOptions) : Object {
+export function getWebpackConfig({ filename, modulename, minify = false, options = {}, vars = {} } : WebpackConfigOptions = {}) : Object {
 
     vars = {
         ...DEFAULT_VARS,
