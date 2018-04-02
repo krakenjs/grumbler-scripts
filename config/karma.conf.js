@@ -4,7 +4,7 @@ import { argv } from 'yargs';
 
 import { getWebpackConfig } from './webpack.config';
 
-export function getKarmaConfig(karma : Object, cfg : Object = {}) {
+export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
 
     process.env.NODE_ENV = 'test';
 

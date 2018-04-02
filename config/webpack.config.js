@@ -34,7 +34,6 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
         ...vars
     };
 
-    // eslint-disable-next-line no-process-env
     if (process.env.NODE_ENV === 'test') {
         options.devtool = 'inline-source-map';
         vars.__TEST__ = true;
