@@ -153,7 +153,7 @@ module.exports = {
         'no-catch-shadow': 'error',
         'no-delete-var': 'error',
         'no-label-var': 'error',
-        'no-restricted-globals': 'off'
+        'no-restricted-globals': 'off',
         'no-shadow-restricted-names': 'error',
         'no-shadow': 'error',
         'no-undef-init': 'error',
