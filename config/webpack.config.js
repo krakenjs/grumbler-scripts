@@ -42,7 +42,7 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
     for (let key of Object.keys(vars)) {
         vars[key] = JSON.stringify(vars[key]);
     }
-
+    
     return {
 
         entry: './src/index.js',
@@ -57,7 +57,10 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
         },
 
         resolve: {
-            alias,
+            alias: {
+                ...alias,
+                sinon: 'sinon/pkg/sinon.js'
+            },
             extensions: [ '.js', '.jsx' ],
             modules:    [
                 __dirname,
