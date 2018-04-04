@@ -38,6 +38,10 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
         options.devtool = 'inline-source-map';
         vars.__TEST__ = true;
     }
+
+    Object.keys(vars).forEach(key => {
+        vars[key] = JSON.stringify(vars[key]);
+    });
     
     return {
 
