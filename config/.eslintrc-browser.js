@@ -1,7 +1,7 @@
 /* @flow */
 
 module.exports = {
-    'extends': './node_modules/grumbler-scripts/config/.eslintrc.js',
+    'extends': './.eslintrc.js',
 
     rules: {
         'import/no-dynamic-require': 'error',
