@@ -21,7 +21,7 @@
     "clean": "rimraf dist coverage",
     "reinstall": "rimraf flow-typed && rimraf node_modules && npm install && flow-typed install",
     "debug": "cross-env NODE_ENV=debug",
-    "prepublish": "in-publish && npm run babel",
+    "prepublish": "in-publish && npm run babel || not-in-publish",
     "postpublish": "git checkout config"
   },
   "browserslist": [
