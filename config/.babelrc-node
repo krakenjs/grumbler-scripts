@@ -28,7 +28,6 @@
     "env": {
         "test": {
             "plugins": [
-                [ "flow-runtime", { "assert": true, "annotate": true } ],
                 [ "istanbul", { "only": "./src" } ]
             ]
         }
