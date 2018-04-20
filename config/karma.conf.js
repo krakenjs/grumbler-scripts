@@ -33,6 +33,18 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
                 pattern:  'test/index.js',
                 included: true,
                 served:   true
+            },
+
+            {
+                pattern:  'test/**/*.js',
+                included: false,
+                served:   true
+            },
+
+            {
+                pattern:  'test/**/*.htm',
+                included: false,
+                served:   true
             }
         ],
 
