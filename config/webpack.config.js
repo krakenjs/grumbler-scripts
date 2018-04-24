@@ -8,6 +8,34 @@ import webpack from 'webpack';
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 
+type JSONPrimitive = string | boolean | number;
+type JSONObject = { [string] : JSONPrimitive | JSONObject } | Array<JSONPrimitive | JSONObject>;
+type JSONType = JSONObject | JSONPrimitive;
+
+function jsonifyPrimitives(item : JSONType) : JSONType {
+    if (Array.isArray(item)) {
+        return item.map(jsonifyPrimitives);
+    } else if (typeof item === 'object' && item !== null) {
+        let result = {};
+        for (let key of Object.keys(item)) {
+            result[key] = jsonifyPrimitives(item[key]);
+        }
+        return result;
+    } else if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean' || item === null || item === undefined) {
+        if (typeof item === 'string') {
+            try {
+                JSON.parse(item);
+                return item;
+            } catch (err) {
+                // pass
+            }
+        }
+        return JSON.stringify(item);
+    } else {
+        throw new TypeError(`Unrecognized type: ${ typeof item }`);
+    }
+}
+
 const DEFAULT_VARS = {
     __TEST__: false,
     __MIN__:  false
@@ -94,10 +122,7 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
             new webpack.SourceMapDevToolPlugin({
                 filename: '[file].map'
             }),
-            new webpack.DefinePlugin({
-                __TEST__: false,
-                ...vars
-            }),
+            new webpack.DefinePlugin(jsonifyPrimitives(vars)),
             new webpack.NamedModulesPlugin(),
             new UglifyJSPlugin({
                 test:     /\.js$/,
