@@ -127,7 +127,7 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
             new UglifyJSPlugin({
                 test:          /\.js$/,
                 uglifyOptions: {
-                    warnings: true,
+                    warnings: false,
                     compress: {
                         sequences: minify
                     },
