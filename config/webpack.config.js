@@ -125,15 +125,20 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
             new webpack.DefinePlugin(jsonifyPrimitives(vars)),
             new webpack.NamedModulesPlugin(),
             new UglifyJSPlugin({
-                test:     /\.js$/,
-                beautify: !minify,
-                minimize: minify,
-                compress: {
-                    warnings:  false,
-                    sequences: minify
+                test:          /\.js$/,
+                uglifyOptions: {
+                    warnings: true,
+                    compress: {
+                        sequences: minify
+                    },
+                    output: {
+                        beautify: !minify
+                    },
+                    mangle: minify
                 },
-                mangle:    minify,
-                sourceMap: true
+                parallel:  true,
+                sourceMap: true,
+                cache:     true
             }),
             new CircularDependencyPlugin({
                 exclude:     /node_modules/,
