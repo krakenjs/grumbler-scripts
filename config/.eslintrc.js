@@ -197,7 +197,7 @@ module.exports = {
         'max-depth': [ 'error', 5 ],
         'max-len': [ 'off', 120, 4],
         'max-nested-callbacks': [ 'error', 4],
-        'max-params': [1, 5],
+        'max-params': ['error', 5],
         'max-statements': 'off',
         'new-cap': 'error',
         'new-parens': 'error',
@@ -267,9 +267,9 @@ module.exports = {
         'no-this-before-super': 'error',
         'no-useless-constructor': 'error',
         // require let or const instead of var
-        'no-var': 1,
+        'no-var': 'error',
         // require method and property shorthand syntax for object literals
-        'object-shorthand': 1,
+        'object-shorthand': 'error',
         // suggest using arrow functions as callbacks
         'prefer-arrow-callback': 'error',
         // suggest using of const declaration for variables that are never modified after declared
