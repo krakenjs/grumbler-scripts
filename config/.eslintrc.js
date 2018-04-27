@@ -133,7 +133,7 @@ module.exports = {
         'no-sequences': 'error',
         'no-throw-literal': 'error',
         'no-unmodified-loop-condition': 'error',
-        'no-unused-expressions': 'error',
+        // 'no-unused-expressions': 'error',
         'no-unused-labels': 'error',
         'no-useless-call': 'error',
         'no-useless-concat': 'error',
@@ -308,6 +308,7 @@ module.exports = {
         'flowtype/no-types-missing-file-annotation': 'error',
         'flowtype/require-variable-type': 'off',
         'flowtype/sort-keys': 'off',
+        'flowtype/no-unused-expressions': 'error',
 
         'compat/compat': 'off',
 
