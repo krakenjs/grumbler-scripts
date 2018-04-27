@@ -75,6 +75,8 @@ export function getWebpackConfig({ filename, modulename, minify = false, test = 
     } else {
         vars.__TEST__ = false;
     }
+
+    vars.__FILE_NAME__ = filename;
     
     return {
 
