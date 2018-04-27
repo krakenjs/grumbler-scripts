@@ -45,12 +45,13 @@ type WebpackConfigOptions = {
     filename : string,
     modulename : string,
     minify? : boolean,
+    test? : boolean,
     options? : Object,
     vars? : { [string] : mixed },
     alias? : { [string] : string }
 };
 
-export function getWebpackConfig({ filename, modulename, minify = false, options = {}, vars = {}, alias = {} } : WebpackConfigOptions = {}) : Object {
+export function getWebpackConfig({ filename, modulename, minify = false, test = (process.env.NODE_ENV === 'test'), options = {}, vars = {}, alias = {} } : WebpackConfigOptions = {}) : Object {
 
     vars = {
         ...DEFAULT_VARS,
@@ -62,9 +63,17 @@ export function getWebpackConfig({ filename, modulename, minify = false, options
         ...vars
     };
 
-    if (process.env.NODE_ENV === 'test') {
+    if (minify) {
+        vars.__MIN__ = true;
+    } else {
+        vars.__MIN__ = false;
+    }
+
+    if (test) {
         options.devtool = 'inline-source-map';
         vars.__TEST__ = true;
+    } else {
+        vars.__TEST__ = false;
     }
     
     return {
