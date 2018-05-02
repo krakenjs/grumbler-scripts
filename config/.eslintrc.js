@@ -74,7 +74,7 @@ module.exports = {
         'no-sparse-arrays': 'error',
         'no-unexpected-multiline': 'error',
         'no-unreachable': 'error',
-        'quote-props': [ 'error', 'consistent' ],
+        'quote-props': [ 'error', 'consistent', { 'numbers': true } ],
         'use-isnan': 'error',
         'valid-jsdoc': 'off',
         'valid-typeof': 'error',
