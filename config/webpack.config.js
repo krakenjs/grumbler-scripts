@@ -3,6 +3,7 @@
 
 import path from 'path';
 import qs from 'querystring';
+import { tmpdir } from 'os';
 
 import webpack from 'webpack';
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
@@ -142,7 +143,10 @@ export function getWebpackConfig({ filename, modulename, minify = false, test = 
                 {
                     test:    /\.jsx?$/,
                     exclude: /(dist)/,
-                    loader:  'babel-loader'
+                    loader:  'babel-loader',
+                    options: {
+                        cacheDirectory: tmpdir()
+                    }
                 },
                 {
                     test:   /\.(html?|css|json|svg)$/,
