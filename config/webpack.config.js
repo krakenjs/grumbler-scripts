@@ -69,6 +69,40 @@ export function getWebpackConfig({ filename, modulename, minify = false, test = 
     }
 
     vars.__FILE_NAME__ = filename;
+
+    let plugins = [
+        new webpack.SourceMapDevToolPlugin({
+            filename: '[file].map'
+        }),
+        new webpack.DefinePlugin(jsonifyPrimitives(vars)),
+        new UglifyJSPlugin({
+            test:          /\.js$/,
+            uglifyOptions: {
+                warnings: false,
+                compress: {
+                    sequences: minify
+                },
+                output: {
+                    beautify: !minify
+                },
+                mangle: minify
+            },
+            parallel:  true,
+            sourceMap: true,
+            cache:     true
+        }),
+        new CircularDependencyPlugin({
+            exclude:     /node_modules/,
+            failOnError: true
+        })
+    ];
+
+    if (!minify) {
+        plugins = [
+            ...plugins,
+            new webpack.NamedModulesPlugin()
+        ];
+    }
     
     return {
 
@@ -121,33 +155,7 @@ export function getWebpackConfig({ filename, modulename, minify = false, test = 
 
         devtool: 'source-map',
 
-        plugins: [
-            new webpack.SourceMapDevToolPlugin({
-                filename: '[file].map'
-            }),
-            new webpack.DefinePlugin(jsonifyPrimitives(vars)),
-            new webpack.NamedModulesPlugin(),
-            new UglifyJSPlugin({
-                test:          /\.js$/,
-                uglifyOptions: {
-                    warnings: false,
-                    compress: {
-                        sequences: minify
-                    },
-                    output: {
-                        beautify: !minify
-                    },
-                    mangle: minify
-                },
-                parallel:  true,
-                sourceMap: true,
-                cache:     true
-            }),
-            new CircularDependencyPlugin({
-                exclude:     /node_modules/,
-                failOnError: true
-            })
-        ],
+        plugins,
 
         ...options
     };
