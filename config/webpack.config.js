@@ -1,13 +1,23 @@
 /* @flow */
 /* eslint import/no-nodejs-modules: off */
 
-import path from 'path';
-import qs from 'querystring';
+import { join, resolve } from 'path';
 import { tmpdir } from 'os';
+import { existsSync, mkdirSync } from 'fs';
 
 import webpack from 'webpack';
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
+import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
+
+const HARD_SOURCE_CACHE_DIR = join(tmpdir(), 'cache-hard-source');
+const BABEL_CACHE_DIR = join(tmpdir(), 'cache-babel');
+
+for (let path of [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR ]) {
+    if (!existsSync(path)) {
+        mkdirSync(path);
+    }
+}
 
 type JSONPrimitive = string | boolean | number;
 type JSONObject = { [string] : JSONPrimitive | JSONObject } | Array<JSONPrimitive | JSONObject>;
@@ -67,6 +77,9 @@ export function getWebpackConfig({ filename, modulename, minify = false, test = 
     vars.__FILE_NAME__ = filename;
 
     let plugins = [
+        new HardSourceWebpackPlugin({
+            cacheDirectory: HARD_SOURCE_CACHE_DIR
+        }),
         new webpack.SourceMapDevToolPlugin({
             filename: '[file].map'
         }),
@@ -105,7 +118,7 @@ export function getWebpackConfig({ filename, modulename, minify = false, test = 
         entry: './src/index.js',
 
         output: {
-            path:           path.resolve('./dist'),
+            path:           resolve('./dist'),
             filename,
             libraryTarget:  'umd',
             umdNamedDefine: true,
@@ -136,7 +149,7 @@ export function getWebpackConfig({ filename, modulename, minify = false, test = 
                     exclude: /(dist)/,
                     loader:  'babel-loader',
                     options: {
-                        cacheDirectory: tmpdir()
+                        cacheDirectory: BABEL_CACHE_DIR
                     }
                 },
                 {

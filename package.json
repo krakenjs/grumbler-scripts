@@ -88,6 +88,7 @@
     "flow-bin": "^0.70.0",
     "flow-runtime": "^0.14.0",
     "flow-typed": "^2.2.0",
+    "hard-source-webpack-plugin": "^0.6.4",
     "imports": "^1.0.0",
     "in-publish": "^2.0.0",
     "istanbul-instrumenter-loader": "^3.0.0",
