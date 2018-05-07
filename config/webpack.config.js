@@ -12,8 +12,9 @@ import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 
 const HARD_SOURCE_CACHE_DIR = join(tmpdir(), 'cache-hard-source');
 const BABEL_CACHE_DIR = join(tmpdir(), 'cache-babel');
+const UGLIGY_CACHE_DIR = join(tmpdir(), 'cache-uglify');
 
-for (let path of [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR ]) {
+for (let path of [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, UGLIGY_CACHE_DIR ]) {
     if (!existsSync(path)) {
         mkdirSync(path);
     }
@@ -98,7 +99,7 @@ export function getWebpackConfig({ filename, modulename, minify = false, test = 
             },
             parallel:  true,
             sourceMap: true,
-            cache:     true
+            cache:     UGLIGY_CACHE_DIR
         }),
         new CircularDependencyPlugin({
             exclude:     /node_modules/,
