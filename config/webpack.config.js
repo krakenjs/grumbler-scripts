@@ -78,9 +78,6 @@ export function getWebpackConfig({ filename, modulename, minify = false, test = 
     vars.__FILE_NAME__ = filename;
 
     let plugins = [
-        new HardSourceWebpackPlugin({
-            cacheDirectory: HARD_SOURCE_CACHE_DIR
-        }),
         new webpack.SourceMapDevToolPlugin({
             filename: '[file].map'
         }),
@@ -111,6 +108,15 @@ export function getWebpackConfig({ filename, modulename, minify = false, test = 
         plugins = [
             ...plugins,
             new webpack.NamedModulesPlugin()
+        ];
+    }
+
+    if (!test) {
+        plugins = [
+            ...plugins,
+            new HardSourceWebpackPlugin({
+                cacheDirectory: HARD_SOURCE_CACHE_DIR
+            })
         ];
     }
     
