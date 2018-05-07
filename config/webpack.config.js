@@ -51,11 +51,6 @@ export function getWebpackConfig({ filename, modulename, minify = false, test = 
         ...vars
     };
 
-    const PREPROCESSOR_OPTS = {
-        'ifdef-triple-slash': 'false',
-        ...vars
-    };
-
     if (minify) {
         vars.__MIN__ = true;
     } else {
@@ -132,10 +127,6 @@ export function getWebpackConfig({ filename, modulename, minify = false, test = 
 
         module: {
             rules: [
-                {
-                    test:    /\.js$/,
-                    loader: `ifdef-loader?${ qs.stringify(PREPROCESSOR_OPTS) }`
-                },
                 {
                     test:   /sinon\.js$/,
                     loader: 'imports?define=>false,require=>false'
