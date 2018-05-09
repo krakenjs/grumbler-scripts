@@ -46,6 +46,7 @@ const DEFAULT_VARS = {
 };
 
 type WebpackConfigOptions = {
+    entry? : string | Array<string>,
     filename : string,
     modulename : string,
     minify? : boolean,
@@ -55,7 +56,9 @@ type WebpackConfigOptions = {
     alias? : { [string] : string }
 };
 
-export function getWebpackConfig({ filename, modulename, minify = false, test = (process.env.NODE_ENV === 'test'), options = {}, vars = {}, alias = {} } : WebpackConfigOptions = {}) : Object {
+export function getWebpackConfig({ entry, filename, modulename, minify = false, test = (process.env.NODE_ENV === 'test'), options = {}, vars = {}, alias = {} } : WebpackConfigOptions = {}) : Object {
+
+    entry = entry || './src/index.js';
 
     vars = {
         ...DEFAULT_VARS,
@@ -122,7 +125,7 @@ export function getWebpackConfig({ filename, modulename, minify = false, test = 
     
     return {
 
-        entry: './src/index.js',
+        entry,
 
         output: {
             path:           resolve('./dist'),
