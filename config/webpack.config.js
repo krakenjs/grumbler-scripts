@@ -53,10 +53,11 @@ type WebpackConfigOptions = {
     test? : boolean,
     options? : Object,
     vars? : { [string] : mixed },
-    alias? : { [string] : string }
+    alias? : { [string] : string },
+    libraryTarget? : string
 };
 
-export function getWebpackConfig({ entry, filename, modulename, minify = false, test = (process.env.NODE_ENV === 'test'), options = {}, vars = {}, alias = {} } : WebpackConfigOptions = {}) : Object {
+export function getWebpackConfig({ entry, filename, modulename, libraryTarget = 'umd', minify = false, test = (process.env.NODE_ENV === 'test'), options = {}, vars = {}, alias = {} } : WebpackConfigOptions = {}) : Object {
 
     entry = entry || './src/index.js';
 
@@ -130,7 +131,7 @@ export function getWebpackConfig({ entry, filename, modulename, minify = false, 
         output: {
             path:           resolve('./dist'),
             filename,
-            libraryTarget:  'umd',
+            libraryTarget,
             umdNamedDefine: true,
             library:        modulename,
             pathinfo:       false
