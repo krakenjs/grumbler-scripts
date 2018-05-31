@@ -8,7 +8,8 @@
                     "firefox": 30,
                     "safari": 5,
                     "opera": 23
-                }
+                },
+                "loose": true
             }
         ]
     ],
