@@ -91,7 +91,8 @@ export function getWebpackConfig({ entry, filename, modulename, libraryTarget = 
             uglifyOptions: {
                 warnings: false,
                 compress: {
-                    sequences: minify
+                    sequences: minify,
+                    passes:    3
                 },
                 output: {
                     beautify: !minify
