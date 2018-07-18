@@ -75,8 +75,10 @@ export function getWebpackConfig({ entry, filename, modulename, libraryTarget = 
     if (test) {
         options.devtool = 'inline-source-map';
         vars.__TEST__ = true;
+        vars.__ENV__ = 'test';
     } else {
         vars.__TEST__ = false;
+        vars.__ENV__ = vars.__ENV__ || 'production';
     }
 
     vars.__FILE_NAME__ = filename;
