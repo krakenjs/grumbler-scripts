@@ -44,7 +44,9 @@ module.exports = {
         'Promise': false,
         'performance': true,
         'assert': true,
-        '__TEST__': true
+        '__TEST__': true,
+
+        '$Values': true
     },
 
     'rules': {
@@ -287,7 +289,7 @@ module.exports = {
         'yield-star-spacing': 'off',
 
         'flowtype/boolean-style': [ 'error', 'boolean' ],
-        'flowtype/define-flow-type': 'error',
+        'flowtype/define-flow-type': 'off',
         'flowtype/delimiter-dangle': [ 'error', 'never' ],
         'flowtype/generic-spacing': [ 'error', 'never' ],
         'flowtype/no-primitive-constructor-types': 'error',
