@@ -35,6 +35,8 @@ function jsonifyPrimitives(item : JSONType) : JSONType {
         return result;
     } else if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean' || item === null || item === undefined) {
         return JSON.stringify(item);
+    } else if (typeof item === 'function') {
+        return `(${ item.toString() })()`;
     } else {
         throw new TypeError(`Unrecognized type: ${ typeof item }`);
     }
