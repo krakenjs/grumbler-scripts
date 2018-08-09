@@ -42,6 +42,12 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
             },
 
             {
+                pattern:  'test/**/*.jsx',
+                included: false,
+                served:   true
+            },
+
+            {
                 pattern:  'test/**/*.htm',
                 included: false,
                 served:   true
@@ -49,9 +55,11 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
         ],
 
         preprocessors: {
-            'test/*.js':            [ 'webpack',  'sourcemap' ],
-            'test/windows/**/*.js': [ 'webpack',  'sourcemap' ],
-            'src/**/*.js':          [ 'coverage', 'sourcemap' ]
+            'test/*.js':             [ 'webpack',  'sourcemap' ],
+            'test/*.jsx':            [ 'webpack',  'sourcemap' ],
+            'test/windows/**/*.js':  [ 'webpack',  'sourcemap' ],
+            'test/windows/**/*.jsx': [ 'webpack',  'sourcemap' ],
+            'src/**/*.js':           [ 'coverage', 'sourcemap' ]
         },
 
         customLaunchers: {
