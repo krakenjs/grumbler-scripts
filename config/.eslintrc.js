@@ -401,7 +401,7 @@ module.exports = {
         'const-immutable/no-mutation': 'error',
 
         'react/jsx-boolean-value': 'off',
-        'react/jsx-closing-bracket-location': [ 'error', 'after-props' ],
+        'react/jsx-closing-bracket-location': 'off',
         'react/jsx-closing-tag-location': 'error',
         'react/jsx-curly-spacing': [ 'error', { 'when': 'always', 'allowMultiline': false } ],
         'react/jsx-equals-spacing': [ 'error', 'never' ],
@@ -422,7 +422,7 @@ module.exports = {
         'react/jsx-pascal-case': 'off',
         'react/jsx-sort-props': 'off',
         'react/jsx-tag-spacing': 'error',
-        'react/jsx-uses-react': 'off',
+        'react/jsx-uses-react': 'error',
         'react/jsx-uses-vars': 'error',
         'react/jsx-wrap-multilines': 'error',
 
