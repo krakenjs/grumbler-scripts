@@ -9,7 +9,8 @@
                     "safari": 5,
                     "opera": 23
                 },
-                "loose": true
+                "loose": true,
+                "modules": false
             }
         ]
     ],
@@ -23,7 +24,7 @@
         [ "transform-es3-property-literals", { "loose": true } ],
         [ "transform-es3-member-expression-literals", { "loose": true } ],
         [ "transform-decorators-legacy", { "loose": true } ],
-        [ "transform-es2015-for-of", { "loose": true } ],
+        [ "transform-for-of-as-array", { "loose": true } ],
         [ "babel-plugin-transform-react-jsx", { "loose": true } ]
     ],
 

@@ -5,6 +5,7 @@ import { join, resolve } from 'path';
 import { tmpdir } from 'os';
 import { existsSync, mkdirSync } from 'fs';
 
+import rimraf from 'rimraf';
 import webpack from 'webpack';
 import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
@@ -15,9 +16,10 @@ const BABEL_CACHE_DIR = join(tmpdir(), 'cache-babel');
 const UGLIGY_CACHE_DIR = join(tmpdir(), 'cache-uglify');
 
 for (let path of [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, UGLIGY_CACHE_DIR ]) {
-    if (!existsSync(path)) {
-        mkdirSync(path);
+    if (existsSync(path)) {
+        rimraf.sync(path);
     }
+    mkdirSync(path);
 }
 
 type JSONPrimitive = string | boolean | number;
@@ -106,10 +108,6 @@ export function getWebpackConfig({ entry, filename, modulename, libraryTarget = 
             parallel:  true,
             sourceMap: true,
             cache:     UGLIGY_CACHE_DIR
-        }),
-        new CircularDependencyPlugin({
-            exclude:     /node_modules/,
-            failOnError: true
         })
     ];
 
@@ -120,7 +118,15 @@ export function getWebpackConfig({ entry, filename, modulename, libraryTarget = 
         ];
     }
 
-    if (!test) {
+    if (test) {
+        plugins = [
+            ...plugins,
+            new CircularDependencyPlugin({
+                exclude:     /node_modules/,
+                failOnError: true
+            })
+        ];
+    } else {
         plugins = [
             ...plugins,
             new HardSourceWebpackPlugin({
