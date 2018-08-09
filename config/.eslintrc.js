@@ -46,7 +46,8 @@ module.exports = {
         'assert': true,
         '__TEST__': true,
 
-        '$Values': true
+        '$Values': true,
+        '$ReadOnlyArray': true
     },
 
     'rules': {
