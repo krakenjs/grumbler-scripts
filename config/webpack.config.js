@@ -61,6 +61,12 @@ type WebpackConfigOptions = {
     libraryTarget? : string
 };
 
+let babelConfig = JSON.parse(readFileSync(join(__dirname, '/.babelrc-browser').toString()));
+
+babelConfig.babelrc = false;
+babelConfig.cacheDirectory = BABEL_CACHE_DIR;
+babelConfig.presets[0][1].modules = false;
+
 export function getWebpackConfig({ entry, filename, modulename, libraryTarget = 'umd', minify = false, web = true, test = (process.env.NODE_ENV === 'test'), options = {}, vars = {}, alias = {} } : WebpackConfigOptions = {}) : Object {
 
     entry = entry || './src/index.js';
@@ -177,9 +183,7 @@ export function getWebpackConfig({ entry, filename, modulename, libraryTarget = 
                     test:    /\.jsx?$/,
                     exclude: /(dist)/,
                     loader:  'babel-loader',
-                    options: {
-                        cacheDirectory: BABEL_CACHE_DIR
-                    }
+                    options: babelConfig
                 },
                 {
                     test:   /\.(html?|css|json|svg)$/,
