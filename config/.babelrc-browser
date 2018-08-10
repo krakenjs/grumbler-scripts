@@ -3,10 +3,10 @@
         [
             "env", {
                 "targets": {
-                    "ie": 9,
+                    "ie": 11,
                     "chrome": 27,
                     "firefox": 30,
-                    "safari": 5,
+                    "safari": 7,
                     "opera": 23
                 },
                 "loose": true,
