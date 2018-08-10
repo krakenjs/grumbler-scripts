@@ -3,7 +3,7 @@
 
 import { join, resolve } from 'path';
 import { tmpdir } from 'os';
-import { existsSync, mkdirSync } from 'fs';
+import { existsSync, mkdirSync, readFileSync } from 'fs';
 
 import rimraf from 'rimraf';
 import webpack from 'webpack';
@@ -61,7 +61,7 @@ type WebpackConfigOptions = {
     libraryTarget? : string
 };
 
-export function getWebpackConfig({ entry, filename, modulename, libraryTarget = 'umd', minify = false, test = (process.env.NODE_ENV === 'test'), options = {}, vars = {}, alias = {} } : WebpackConfigOptions = {}) : Object {
+export function getWebpackConfig({ entry, filename, modulename, libraryTarget = 'umd', minify = false, web = true, test = (process.env.NODE_ENV === 'test'), options = {}, vars = {}, alias = {} } : WebpackConfigOptions = {}) : Object {
 
     entry = entry || './src/index.js';
 
@@ -85,31 +85,38 @@ export function getWebpackConfig({ entry, filename, modulename, libraryTarget = 
         vars.__ENV__ = vars.__ENV__ || 'production';
     }
 
+    vars.__WEB__ = web;
     vars.__FILE_NAME__ = filename;
 
     let plugins = [
-        new webpack.SourceMapDevToolPlugin({
-            filename: '[file].map'
-        }),
-        new webpack.DefinePlugin(jsonifyPrimitives(vars)),
-        new UglifyJSPlugin({
-            test:          /\.js$/,
-            uglifyOptions: {
-                warnings: false,
-                compress: {
-                    sequences: minify,
-                    passes:    3
-                },
-                output: {
-                    beautify: !minify
-                },
-                mangle: minify
-            },
-            parallel:  true,
-            sourceMap: true,
-            cache:     UGLIGY_CACHE_DIR
-        })
+        new webpack.DefinePlugin(jsonifyPrimitives(vars))
     ];
+
+    if (web) {
+        plugins = [
+            ...plugins,
+            new UglifyJSPlugin({
+                test:          /\.js$/,
+                uglifyOptions: {
+                    warnings: false,
+                    compress: {
+                        sequences: minify,
+                        passes:    3
+                    },
+                    output: {
+                        beautify: !minify
+                    },
+                    mangle: minify
+                },
+                parallel:  true,
+                sourceMap: true,
+                cache:     UGLIGY_CACHE_DIR
+            }),
+            new webpack.SourceMapDevToolPlugin({
+                filename: '[file].map'
+            })
+        ];
+    }
 
     if (!minify) {
         plugins = [
