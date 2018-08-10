@@ -9,8 +9,7 @@
                     "safari": 7,
                     "opera": 23
                 },
-                "loose": true,
-                "modules": false
+                "loose": true
             }
         ]
     ],
