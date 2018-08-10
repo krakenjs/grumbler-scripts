@@ -39,13 +39,6 @@ module.exports = {
     },
 
     'globals': {
-        'window': true,
-        'document': true,
-        'Promise': false,
-        'performance': true,
-        'assert': true,
-        '__TEST__': true,
-
         '$Values': true,
         '$ReadOnlyArray': true
     },
