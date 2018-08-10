@@ -58,10 +58,11 @@ type WebpackConfigOptions = {
     options? : Object,
     vars? : { [string] : mixed },
     alias? : { [string] : string },
-    libraryTarget? : string
+    libraryTarget? : string,
+    web? : boolean
 };
 
-let babelConfig = JSON.parse(readFileSync(join(__dirname, '/.babelrc-browser').toString()));
+let babelConfig = JSON.parse(readFileSync(join(__dirname, '/.babelrc-browser')).toString());
 
 babelConfig.babelrc = false;
 babelConfig.cacheDirectory = BABEL_CACHE_DIR;
