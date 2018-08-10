@@ -3,7 +3,7 @@
 
 import { join, resolve } from 'path';
 import { tmpdir } from 'os';
-import { existsSync, mkdirSync, readFileSync } from 'fs';
+import { existsSync, mkdirSync } from 'fs';
 
 import rimraf from 'rimraf';
 import webpack from 'webpack';
@@ -61,12 +61,6 @@ type WebpackConfigOptions = {
     libraryTarget? : string,
     web? : boolean
 };
-
-let babelConfig = JSON.parse(readFileSync(join(__dirname, '/.babelrc-browser')).toString());
-
-babelConfig.babelrc = false;
-babelConfig.cacheDirectory = BABEL_CACHE_DIR;
-babelConfig.presets[0][1].modules = false;
 
 export function getWebpackConfig({ entry, filename, modulename, libraryTarget = 'umd', minify = false, web = true, test = (process.env.NODE_ENV === 'test'), options = {}, vars = {}, alias = {} } : WebpackConfigOptions = {}) : Object {
 
@@ -184,7 +178,9 @@ export function getWebpackConfig({ entry, filename, modulename, libraryTarget = 
                     test:    /\.jsx?$/,
                     exclude: /(dist)/,
                     loader:  'babel-loader',
-                    options: babelConfig
+                    options: {
+                        cacheDirectory: BABEL_CACHE_DIR
+                    }
                 },
                 {
                     test:   /\.(html?|css|json|svg)$/,
