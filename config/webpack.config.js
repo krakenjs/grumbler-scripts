@@ -93,7 +93,7 @@ export function getWebpackConfig({ entry, filename, modulename, libraryTarget = 
         new webpack.DefinePlugin(jsonifyPrimitives(vars))
     ];
 
-    if (web) {
+    if (web && !test) {
         plugins = [
             ...plugins,
             new UglifyJSPlugin({
@@ -112,7 +112,13 @@ export function getWebpackConfig({ entry, filename, modulename, libraryTarget = 
                 parallel:  true,
                 sourceMap: true,
                 cache:     UGLIGY_CACHE_DIR
-            }),
+            })
+        ];
+    }
+
+    if (web) {
+        plugins = [
+            ...plugins,
             new webpack.SourceMapDevToolPlugin({
                 filename: '[file].map'
             })
