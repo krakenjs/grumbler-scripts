@@ -149,6 +149,13 @@ export function getWebpackConfig({
             })
         ];
     }
+
+    if (!test && !debug) {
+        plugins = [
+            ...plugins,
+            new webpack.optimize.ModuleConcatenationPlugin()
+        ];
+    }
     
     return {
 
