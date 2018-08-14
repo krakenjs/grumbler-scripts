@@ -28,7 +28,7 @@ type JSONType = JSONObject | JSONPrimitive;
 
 function jsonifyPrimitives(item : JSONType) : JSONType {
     if (Array.isArray(item)) {
-        return item.map(jsonifyPrimitives);
+        return JSON.stringify(item);
     } else if (typeof item === 'object' && item !== null) {
         let result = {};
         for (let key of Object.keys(item)) {
