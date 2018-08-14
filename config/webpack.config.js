@@ -44,11 +44,6 @@ function jsonifyPrimitives(item : JSONType) : JSONType {
     }
 }
 
-const DEFAULT_VARS = {
-    __TEST__: false,
-    __MIN__:  false
-};
-
 type WebpackConfigOptions = {
     entry? : string | Array<string>,
     filename : string,
@@ -59,35 +54,41 @@ type WebpackConfigOptions = {
     vars? : { [string] : mixed },
     alias? : { [string] : string },
     libraryTarget? : string,
-    web? : boolean
+    web? : boolean,
+    debug? : boolean,
+    env : string
 };
 
-export function getWebpackConfig({ entry, filename, modulename, libraryTarget = 'umd', minify = false, web = true, test = (process.env.NODE_ENV === 'test'), options = {}, vars = {}, alias = {} } : WebpackConfigOptions = {}) : Object {
+export function getWebpackConfig({
+    entry,
+    filename,
+    modulename,
+    libraryTarget = 'umd',
+    minify = false,
+    web = true,
+    debug = false,
+    test = (process.env.NODE_ENV === 'test'),
+    options = {},
+    vars = {},
+    alias = {},
+    env = (test ? 'test' : 'production')
+} : WebpackConfigOptions = {}) : Object {
 
     entry = entry || './src/index.js';
 
     vars = {
-        ...DEFAULT_VARS,
-        ...vars
+        ...vars,
+        __MIN__:       minify,
+        __TEST__:      test,
+        __WEB__:       web,
+        __FILE_NAME__: filename,
+        __DEBUG__:     debug,
+        __ENV__:       env
     };
 
-    if (minify) {
-        vars.__MIN__ = true;
-    } else {
-        vars.__MIN__ = false;
-    }
-
-    if (test) {
+    if (test || debug) {
         options.devtool = 'inline-source-map';
-        vars.__TEST__ = true;
-        vars.__ENV__ = 'test';
-    } else {
-        vars.__TEST__ = false;
-        vars.__ENV__ = vars.__ENV__ || 'production';
     }
-
-    vars.__WEB__ = web;
-    vars.__FILE_NAME__ = filename;
 
     let plugins = [
         new webpack.DefinePlugin(jsonifyPrimitives(vars))
