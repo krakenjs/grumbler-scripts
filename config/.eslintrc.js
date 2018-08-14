@@ -338,7 +338,7 @@ module.exports = {
         'promise/always-return': 'off',
         'promise/no-return-wrap': 'error',
         'promise/param-names': 'error',
-        'promise/catch-or-return': 'error',
+        'promise/catch-or-return': 'off',
         'promise/no-native': 'off',
         'promise/no-nesting': 'off',
         'promise/no-promise-in-callback': 'error',
