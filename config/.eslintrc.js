@@ -196,7 +196,7 @@ module.exports = {
         'max-nested-callbacks': [ 'error', 4],
         'max-params': ['error', 5],
         'max-statements': 'off',
-        'new-cap': 'error',
+        'new-cap': 'off',
         'new-parens': 'error',
         'newline-after-var': 'off',
         'newline-before-return': 'off',
