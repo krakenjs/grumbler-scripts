@@ -40,7 +40,8 @@ module.exports = {
 
     'globals': {
         '$Values': true,
-        '$ReadOnlyArray': true
+        '$ReadOnlyArray': true,
+        '$PropertyType': true
     },
 
     'rules': {
