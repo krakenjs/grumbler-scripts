@@ -23,6 +23,7 @@ module.exports = {
         '__WEB__': true,
         '__ENV__': true,
         '__MIN__': true,
+        '__DEBUG__': true,
         '__FILE_NAME__': true
     },
 };
