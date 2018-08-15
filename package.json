@@ -31,6 +31,10 @@
     "safari >= 5",
     "opera >= 23"
   ],
+  "files": [
+    "config",
+    "declarations.js"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/krakenjs/grumbler.git"
