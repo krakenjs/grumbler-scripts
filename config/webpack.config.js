@@ -170,6 +170,16 @@ export function getWebpackConfig({
             pathinfo:       false
         },
 
+        node: {
+            console:      false,
+            global:       false,
+            process:      false,
+            __filename:   false,
+            __dirname:    false,
+            Buffer:       false,
+            setImmediate: false
+        },
+
         resolve: {
             alias: {
                 ...alias,
