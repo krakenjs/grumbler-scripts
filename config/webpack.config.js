@@ -111,7 +111,7 @@ export function getWebpackConfig({
                     mangle: minify
                 },
                 parallel:  true,
-                sourceMap: true,
+                sourceMap: web,
                 cache:     UGLIGY_CACHE_DIR
             })
         ];
