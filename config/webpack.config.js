@@ -86,15 +86,19 @@ export function getWebpackConfig({
         __ENV__:       env
     };
 
-    if (test || debug) {
-        options.devtool = 'inline-source-map';
-    }
+    let enableSourceMap = web;
+    let enableInlineSourceMap = enableSourceMap && (test || debug);
+    let enableUglify = (web && !test);
+    let enableNamedModules = !minify;
+    let enableCheckCircularDeps = test;
+    let enableCaching = !test;
+    let enableModuleConcatenation = !test && !debug;
 
     let plugins = [
         new webpack.DefinePlugin(jsonifyPrimitives(vars))
     ];
 
-    if (web && !test) {
+    if (enableUglify) {
         plugins = [
             ...plugins,
             new UglifyJSPlugin({
@@ -111,13 +115,13 @@ export function getWebpackConfig({
                     mangle: minify
                 },
                 parallel:  true,
-                sourceMap: web,
+                sourceMap: enableSourceMap,
                 cache:     UGLIGY_CACHE_DIR
             })
         ];
     }
 
-    if (web) {
+    if (enableSourceMap) {
         plugins = [
             ...plugins,
             new webpack.SourceMapDevToolPlugin({
@@ -126,14 +130,14 @@ export function getWebpackConfig({
         ];
     }
 
-    if (!minify) {
+    if (enableNamedModules) {
         plugins = [
             ...plugins,
             new webpack.NamedModulesPlugin()
         ];
     }
 
-    if (test) {
+    if (enableCheckCircularDeps) {
         plugins = [
             ...plugins,
             new CircularDependencyPlugin({
@@ -141,7 +145,9 @@ export function getWebpackConfig({
                 failOnError: true
             })
         ];
-    } else {
+    }
+    
+    if (enableCaching) {
         plugins = [
             ...plugins,
             new HardSourceWebpackPlugin({
@@ -150,11 +156,17 @@ export function getWebpackConfig({
         ];
     }
 
-    if (!test && !debug) {
+    if (enableModuleConcatenation) {
         plugins = [
             ...plugins,
             new webpack.optimize.ModuleConcatenationPlugin()
         ];
+    }
+
+    if (enableInlineSourceMap) {
+        options.devtool = 'inline-source-map';
+    } else if (enableSourceMap) {
+        options.devtool = 'source-map';
     }
     
     return {
@@ -203,7 +215,7 @@ export function getWebpackConfig({
                     exclude: /(dist)/,
                     loader:  'babel-loader',
                     options: {
-                        cacheDirectory: BABEL_CACHE_DIR
+                        cacheDirectory: enableCaching && BABEL_CACHE_DIR
                     }
                 },
                 {
@@ -214,8 +226,6 @@ export function getWebpackConfig({
         },
 
         bail: true,
-
-        devtool: 'source-map',
 
         plugins,
 
