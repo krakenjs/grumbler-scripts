@@ -24,6 +24,7 @@ module.exports = {
         '__ENV__': true,
         '__MIN__': true,
         '__DEBUG__': true,
-        '__FILE_NAME__': true
+        '__FILE_NAME__': true,
+        '__TREE_SHAKE__': true
     },
 };
