@@ -1,6 +1,6 @@
 {
   "name": "grumbler-scripts",
-  "version": "2.0.64",
+  "version": "2.0.65",
   "description": "Javascript module template.",
   "main": "index.js",
   "scripts": {
