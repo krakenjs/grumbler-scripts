@@ -41,7 +41,9 @@ module.exports = {
     'globals': {
         '$Values': true,
         '$ReadOnlyArray': true,
-        '$PropertyType': true
+        '$PropertyType': true,
+        '$TupleMap': true,
+        '$ObjMap': true
     },
 
     'rules': {
