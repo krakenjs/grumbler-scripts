@@ -94,7 +94,12 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
         ],
 
         client: {
-            captureConsole
+            captureConsole,
+
+            mocha: {
+                timeout: process.env.TRAVIS ? 60 * 1000 : 10 * 1000,
+                bail:    true
+            }
         },
 
         port: 9876,
