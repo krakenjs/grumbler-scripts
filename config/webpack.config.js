@@ -84,7 +84,11 @@ export function getWebpackConfig({
         __FILE_NAME__:  filename,
         __DEBUG__:      debug,
         __ENV__:        env,
-        __TREE_SHAKE__: web && !test && !debug
+        __TREE_SHAKE__: web && !test && !debug,
+        __LOCAL__:      env === 'local',
+        __STAGE__:      env === 'stage',
+        __SANDBOX__:    env === 'sandbox',
+        __PRODUCTION__: env === 'production'
     };
 
     let enableSourceMap = web;
