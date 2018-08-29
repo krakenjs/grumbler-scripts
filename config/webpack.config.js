@@ -78,6 +78,7 @@ export function getWebpackConfig({
 
     vars = {
         ...vars,
+        global:         web ? 'window' : 'global',
         __MIN__:        minify,
         __TEST__:       test,
         __WEB__:        web,
