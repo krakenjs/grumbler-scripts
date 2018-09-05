@@ -56,7 +56,8 @@ type WebpackConfigOptions = {
     libraryTarget? : string,
     web? : boolean,
     debug? : boolean,
-    env : string
+    env : string,
+    path? : string
 };
 
 export function getWebpackConfig({
@@ -71,6 +72,7 @@ export function getWebpackConfig({
     options = {},
     vars = {},
     alias = {},
+    path = resolve('./dist')
     env = (test ? 'test' : 'production')
 } : WebpackConfigOptions = {}) : Object {
 
@@ -180,7 +182,7 @@ export function getWebpackConfig({
         entry,
 
         output: {
-            path:           resolve('./dist'),
+            path,
             filename,
             libraryTarget,
             umdNamedDefine: true,
