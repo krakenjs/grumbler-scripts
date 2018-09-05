@@ -124,7 +124,7 @@ export function getWebpackConfig({
                 },
                 parallel:  true,
                 sourceMap: enableSourceMap,
-                cache:     UGLIGY_CACHE_DIR
+                cache:     enableCaching && UGLIGY_CACHE_DIR
             })
         ];
     }
