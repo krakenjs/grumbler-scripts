@@ -72,7 +72,7 @@ export function getWebpackConfig({
     options = {},
     vars = {},
     alias = {},
-    path = resolve('./dist')
+    path = resolve('./dist'),
     env = (test ? 'test' : 'production')
 } : WebpackConfigOptions = {}) : Object {
 
