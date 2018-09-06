@@ -57,7 +57,8 @@ type WebpackConfigOptions = {
     web? : boolean,
     debug? : boolean,
     env : string,
-    path? : string
+    path? : string,
+    sourcemaps? : boolean
 };
 
 export function getWebpackConfig({
@@ -73,7 +74,8 @@ export function getWebpackConfig({
     vars = {},
     alias = {},
     path = resolve('./dist'),
-    env = (test ? 'test' : 'production')
+    env = (test ? 'test' : 'production'),
+    sourcemaps = true
 } : WebpackConfigOptions = {}) : Object {
 
     entry = entry || './src/index.js';
@@ -94,7 +96,7 @@ export function getWebpackConfig({
         __PRODUCTION__: env === 'production'
     };
 
-    let enableSourceMap = web;
+    let enableSourceMap = sourcemaps && web;
     let enableInlineSourceMap = enableSourceMap && (test || debug);
     let enableUglify = (web && !test);
     let enableNamedModules = !minify;
