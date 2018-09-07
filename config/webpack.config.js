@@ -1,5 +1,5 @@
 /* @flow */
-/* eslint import/no-nodejs-modules: off */
+/* eslint import/no-nodejs-modules: off, complexity: off */
 
 import { join, resolve } from 'path';
 import { tmpdir } from 'os';
@@ -58,7 +58,8 @@ type WebpackConfigOptions = {
     debug? : boolean,
     env : string,
     path? : string,
-    sourcemaps? : boolean
+    sourcemaps? : boolean,
+    cache? : boolean
 };
 
 export function getWebpackConfig({
@@ -75,7 +76,8 @@ export function getWebpackConfig({
     alias = {},
     path = resolve('./dist'),
     env = (test ? 'test' : 'production'),
-    sourcemaps = true
+    sourcemaps = true,
+    cache = false
 } : WebpackConfigOptions = {}) : Object {
 
     entry = entry || './src/index.js';
@@ -101,7 +103,7 @@ export function getWebpackConfig({
     let enableUglify = (web && !test);
     let enableNamedModules = !minify;
     let enableCheckCircularDeps = test;
-    let enableCaching = !test;
+    let enableCaching = cache && !test;
     let enableModuleConcatenation = !test && !debug;
 
     let plugins = [
