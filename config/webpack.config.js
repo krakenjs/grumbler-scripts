@@ -84,7 +84,6 @@ export function getWebpackConfig({
 
     vars = {
         ...vars,
-        global:         () => { return (web ? 'window' : 'global'); },
         __MIN__:        minify,
         __TEST__:       test,
         __WEB__:        web,
@@ -95,7 +94,10 @@ export function getWebpackConfig({
         __LOCAL__:      env === 'local',
         __STAGE__:      env === 'stage',
         __SANDBOX__:    env === 'sandbox',
-        __PRODUCTION__: env === 'production'
+        __PRODUCTION__: env === 'production',
+        __WINDOW__:     () => 'global',
+        __GLOBAL__:     () => 'global',
+        global:         (web ? (() => 'window') : (() => 'global'))
     };
 
     let enableSourceMap = sourcemaps && web;
