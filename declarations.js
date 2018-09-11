@@ -11,3 +11,8 @@ declare var __TREE_SHAKE__ : boolean;
 
 declare var __WINDOW__ : any; // eslint-disable-line flowtype/no-weak-types
 declare var __GLOBAL__ : any; // eslint-disable-line flowtype/no-weak-types
+
+declare var __LOCAL__ : boolean;
+declare var __STAGE__ : boolean;
+declare var __SANDBOX__ : boolean;
+declare var __PRODUCTION__ : boolean;

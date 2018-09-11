@@ -27,6 +27,10 @@ module.exports = {
         '__FILE_NAME__': true,
         '__TREE_SHAKE__': true,
         '__WINDOW__': true,
-        '__GLOBAL__': true
+        '__GLOBAL__': true,
+        '__LOCAL__': true,
+        '__STAGE__': true,
+        '__SANDBOX__': true,
+        '__PRODUCTION__': true
     },
 };
