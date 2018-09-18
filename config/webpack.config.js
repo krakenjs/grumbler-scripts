@@ -15,7 +15,7 @@ const HARD_SOURCE_CACHE_DIR = join(tmpdir(), 'cache-hard-source');
 const BABEL_CACHE_DIR = join(tmpdir(), 'cache-babel');
 const UGLIGY_CACHE_DIR = join(tmpdir(), 'cache-uglify');
 
-for (let path of [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, UGLIGY_CACHE_DIR ]) {
+for (const path of [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, UGLIGY_CACHE_DIR ]) {
     if (existsSync(path)) {
         rimraf.sync(path);
     }
@@ -23,15 +23,15 @@ for (let path of [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, UGLIGY_CACHE_DIR ]) {
 }
 
 type JSONPrimitive = string | boolean | number;
-type JSONObject = { [string] : JSONPrimitive | JSONObject } | Array<JSONPrimitive | JSONObject>;
+type JSONObject = { [string] : JSONPrimitive | JSONObject } | $ReadOnlyArray<JSONPrimitive | JSONObject>;
 type JSONType = JSONObject | JSONPrimitive;
 
 function jsonifyPrimitives(item : JSONType) : JSONType {
     if (Array.isArray(item)) {
         return JSON.stringify(item);
     } else if (typeof item === 'object' && item !== null) {
-        let result = {};
-        for (let key of Object.keys(item)) {
+        const result = {};
+        for (const key of Object.keys(item)) {
             result[key] = jsonifyPrimitives(item[key]);
         }
         return result;
@@ -44,8 +44,8 @@ function jsonifyPrimitives(item : JSONType) : JSONType {
     }
 }
 
-type WebpackConfigOptions = {
-    entry? : string | Array<string>,
+type WebpackConfigOptions = {|
+    entry? : string | $ReadOnlyArray<string>,
     filename : string,
     modulename : string,
     minify? : boolean,
@@ -60,7 +60,7 @@ type WebpackConfigOptions = {
     path? : string,
     sourcemaps? : boolean,
     cache? : boolean
-};
+|};
 
 export function getWebpackConfig({
     entry,
@@ -100,13 +100,13 @@ export function getWebpackConfig({
         global:         (web ? (() => 'window') : (() => 'global'))
     };
 
-    let enableSourceMap = sourcemaps && web;
-    let enableInlineSourceMap = enableSourceMap && (test || debug);
-    let enableUglify = (web && !test);
-    let enableNamedModules = !minify;
-    let enableCheckCircularDeps = test;
-    let enableCaching = cache && !test;
-    let enableModuleConcatenation = !test && !debug;
+    const enableSourceMap = sourcemaps && web;
+    const enableInlineSourceMap = enableSourceMap && (test || debug);
+    const enableUglify = (web && !test);
+    const enableNamedModules = !minify;
+    const enableCheckCircularDeps = test;
+    const enableCaching = cache && !test;
+    const enableModuleConcatenation = !test && !debug;
 
     let plugins = [
         new webpack.DefinePlugin(jsonifyPrimitives(vars))

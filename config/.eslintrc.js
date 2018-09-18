@@ -77,6 +77,9 @@ module.exports = {
         'use-isnan': 'error',
         'valid-jsdoc': 'off',
         'valid-typeof': 'error',
+        'no-misleading-character-class': 'error',
+        'require-atomic-updates': 'error',
+        'require-unicode-regexp': 'off',
 
         // best practices
         'accessor-pairs': 'off',
@@ -132,7 +135,7 @@ module.exports = {
         'no-sequences': 'error',
         'no-throw-literal': 'error',
         'no-unmodified-loop-condition': 'error',
-        // 'no-unused-expressions': 'error',
+        'no-unused-expressions': 'error',
         'no-unused-labels': 'error',
         'no-useless-call': 'error',
         'no-useless-concat': 'error',
@@ -143,6 +146,10 @@ module.exports = {
         'vars-on-top': 'off',
         'wrap-iife': 'error',
         'yoda': 'error',
+        'function-paren-newline': [ 'error', 'consistent' ],
+        'implicit-arrow-linebreak': 'off',
+        'no-async-promise-executor': 'error',
+        'no-dupe-class-members': 'off',
 
         // strict
         'strict': [ 'error', 'global' ],
@@ -240,47 +247,35 @@ module.exports = {
         'space-unary-ops': [ 'error', { 'words': true, 'nonwords': false } ],
         'spaced-comment': 'error',
         'wrap-regex': 'error',
+        'lines-between-class-members': 'off',
+        'max-classes-per-file': 'off',
+        'max-lines-per-function': 'off',
+        'multiline-comment-style': 'off',
+        'prefer-object-spread': 'error',
+        
 
         // ES6
 
-        // require braces in arrow function body
         'arrow-body-style': 'off',
-        // require parens in arrow function arguments
         'arrow-parens': 'off',
-        // require space before/after arrow functions arrow
         'arrow-spacing': 'error',
-        // verify super() callings in constructors
         'constructor-super': 'error',
-        // enforce the spacing around the * in generator functions
         'generator-star-spacing': 'off',
-        // disallow modifying variables of class declarations
         'no-class-assign': 'error',
         'no-confusing-arrow': 'error',
-        // disallow modifying variables that are declared using const
         'no-const-assign': 'error',
-        // disallow duplicate name in class members
-        'no-dupe-class-members': 'error',
         'no-new-symbol': 'error',
         'no-restricted-imports': 'off',
-        // disallow to use this/super before super() calling in constructors.
         'no-this-before-super': 'error',
         'no-useless-constructor': 'error',
-        // require let or const instead of var
         'no-var': 'error',
-        // require method and property shorthand syntax for object literals
         'object-shorthand': 'error',
-        // suggest using arrow functions as callbacks
         'prefer-arrow-callback': 'error',
-        // suggest using of const declaration for variables that are never modified after declared
-        'prefer-const': 'off',
+        'prefer-const': 'error',
         'prefer-rest-params': 'off',
-        // suggest using Reflect methods where applicable
         'prefer-reflect': 'off',
-        // suggest using the spread operator instead of .apply()
         'prefer-spread': 'off',
-        // suggest using template literals instead of strings concatenation
         'prefer-template': 'error',
-        // disallow generator functions that do not have yield
         'require-yield': 'error',
         'template-curly-spacing': [ 'error', 'always' ],
         'yield-star-spacing': 'off',
@@ -308,6 +303,15 @@ module.exports = {
         'flowtype/require-variable-type': 'off',
         'flowtype/sort-keys': 'off',
         'flowtype/no-unused-expressions': 'error',
+        'flowtype/array-style-complex-type': 'error',
+        'flowtype/array-style-simple-type': 'off',
+        'flowtype/newline-after-flow-annotation': 'off',
+        'flowtype/no-existential-type': 'off',
+        'flowtype/no-flow-fix-me-comments': 'off',
+        'flowtype/no-mutable-array': 'error',
+        'flowtype/require-exact-type': 'error',
+        'flowtype/require-types-at-top': 'off',
+        'flowtype/type-import-style': 'off',
 
         'compat/compat': 'off',
 
@@ -329,6 +333,11 @@ module.exports = {
         'unicorn/import-index': 'off',
         'unicorn/new-for-builtins': 'off',
         'unicorn/regex-shorthand': 'off',
+        'unicorn/error-message': 'error',
+        'unicorn/no-unsafe-regex': 'error',
+        'unicorn/prefer-add-event-listener': 'error',
+        'unicorn/prefer-exponentiation-operator': 'off',
+        'unicorn/prefer-spread': 'error',
 
         'eslint-comments/disable-enable-pair': 'error',
         'eslint-comments/no-duplicate-disable': 'error',
@@ -336,6 +345,8 @@ module.exports = {
         'eslint-comments/no-unused-disable': 'error',
         'eslint-comments/no-unused-enable': 'error',
         'eslint-comments/no-use': 'off',
+        'eslint-comments/no-aggregating-enable': 'error',
+        'eslint-comments/no-restricted-disable': 'off',
 
         'promise/always-return': 'off',
         'promise/no-return-wrap': 'error',
@@ -348,6 +359,9 @@ module.exports = {
         'promise/avoid-new': 'off',
         'promise/prefer-await-to-callbacks': 'off',
         'promise/prefer-await-to-then': 'off',
+        'promise/no-new-statics': 'error',
+        'promise/no-return-in-finally': 'error',
+        'promise/valid-params': 'error',
 
         'security/detect-unsafe-regex': 'error',
         'security/detect-non-literal-regexp': 'error',
@@ -393,8 +407,15 @@ module.exports = {
         'import/order': [ 'error', { 'newlines-between': 'always' } ],
         'import/prefer-default-export': 'off',
         'import/unambiguous': 'off',
+        'import/dynamic-import-chunkname': 'off',
+        'import/exports-last': 'off',
+        'import/group-exports': 'off',
+        'import/no-cycle': 'error',
+        'import/no-default-export': 'error',
+        'import/no-self-import': 'error',
+        'import/no-useless-path-segments': 'error',
 
-        'const-immutable/no-mutation': 'error',
+        'const-immutable/no-mutation': 'off',
 
         'react/jsx-boolean-value': 'off',
         'react/jsx-closing-bracket-location': 'off',
@@ -421,6 +442,59 @@ module.exports = {
         'react/jsx-uses-react': 'error',
         'react/jsx-uses-vars': 'error',
         'react/jsx-wrap-multilines': 'error',
+        'react/jsx-child-element-spacing': 'error',
+        'react/jsx-max-depth': [ 'error', { 'max': 8 } ],
+        'react/jsx-one-expression-per-line': 'off',
+        'react/jsx-sort-default-props': 'off',
+
+        'react/boolean-prop-naming': 'off',
+        'react/button-has-type': 'error',
+        'react/default-props-match-prop-types': 'error',
+        'react/destructuring-assignment': 'error',
+        'react/display-name': 'error',
+        'react/forbid-component-props': 'error',
+        'react/forbid-dom-props': 'off',
+        'react/forbid-elements': 'off',
+        'react/forbid-foreign-prop-types': 'error',
+        'react/forbid-prop-types': 'off',
+        'react/no-access-state-in-setstate': 'error',
+        'react/no-array-index-key': 'error',
+        'react/no-children-prop': 'off',
+        'react/no-danger': 'error',
+        'react/no-danger-with-children': 'error',
+        'react/no-deprecated': 'error',
+        'react/no-did-mount-set-state': 'error',
+        'react/no-did-update-set-state': 'error',
+        'react/no-direct-mutation-state': 'error',
+        'react/no-find-dom-node': 'error',
+        'react/no-is-mounted': 'error',
+        'react/no-multi-comp': 'off',
+        'react/no-redundant-should-component-update': 'error',
+        'react/no-render-return-value': 'error',
+        'react/no-set-state': 'off',
+        'react/no-string-refs': 'error',
+        'react/no-this-in-sfc': 'error',
+        'react/no-typos': 'error',
+        'react/no-unescaped-entities': 'error',
+        'react/no-unknown-property': 'off',
+        'react/no-unused-prop-types': 'error',
+        'react/no-unused-state': 'error',
+        'react/no-will-update-set-state': 'error',
+        'react/prefer-es6-class': 'error',
+        'react/prefer-stateless-function': 'off',
+        'react/prop-types': 'error',
+        'react/react-in-jsx-scope': 'error',
+        'react/require-default-props': 'error',
+        'react/require-optimization': 'off',
+        'react/require-render-return': 'error',
+        'react/self-closing-comp': 'error',
+        'react/sort-comp': 'off',
+        'react/sort-prop-types': 'off',
+        'react/style-prop-object': 'error',
+        'react/void-dom-elements-no-children': 'error',
+
+
+
 
         'array-bracket-newline': 'off',
         'array-element-newline': 'off',

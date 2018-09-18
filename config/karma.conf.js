@@ -8,19 +8,19 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
 
     process.env.NODE_ENV = 'test';
 
-    let debug          = Boolean(argv.debug);
-    let quick          = Boolean(argv.quick);
-    let captureConsole = Boolean(argv.console);
-    let keepOpen       = Boolean(argv['keep-open']) || debug;
-    let autoWatch      = Boolean(keepOpen);
-    let coverage       = argv.coverage !== false && !quick;
-    let logLevel       = argv['log-level'] || argv.loglevel || (keepOpen ? 'info' : '');
-    let headless       = !keepOpen;
+    const debug          = Boolean(argv.debug);
+    const quick          = Boolean(argv.quick);
+    const captureConsole = Boolean(argv.console);
+    const keepOpen       = Boolean(argv['keep-open']) || debug;
+    const autoWatch      = Boolean(keepOpen);
+    const coverage       = argv.coverage !== false && !quick;
+    const logLevel       = argv['log-level'] || argv.loglevel || (keepOpen ? 'info' : '');
+    const headless       = !keepOpen;
 
     // $FlowFixMe
-    let browsers: string = argv.browser;
+    const browsers: string = argv.browser;
 
-    let karmaConfig : Object = {
+    const karmaConfig : Object = {
 
         files: [
             {
@@ -168,6 +168,7 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
     return karmaConfig;
 }
 
+// eslint-disable-next-line import/no-default-export
 export default (karma : Object) =>
     karma.set(getKarmaConfig(karma, {
         basePath: process.cwd()
