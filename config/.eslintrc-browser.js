@@ -5,7 +5,7 @@ module.exports = {
 
     rules: {
         'import/no-dynamic-require': 'error',
-        'no-restricted-globals': [ 'error', 'Promise', 'atob', 'btoa' ],
+        'no-restricted-globals': [ 'error', 'Promise' ],
         'promise/no-native': 'error',
         'import/no-nodejs-modules': 'error',
         'compat/compat': 'error',
