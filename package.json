@@ -122,8 +122,8 @@
     "sinon-chai": "^3.2.0",
     "text-loader": "0.0.1",
     "uglifyjs-webpack-plugin": "^2.0.0",
-    "webpack": "^4.19.0",
-    "webpack-stream": "^5.1.1",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
     "yargs": "^12.0.2"
   }
 }

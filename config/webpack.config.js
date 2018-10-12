@@ -103,36 +103,41 @@ export function getWebpackConfig({
     const enableSourceMap = sourcemaps && web;
     const enableInlineSourceMap = enableSourceMap && (test || debug);
     const enableUglify = (web && !test);
-    const enableNamedModules = !minify;
     const enableCheckCircularDeps = test;
     const enableCaching = cache && !test;
-    const enableModuleConcatenation = !test && !debug;
+
+    const mode = (debug || test)
+        ? 'development'
+        : 'production';
 
     let plugins = [
         new webpack.DefinePlugin(jsonifyPrimitives(vars))
     ];
 
+    let optimization;
+
     if (enableUglify) {
-        plugins = [
-            ...plugins,
-            new UglifyJSPlugin({
-                test:          /\.js$/,
-                uglifyOptions: {
-                    warnings: false,
-                    compress: {
-                        sequences: minify,
-                        passes:    3
+        optimization = {
+            minimizer: [
+                new UglifyJSPlugin({
+                    test:          /\.js$/,
+                    uglifyOptions: {
+                        warnings: false,
+                        compress: {
+                            sequences: minify,
+                            passes:    3
+                        },
+                        output: {
+                            beautify: !minify
+                        },
+                        mangle: minify
                     },
-                    output: {
-                        beautify: !minify
-                    },
-                    mangle: minify
-                },
-                parallel:  true,
-                sourceMap: enableSourceMap,
-                cache:     enableCaching && UGLIGY_CACHE_DIR
-            })
-        ];
+                    parallel:  true,
+                    sourceMap: enableSourceMap,
+                    cache:     enableCaching && UGLIGY_CACHE_DIR
+                })
+            ]
+        };
     }
 
     if (enableSourceMap) {
@@ -141,13 +146,6 @@ export function getWebpackConfig({
             new webpack.SourceMapDevToolPlugin({
                 filename: '[file].map'
             })
-        ];
-    }
-
-    if (enableNamedModules) {
-        plugins = [
-            ...plugins,
-            new webpack.NamedModulesPlugin()
         ];
     }
 
@@ -170,13 +168,6 @@ export function getWebpackConfig({
         ];
     }
 
-    if (enableModuleConcatenation) {
-        plugins = [
-            ...plugins,
-            new webpack.optimize.ModuleConcatenationPlugin()
-        ];
-    }
-
     if (enableInlineSourceMap) {
         options.devtool = 'inline-source-map';
     } else if (enableSourceMap) {
@@ -185,6 +176,7 @@ export function getWebpackConfig({
     
     return {
 
+        mode,
         entry,
 
         output: {
@@ -241,6 +233,7 @@ export function getWebpackConfig({
 
         bail: true,
 
+        optimization,
         plugins,
 
         ...options

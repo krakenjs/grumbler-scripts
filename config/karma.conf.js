@@ -18,7 +18,7 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
     const headless       = !keepOpen;
 
     // $FlowFixMe
-    const browsers: string = argv.browser;
+    const browsers : string = argv.browser;
 
     const karmaConfig : Object = {
 
