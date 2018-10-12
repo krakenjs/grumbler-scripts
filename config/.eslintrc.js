@@ -271,7 +271,7 @@ module.exports = {
         'no-var': 'error',
         'object-shorthand': 'error',
         'prefer-arrow-callback': 'error',
-        'prefer-const': 'error',
+        'prefer-const': [ 'error', { 'destructuring': 'all' } ],
         'prefer-rest-params': 'off',
         'prefer-reflect': 'off',
         'prefer-spread': 'off',
