@@ -30,12 +30,19 @@ module.exports = {
             'node': {
                 'extensions': [ '.js', '.jsx' ]
             }
+        },
+        'react': {
+            'version': '16.0'
         }
     },
 
     'parserOptions': {
         'ecmaVersion': 2017,
-        'sourceType': 'module'
+        'sourceType': 'module',
+
+        'ecmaFeatures': {
+            'jsx': true
+        }
     },
 
     'globals': {

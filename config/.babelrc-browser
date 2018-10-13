@@ -1,7 +1,7 @@
 {  
     "presets": [
         [
-            "env", {
+            "@babel/env", {
                 "targets": {
                     "ie": 11,
                     "chrome": 27,
@@ -12,50 +12,22 @@
                 "loose": true,
                 "modules": false
             }
-        ]
+        ],
+        "@babel/react",
+        "@babel/flow"
     ],
 
     "plugins": [
-        [ "syntax-dynamic-import", { "loose": true } ],
-        [ "transform-flow-strip-types", { "loose": true } ],
-        [ "transform-object-rest-spread", { "loose": true } ],
-        [ "syntax-object-rest-spread", { "loose": true } ],
-        [ "transform-class-properties", { "loose": true } ],
-        [ "transform-es3-property-literals", { "loose": true } ],
-        [ "transform-es3-member-expression-literals", { "loose": true } ],
-        [ "transform-decorators-legacy", { "loose": true } ],
-        [ "transform-for-of-as-array", { "loose": true } ],
-        [ "babel-plugin-transform-react-jsx", { "loose": true } ]
+        [ "@babel/syntax-dynamic-import", { "loose": true } ],
+        [ "@babel/plugin-proposal-decorators", { "loose": true, "decoratorsBeforeExport": false } ],
+        [ "@babel/plugin-proposal-class-properties", { "loose": true } ],
+        [ "@babel/transform-for-of", { "assumeArray": true } ]
     ],
 
     "env": {
         "test": {
             "plugins": [
-                [ "syntax-dynamic-import", { "loose": true } ],
-                [ "transform-flow-strip-types", { "loose": true } ],
-                [ "transform-object-rest-spread", { "loose": true } ],
-                [ "syntax-object-rest-spread", { "loose": true } ],
-                [ "transform-class-properties", { "loose": true } ],
-                [ "transform-es3-property-literals", { "loose": true } ],
-                [ "transform-es3-member-expression-literals", { "loose": true } ],
-                [ "transform-decorators-legacy", { "loose": true } ],
-                [ "transform-for-of-as-array", { "loose": true } ],
-                [ "babel-plugin-transform-react-jsx", { "loose": true } ],
                 [ "istanbul", { "only": "./src" } ]
-            ],
-            "presets": [
-                [
-                    "env", {
-                        "targets": {
-                            "ie": 11,
-                            "chrome": 27,
-                            "firefox": 30,
-                            "safari": 7,
-                            "opera": 23
-                        },
-                        "loose": true
-                    }
-                ]
             ]
         }
     }
