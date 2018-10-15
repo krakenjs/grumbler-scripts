@@ -22,11 +22,7 @@ for (const path of [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, UGLIGY_CACHE_DIR ])
     mkdirSync(path);
 }
 
-type JSONPrimitive = string | boolean | number;
-type JSONObject = { [string] : JSONPrimitive | JSONObject } | $ReadOnlyArray<JSONPrimitive | JSONObject>;
-type JSONType = JSONObject | JSONPrimitive;
-
-function jsonifyPrimitives(item : JSONType) : JSONType {
+function jsonifyPrimitives(item : mixed) : mixed {
     if (Array.isArray(item)) {
         return JSON.stringify(item);
     } else if (typeof item === 'object' && item !== null) {
@@ -51,7 +47,7 @@ type WebpackConfigOptions = {|
     minify? : boolean,
     test? : boolean,
     options? : Object,
-    vars? : { [string] : mixed },
+    vars? : mixed,
     alias? : { [string] : string },
     libraryTarget? : string,
     web? : boolean,
