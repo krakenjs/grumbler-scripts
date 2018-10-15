@@ -43,7 +43,7 @@ function jsonifyPrimitives(item : mixed) : mixed {
 type WebpackConfigOptions = {|
     entry? : string | $ReadOnlyArray<string>,
     filename : string,
-    modulename : string,
+    modulename? : string,
     minify? : boolean,
     test? : boolean,
     options? : Object,
