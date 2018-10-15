@@ -13,7 +13,7 @@
     ],
 
     "plugins": [
-        [ "@babel/syntax-dynamic-import", { "loose": true } ],
+        [ "@babel/plugin-syntax-dynamic-import", { "loose": true } ],
         [ "@babel/plugin-proposal-decorators", { "loose": true, "decoratorsBeforeExport": false } ],
         [ "@babel/plugin-proposal-class-properties", { "loose": true } ]
     ],
