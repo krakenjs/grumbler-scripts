@@ -367,7 +367,7 @@ module.exports = {
         'promise/prefer-await-to-callbacks': 'off',
         'promise/prefer-await-to-then': 'off',
         'promise/no-new-statics': 'error',
-        'promise/no-return-in-finally': 'error',
+        'promise/no-return-in-finally': 'off',
         'promise/valid-params': 'error',
 
         'security/detect-unsafe-regex': 'error',
