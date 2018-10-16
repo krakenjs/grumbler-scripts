@@ -217,7 +217,8 @@ export function getWebpackConfig({
                     exclude: /(dist)/,
                     loader:  'babel-loader',
                     options: {
-                        cacheDirectory: enableCaching && BABEL_CACHE_DIR
+                        cacheDirectory: enableCaching && BABEL_CACHE_DIR,
+                        extends:        join(__dirname, './.babelrc-browser')
                     }
                 },
                 {
