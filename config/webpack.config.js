@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint import/no-nodejs-modules: off, complexity: off */
 
-import { join, resolve } from 'path';
+import { join, resolve, dirname } from 'path';
 import { tmpdir } from 'os';
 import { existsSync, mkdirSync } from 'fs';
 
@@ -197,7 +197,8 @@ export function getWebpackConfig({
         resolve: {
             alias: {
                 ...alias,
-                sinon: 'sinon/pkg/sinon.js'
+                'sinon':            'sinon/pkg/sinon.js',
+                '@babel/runtime': join(dirname(require.resolve('@babel/runtime/helpers/extends')), '..')
             },
             extensions: [ '.js', '.jsx' ],
             modules:    [
