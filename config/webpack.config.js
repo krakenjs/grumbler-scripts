@@ -26,6 +26,9 @@ function jsonifyPrimitives(item : mixed) : mixed {
     if (Array.isArray(item)) {
         return JSON.stringify(item);
     } else if (typeof item === 'object' && item !== null) {
+        if (item.hasOwnProperty('__literal__')) {
+            return item.__literal__;
+        }
         const result = {};
         for (const key of Object.keys(item)) {
             result[key] = jsonifyPrimitives(item[key]);
