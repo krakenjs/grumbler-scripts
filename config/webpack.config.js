@@ -99,7 +99,7 @@ export function getWebpackConfig({
         global:         (web ? (() => 'window') : (() => 'global'))
     };
 
-    const enableSourceMap = sourcemaps && web;
+    const enableSourceMap = sourcemaps && web && !test;
     const enableInlineSourceMap = enableSourceMap && (test || debug);
     const enableUglify = (web && !test);
     const enableCheckCircularDeps = test;
