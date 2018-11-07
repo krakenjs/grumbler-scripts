@@ -24,12 +24,6 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
 
         files: [
             {
-                pattern:  'node_modules/babel-polyfill/dist/polyfill.js',
-                included: true,
-                served:   true
-            },
-
-            {
                 pattern:  'test/index.js',
                 included: true,
                 served:   true
