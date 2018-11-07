@@ -172,6 +172,8 @@ export function getWebpackConfig({
     } else if (enableSourceMap) {
         options.devtool = 'source-map';
     }
+
+    const globalObject = `(typeof self !== 'undefined' ? self : this)`;
     
     return {
 
@@ -182,6 +184,7 @@ export function getWebpackConfig({
             path,
             filename,
             libraryTarget,
+            globalObject,
             umdNamedDefine: true,
             library:        modulename,
             pathinfo:       false
