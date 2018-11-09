@@ -5,7 +5,10 @@
                 "targets": {
                     "node": "8.0"
                 },
-                "loose": true
+                "loose": true,
+                "exclude": [
+                    "transform-regenerator"
+                ]
             }
         ],
         "@babel/react",
@@ -15,7 +18,8 @@
     "plugins": [
         [ "@babel/plugin-syntax-dynamic-import", { "loose": true } ],
         [ "@babel/plugin-proposal-decorators", { "loose": true, "legacy": true } ],
-        [ "@babel/plugin-proposal-class-properties", { "loose": true } ]
+        [ "@babel/plugin-proposal-class-properties", { "loose": true } ],
+        [ "@babel/plugin-transform-runtime", { "corejs": false, "helpers": true, "regenerator": false, "useESModules": true } ]
     ],
 
     "env": {
