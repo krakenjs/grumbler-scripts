@@ -62,6 +62,7 @@ type WebpackConfigOptions = {|
 |};
 
 export function getWebpackConfig({
+    // $FlowFixMe
     entry = './src/index.js',
     filename,
     modulename,
