@@ -134,16 +134,7 @@ export function getWebpackConfig({
             })
         ];
     }
-
-    if (enableSourceMap) {
-        plugins = [
-            ...plugins,
-            new webpack.SourceMapDevToolPlugin({
-                filename: '[file].map'
-            })
-        ];
-    }
-
+    
     if (enableNamedModules) {
         plugins = [
             ...plugins,
