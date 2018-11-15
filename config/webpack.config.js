@@ -62,7 +62,7 @@ type WebpackConfigOptions = {|
 |};
 
 export function getWebpackConfig({
-    entry,
+    entry = './src/index.js',
     filename,
     modulename,
     libraryTarget = 'umd',
@@ -78,9 +78,7 @@ export function getWebpackConfig({
     sourcemaps = true,
     cache = false
 } : WebpackConfigOptions = {}) : Object {
-
-    entry = entry || './src/index.js';
-
+    
     vars = {
         ...vars,
         __MIN__:        minify,
