@@ -16,6 +16,7 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
     const coverage       = argv.coverage !== false && !quick && !keepOpen;
     const logLevel       = argv['log-level'] || argv.loglevel || (keepOpen ? 'info' : '');
     const headless       = !keepOpen;
+    const devTools       = Boolean(argv.devTools);
 
     // $FlowFixMe
     const browsers : string = argv.browser;
@@ -65,7 +66,6 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
                     '--disable-gpu',
                     '--remote-debugging-port=9222',
                     '--remote-debugging-address=0.0.0.0',
-                    // '--auto-open-devtools-for-tabs',
                     '--enable-precise-memory-info',
                     '--js-flags="--expose-gc"'
                 ],
@@ -153,6 +153,10 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
 
     if (headless) {
         karmaConfig.customLaunchers.xChrome.flags.push('--headless');
+    }
+
+    if (devTools) {
+        karmaConfig.customLaunchers.xChrome.flags.push('--auto-open-devtools-for-tabs');
     }
 
     if (!karmaConfig.webpack) {
