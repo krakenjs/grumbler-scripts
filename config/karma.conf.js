@@ -13,7 +13,7 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
     const captureConsole = Boolean(argv.console);
     const keepOpen       = Boolean(argv['keep-open']) || debug;
     const autoWatch      = Boolean(keepOpen);
-    const coverage       = argv.coverage !== false && !quick;
+    const coverage       = argv.coverage !== false && !quick && !keepOpen;
     const logLevel       = argv['log-level'] || argv.loglevel || (keepOpen ? 'info' : '');
     const headless       = !keepOpen;
 
