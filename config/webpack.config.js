@@ -14,8 +14,9 @@ import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 const HARD_SOURCE_CACHE_DIR = join(tmpdir(), 'cache-hard-source');
 const BABEL_CACHE_DIR = join(tmpdir(), 'cache-babel');
 const UGLIGY_CACHE_DIR = join(tmpdir(), 'cache-uglify');
+const CACHE_LOADER_DIR = join(tmpdir(), 'cache-loader');
 
-for (const path of [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, UGLIGY_CACHE_DIR ]) {
+for (const path of [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, UGLIGY_CACHE_DIR, CACHE_LOADER_DIR ]) {
     if (existsSync(path)) {
         rimraf.sync(path);
     }
@@ -207,6 +208,14 @@ export function getWebpackConfig({
 
         module: {
             rules: [
+                {
+                    test:    /\.jsx?$/,
+                    loader:  'cache-loader',
+                    options: {
+                        cacheDirectory: enableCaching && CACHE_LOADER_DIR
+                    }
+
+                },
                 {
                     test:   /sinon\.js$/,
                     loader: 'imports?define=>false,require=>false'
