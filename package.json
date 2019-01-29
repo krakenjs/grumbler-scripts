@@ -80,6 +80,7 @@
     "babel-plugin-transform-es3-member-expression-literals": "^6.22.0",
     "babel-plugin-transform-es3-property-literals": "^6.22.0",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "cache-loader": "^2.0.1",
     "chai": "^4.0.1",
     "circular-dependency-plugin": "^5.0.2",
     "cross-env": "^5.0.5",
