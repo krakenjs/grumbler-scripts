@@ -7,16 +7,16 @@ import { existsSync, mkdirSync } from 'fs';
 
 import rimraf from 'rimraf';
 import webpack from 'webpack';
-import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 
 const HARD_SOURCE_CACHE_DIR = join(tmpdir(), 'cache-hard-source');
 const BABEL_CACHE_DIR = join(tmpdir(), 'cache-babel');
-const UGLIGY_CACHE_DIR = join(tmpdir(), 'cache-uglify');
+const TERSER_CACHE_DIR = join(tmpdir(), 'cache-terser');
 const CACHE_LOADER_DIR = join(tmpdir(), 'cache-loader');
 
-for (const path of [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, UGLIGY_CACHE_DIR, CACHE_LOADER_DIR ]) {
+for (const path of [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, TERSER_CACHE_DIR, CACHE_LOADER_DIR ]) {
     if (existsSync(path)) {
         rimraf.sync(path);
     }
@@ -101,7 +101,7 @@ export function getWebpackConfig({
 
     const enableSourceMap = sourcemaps && web && !test;
     const enableInlineSourceMap = enableSourceMap && (test || debug);
-    const enableUglify = (web && !test);
+    const enableMinifier = (web && !test);
     const enableCheckCircularDeps = test;
     const enableCaching = cache && !test;
 
@@ -115,12 +115,12 @@ export function getWebpackConfig({
 
     let optimization;
 
-    if (enableUglify) {
+    if (enableMinifier) {
         optimization = {
             minimizer: [
-                new UglifyJSPlugin({
+                new TerserPlugin({
                     test:          /\.js$/,
-                    uglifyOptions: {
+                    terserOptions: {
                         warnings: false,
                         compress: {
                             sequences: minify,
@@ -133,7 +133,7 @@ export function getWebpackConfig({
                     },
                     parallel:  true,
                     sourceMap: enableSourceMap,
-                    cache:     enableCaching && UGLIGY_CACHE_DIR
+                    cache:     enableCaching && TERSER_CACHE_DIR
                 })
             ]
         };
