@@ -46,7 +46,7 @@ function jsonifyPrimitives(item : mixed) : mixed {
 
 type WebpackConfigOptions = {|
     entry? : string | $ReadOnlyArray<string>,
-    filename : string,
+    filename? : string,
     modulename? : string,
     minify? : boolean,
     test? : boolean,
@@ -56,7 +56,7 @@ type WebpackConfigOptions = {|
     libraryTarget? : string,
     web? : boolean,
     debug? : boolean,
-    env : string,
+    env? : string,
     path? : string,
     sourcemaps? : boolean,
     cache? : boolean
@@ -167,6 +167,38 @@ export function getWebpackConfig({
     }
 
     const globalObject = `(typeof self !== 'undefined' ? self : this)`;
+
+    const rules = [];
+
+    if (enableCaching) {
+        rules.push({
+            test:    /\.jsx?$/,
+            loader:  'cache-loader',
+            options: {
+                cacheDirectory: CACHE_LOADER_DIR
+            }
+        });
+    }
+
+    rules.push({
+        test:   /sinon\.js$/,
+        loader: 'imports?define=>false,require=>false'
+    });
+
+    rules.push({
+        test:    /\.jsx?$/,
+        exclude: /(dist)/,
+        loader:  'babel-loader',
+        options: {
+            cacheDirectory: enableCaching && BABEL_CACHE_DIR,
+            extends:        join(__dirname, './.babelrc-browser')
+        }
+    });
+    
+    rules.push({
+        test:   /\.(html?|css|json|svg)$/,
+        loader: 'raw-loader'
+    });
     
     return {
 
@@ -207,33 +239,7 @@ export function getWebpackConfig({
         },
 
         module: {
-            rules: [
-                {
-                    test:    /\.jsx?$/,
-                    loader:  'cache-loader',
-                    options: {
-                        cacheDirectory: enableCaching && CACHE_LOADER_DIR
-                    }
-
-                },
-                {
-                    test:   /sinon\.js$/,
-                    loader: 'imports?define=>false,require=>false'
-                },
-                {
-                    test:    /\.jsx?$/,
-                    exclude: /(dist)/,
-                    loader:  'babel-loader',
-                    options: {
-                        cacheDirectory: enableCaching && BABEL_CACHE_DIR,
-                        extends:        join(__dirname, './.babelrc-browser')
-                    }
-                },
-                {
-                    test:   /\.(html?|css|json|svg)$/,
-                    loader: 'raw-loader'
-                }
-            ]
+            rules
         },
 
         bail: true,

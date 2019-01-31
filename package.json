@@ -12,7 +12,7 @@
     "karma": "cross-env NODE_ENV=test babel-node --plugins=transform-es2015-modules-commonjs ./node_modules/.bin/karma start",
     "babel": "babel ./config --exclude=node_modules --out-dir ./config",
     "webpack": "babel-node --plugins=transform-es2015-modules-commonjs ./node_modules/.bin/webpack --progress",
-    "test": "npm run lint && npm run flow && npm run test-babel",
+    "test": "npm run lint && npm run flow && npm run test-babel && npm run test-webpack",
     "build": "npm run test && npm run babel && npm run webpack && npm run flow:build",
     "release": "./publish.sh",
     "release:patch": "./publish.sh patch",
@@ -24,7 +24,8 @@
     "prepublish": "in-publish && npm run babel || not-in-publish",
     "postpublish": "git checkout config",
     "find-eslint-rules": "eslint-find-rules --unused ./config/.eslintrc.js",
-    "test-babel": "babel --config-file ./config/.babelrc-node test/* > /dev/null && babel --config-file ./config/.babelrc-browser test/* > /dev/null"
+    "test-babel": "babel --config-file ./config/.babelrc-node test/* > /dev/null && babel --config-file ./config/.babelrc-browser test/* > /dev/null",
+    "test-webpack": "babel-node --plugins=transform-es2015-modules-commonjs ./node_modules/.bin/webpack --progress"
   },
   "browserslist": [
     "IE >= 9",
