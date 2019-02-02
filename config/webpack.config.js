@@ -110,8 +110,7 @@ export function getWebpackConfig({
         : 'production';
 
     let plugins = [
-        new webpack.DefinePlugin(jsonifyPrimitives(vars)),
-        new webpack.IgnorePlugin(/(types|declarations)/)
+        new webpack.DefinePlugin(jsonifyPrimitives(vars))
     ];
 
     let optimization;
