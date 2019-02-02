@@ -244,6 +244,10 @@ export function getWebpackConfig({
 
         bail: true,
 
+        stats: {
+            optimizationBailout: true
+        },
+
         optimization,
         plugins,
 
