@@ -5,6 +5,7 @@ import { join, resolve, dirname } from 'path';
 import { tmpdir } from 'os';
 import { existsSync, mkdirSync } from 'fs';
 
+import semver from 'semver';
 import rimraf from 'rimraf';
 import webpack from 'webpack';
 import TerserPlugin from 'terser-webpack-plugin';
@@ -44,20 +45,12 @@ function jsonifyPrimitives(item : mixed) : mixed {
     }
 }
 
-export function getNextVersion(pkg : {| version : string |}) : string {
-    let version = pkg.version;
-    version = version.split('.');
-    version[2] = (parseInt(version[2], 10) + 1).toString();
-    version = version.join('.');
-    return version;
+export function getCurrentVersion(pkg : {| version : string |}) : string {
+    return pkg.version.replace(/[^\d]+/g, '_');
 }
 
-export function getNextMajorVersion(pkg : {| version : string |}) : string {
-    return getNextVersion(pkg).split('.')[0];
-}
-
-export function getNextMinorVersion(pkg : {| version : string |}) : string {
-    return getNextVersion(pkg);
+export function getNextVersion(pkg : {| version : string |}, level? : string = 'patch') : string {
+    return getCurrentVersion({ version: semver.inc(pkg.version, level) });
 }
 
 type WebpackConfigOptions = {|
