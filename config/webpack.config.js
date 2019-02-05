@@ -44,6 +44,22 @@ function jsonifyPrimitives(item : mixed) : mixed {
     }
 }
 
+export function getNextVersion(pkg : {| version : string |}) : string {
+    let version = pkg.version;
+    version = version.split('.');
+    version[2] = (parseInt(version[2], 10) + 1).toString();
+    version = version.join('.');
+    return version;
+}
+
+export function getNextMajorVersion(pkg : {| version : string |}) : string {
+    return getNextVersion(pkg).split('.')[0];
+}
+
+export function getNextMinorVersion(pkg : {| version : string |}) : string {
+    return getNextVersion(pkg);
+}
+
 type WebpackConfigOptions = {|
     entry? : string | $ReadOnlyArray<string>,
     filename? : string,
