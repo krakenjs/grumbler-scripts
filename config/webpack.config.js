@@ -92,11 +92,11 @@ export function getWebpackConfig({
 
     const enableSourceMap = sourcemaps && web && !test;
     const enableInlineSourceMap = enableSourceMap && (test || debug);
-    const enableOptimizer = (web && !test);
+    const enableOptimizer = web;
     const enableCheckCircularDeps = test;
     const enableCaching = cache && !test;
     const enableTreeShake = web && !test && !debug;
-    const enableBeautify = test || !minify;
+    const enableBeautify = debug || test || !minify;
     
     vars = {
         ...vars,
