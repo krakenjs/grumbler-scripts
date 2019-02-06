@@ -97,6 +97,13 @@ export function getWebpackConfig({
     const enableCaching = cache && !test;
     const enableTreeShake = web && !test && !debug;
     const enableBeautify = debug || test || !minify;
+
+    if (filename && !filename.endsWith('.js')) {
+        if (minify && !filename.endsWith('.min')) {
+            filename = `${ filename }.min`;
+        }
+        filename = `${ filename }.js`;
+    }
     
     vars = {
         ...vars,
