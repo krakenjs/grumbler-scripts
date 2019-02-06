@@ -80,7 +80,7 @@ export function getWebpackConfig({
     web = true,
     test = (process.env.NODE_ENV === 'test'),
     debug = test,
-    minify = !debug,
+    minify = test || !debug,
     options = {},
     vars = {},
     alias = {},
@@ -89,6 +89,14 @@ export function getWebpackConfig({
     sourcemaps = true,
     cache = false
 } : WebpackConfigOptions = {}) : Object {
+
+    const enableSourceMap = sourcemaps && web && !test;
+    const enableInlineSourceMap = enableSourceMap && (test || debug);
+    const enableOptimizer = (web && !test);
+    const enableCheckCircularDeps = test;
+    const enableCaching = cache && !test;
+    const enableTreeShake = web && !test && !debug;
+    const enableBeautify = test || !minify;
     
     vars = {
         ...vars,
@@ -98,7 +106,7 @@ export function getWebpackConfig({
         __FILE_NAME__:  filename,
         __DEBUG__:      debug,
         __ENV__:        env,
-        __TREE_SHAKE__: web && !test && !debug,
+        __TREE_SHAKE__: enableTreeShake,
         __LOCAL__:      env === 'local',
         __STAGE__:      env === 'stage',
         __SANDBOX__:    env === 'sandbox',
@@ -107,12 +115,6 @@ export function getWebpackConfig({
         __GLOBAL__:     () => 'global',
         global:         (web ? (() => 'window') : (() => 'global'))
     };
-
-    const enableSourceMap = sourcemaps && web && !test;
-    const enableInlineSourceMap = enableSourceMap && (test || debug);
-    const enableMinifier = (web && !test);
-    const enableCheckCircularDeps = test;
-    const enableCaching = cache && !test;
 
     const mode = (debug || test)
         ? 'development'
@@ -124,7 +126,7 @@ export function getWebpackConfig({
 
     let optimization;
 
-    if (enableMinifier) {
+    if (enableOptimizer) {
         optimization = {
             minimizer: [
                 new TerserPlugin({
@@ -132,13 +134,18 @@ export function getWebpackConfig({
                     terserOptions: {
                         warnings: false,
                         compress: {
-                            sequences: minify,
-                            passes:    3
+                            pure_getters: true,
+                            unsafe_proto: true,
+                            passes:       3
                         },
                         output: {
-                            beautify: !minify
+                            beautify: enableBeautify
                         },
-                        mangle: minify
+                        mangle: minify ? {
+                            properties: {
+                                regex: /^[A-Z_]+$/
+                            }
+                        } : false
                     },
                     parallel:  true,
                     sourceMap: enableSourceMap,
