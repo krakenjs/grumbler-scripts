@@ -11,6 +11,7 @@ import webpack from 'webpack';
 import TerserPlugin from 'terser-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 const HARD_SOURCE_CACHE_DIR = join(tmpdir(), 'cache-hard-source');
 const BABEL_CACHE_DIR = join(tmpdir(), 'cache-babel');
@@ -68,7 +69,8 @@ type WebpackConfigOptions = {|
     env? : string,
     path? : string,
     sourcemaps? : boolean,
-    cache? : boolean
+    cache? : boolean,
+    analyze? : boolean
 |};
 
 export function getWebpackConfig({
@@ -87,7 +89,8 @@ export function getWebpackConfig({
     path = resolve('./dist'),
     env = (test ? 'test' : 'production'),
     sourcemaps = true,
-    cache = false
+    cache = false,
+    analyze = false
 } : WebpackConfigOptions = {}) : Object {
 
     const enableSourceMap = sourcemaps && web && !test;
@@ -187,6 +190,16 @@ export function getWebpackConfig({
         options.devtool = 'source-map';
     } else {
         options.devtool = '';
+    }
+
+    if (analyze) {
+        plugins = [
+            ...plugins,
+            new BundleAnalyzerPlugin({
+                analyzerMode: 'static',
+                defaultSizes: 'gzip'
+            })
+        ];
     }
 
     const globalObject = `(typeof self !== 'undefined' ? self : this)`;
