@@ -153,7 +153,7 @@ export function getWebpackConfig({
                         },
                         mangle: minify ? {
                             properties: {
-                                regex: /^[A-Z_]+$/
+                                regex: /^[A-Z][A-Z_]{3,}$/
                             }
                         } : false
                     },
