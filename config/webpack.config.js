@@ -138,7 +138,9 @@ export function getWebpackConfig({
 
     if (enableOptimizer) {
         optimization = {
-            minimizer: [
+            namedModules:       debug,
+            concatenateModules: true,
+            minimizer:          [
                 new TerserPlugin({
                     test:          /\.js$/,
                     terserOptions: {
