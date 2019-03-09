@@ -153,11 +153,7 @@ export function getWebpackConfig({
                         output: {
                             beautify: enableBeautify
                         },
-                        mangle: minify ? {
-                            properties: {
-                                regex: /^[A-Z][A-Z_]{3,}$/
-                            }
-                        } : false
+                        mangle: minify ? true : false
                     },
                     parallel:  true,
                     sourceMap: enableSourceMap,
