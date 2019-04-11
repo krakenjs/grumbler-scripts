@@ -6,7 +6,9 @@ import { getWebpackConfig } from './webpack.config';
 
 export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
     const {
-        testDir = 'test'
+        testDir = 'test',
+        windowDir = `${ testDir }/windows`,
+        entry = `${ testDir }/index.js`
     } = cfg;
 
     process.env.NODE_ENV = 'test';
@@ -28,7 +30,7 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
 
         files: [
             {
-                pattern:  `${ testDir }/index.js`,
+                pattern:  entry,
                 included: true,
                 served:   true
             },
@@ -53,11 +55,11 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
         ],
 
         preprocessors: {
-            [`${ testDir }/*.js` ]:             [ 'webpack',  'sourcemap' ],
-            [`${ testDir }/*.jsx` ]:             [ 'webpack',  'sourcemap' ],
-            [`${ testDir }/windows/**/*.js` ]:  [ 'webpack',  'sourcemap' ],
-            [`${ testDir }/windows/**/*.jsx` ]: [ 'webpack',  'sourcemap' ],
-            [`${ testDir }/**/*.js` ]:          [ 'coverage', 'sourcemap' ]
+            [`${ testDir }/*.js` ]:       [ 'webpack',  'sourcemap' ],
+            [`${ testDir }/*.jsx` ]:      [ 'webpack',  'sourcemap' ],
+            [`${ windowDir }/**/*.js` ]:  [ 'webpack',  'sourcemap' ],
+            [`${ windowDir }/**/*.jsx` ]: [ 'webpack',  'sourcemap' ],
+            [ `src/**/*.js` ]:            [ 'coverage', 'sourcemap' ]
         },
 
         customLaunchers: {
