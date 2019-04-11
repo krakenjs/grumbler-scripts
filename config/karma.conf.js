@@ -5,6 +5,9 @@ import { argv } from 'yargs';
 import { getWebpackConfig } from './webpack.config';
 
 export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
+    const {
+        dir = 'test'
+    } = cfg;
 
     process.env.NODE_ENV = 'test';
 
@@ -25,36 +28,36 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
 
         files: [
             {
-                pattern:  'test/index.js',
+                pattern:  `${ dir }/index.js`,
                 included: true,
                 served:   true
             },
 
             {
-                pattern:  'test/**/*.js',
+                pattern:  `${ dir }/**/*.js`,
                 included: false,
                 served:   true
             },
 
             {
-                pattern:  'test/**/*.jsx',
+                pattern:  `${ dir }/**/*.jsx`,
                 included: false,
                 served:   true
             },
 
             {
-                pattern:  'test/**/*.htm',
+                pattern:  `${ dir }/**/*.htm`,
                 included: false,
                 served:   true
             }
         ],
 
         preprocessors: {
-            'test/*.js':             [ 'webpack',  'sourcemap' ],
-            'test/*.jsx':            [ 'webpack',  'sourcemap' ],
-            'test/windows/**/*.js':  [ 'webpack',  'sourcemap' ],
-            'test/windows/**/*.jsx': [ 'webpack',  'sourcemap' ],
-            'src/**/*.js':           [ 'coverage', 'sourcemap' ]
+            [ `${ dir }/*.js` ]:             [ 'webpack',  'sourcemap' ],
+            [ `${ dir }/*.jsx` ]:             [ 'webpack',  'sourcemap' ],
+            [ `${ dir }/windows/**/*.js` ]:  [ 'webpack',  'sourcemap' ],
+            [ `${ dir }/windows/**/*.jsx` ]: [ 'webpack',  'sourcemap' ],
+            [ `${ dir }/**/*.js` ]:          [ 'coverage', 'sourcemap' ]
         },
 
         customLaunchers: {
