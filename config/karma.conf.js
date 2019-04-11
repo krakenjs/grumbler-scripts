@@ -55,11 +55,12 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
         ],
 
         preprocessors: {
-            [`${ testDir }/*.js` ]:       [ 'webpack',  'sourcemap' ],
-            [`${ testDir }/*.jsx` ]:      [ 'webpack',  'sourcemap' ],
-            [`${ windowDir }/**/*.js` ]:  [ 'webpack',  'sourcemap' ],
-            [`${ windowDir }/**/*.jsx` ]: [ 'webpack',  'sourcemap' ],
-            [ `src/**/*.js` ]:            [ 'coverage', 'sourcemap' ]
+            [ entry ]:                     [ 'webpack', 'sourcemap' ],
+            [ `${ testDir }/*.js` ]:       [ 'webpack',  'sourcemap' ],
+            [ `${ testDir }/*.jsx` ]:      [ 'webpack',  'sourcemap' ],
+            [ `${ windowDir }/**/*.js` ]:  [ 'webpack',  'sourcemap' ],
+            [ `${ windowDir }/**/*.jsx` ]: [ 'webpack',  'sourcemap' ],
+            [ `src/**/*.js` ]:             [ 'coverage', 'sourcemap' ]
         },
 
         customLaunchers: {
