@@ -233,21 +233,26 @@ export function getWebpackConfig({
         test:   /\.(html?|css|json|svg)$/,
         loader: 'raw-loader'
     });
+
+    const output : Object = {
+        path,
+        filename,
+        globalObject,
+        umdNamedDefine: true,
+        library:        modulename,
+        pathinfo:       false
+    };
+
+    if (libraryTarget) {
+        output.libraryTarget = libraryTarget;
+    }
     
     return {
 
         mode,
         entry,
 
-        output: {
-            path,
-            filename,
-            libraryTarget,
-            globalObject,
-            umdNamedDefine: true,
-            library:        modulename,
-            pathinfo:       false
-        },
+        output,
 
         node: {
             console:      false,
