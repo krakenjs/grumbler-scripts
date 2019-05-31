@@ -55,6 +55,7 @@ export function getNextVersion(pkg : {| version : string |}, level? : string = '
 }
 
 type WebpackConfigOptions = {|
+    context? : string,
     entry? : string | $ReadOnlyArray<string>,
     filename? : string,
     modulename? : string,
@@ -74,6 +75,7 @@ type WebpackConfigOptions = {|
 |};
 
 export function getWebpackConfig({
+    context = process.cwd(),
     // $FlowFixMe
     entry = './src/index.js',
     filename,
@@ -249,6 +251,7 @@ export function getWebpackConfig({
     
     return {
 
+        context,
         mode,
         entry,
 
