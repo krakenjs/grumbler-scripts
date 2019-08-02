@@ -22,7 +22,9 @@ for (const path of [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, TERSER_CACHE_DIR, C
     if (existsSync(path)) {
         rimraf.sync(path);
     }
-    mkdirSync(path);
+    if (!existsSync(path)) {
+        mkdirSync(path);
+    }
 }
 
 function jsonifyPrimitives(item : mixed) : mixed {
