@@ -100,7 +100,6 @@ export function getWebpackConfig({
 
     const enableSourceMap = sourcemaps && web && !test;
     const enableInlineSourceMap = enableSourceMap && (test || debug);
-    const enableOptimizer = web;
     const enableCheckCircularDeps = test;
     const enableCaching = cache && !test;
     const enableTreeShake = web && !test && !debug;
@@ -139,34 +138,31 @@ export function getWebpackConfig({
         new webpack.DefinePlugin(jsonifyPrimitives(vars))
     ];
 
-    let optimization;
-
-    if (enableOptimizer) {
-        optimization = {
-            namedModules:       debug,
-            concatenateModules: true,
-            minimizer:          [
-                new TerserPlugin({
-                    test:          /\.js$/,
-                    terserOptions: {
-                        warnings: false,
-                        compress: {
-                            pure_getters: true,
-                            unsafe_proto: true,
-                            passes:       3
-                        },
-                        output: {
-                            beautify: enableBeautify
-                        },
-                        mangle: minify ? true : false
+    const optimization = {
+        minimize:           minify,
+        namedModules:       debug,
+        concatenateModules: true,
+        minimizer:          [
+            new TerserPlugin({
+                test:          /\.js$/,
+                terserOptions: {
+                    warnings: false,
+                    compress: {
+                        pure_getters: true,
+                        unsafe_proto: true,
+                        passes:       3
                     },
-                    parallel:  true,
-                    sourceMap: enableSourceMap,
-                    cache:     enableCaching && TERSER_CACHE_DIR
-                })
-            ]
-        };
-    }
+                    output: {
+                        beautify: enableBeautify
+                    },
+                    mangle: minify ? true : false
+                },
+                parallel:  true,
+                sourceMap: enableSourceMap,
+                cache:     enableCaching && TERSER_CACHE_DIR
+            })
+        ]
+    };
 
     if (enableCheckCircularDeps) {
         plugins = [
