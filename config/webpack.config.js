@@ -87,7 +87,7 @@ export function getWebpackConfig({
     web = true,
     test = (process.env.NODE_ENV === 'test'),
     debug = test,
-    minify = test || !debug,
+    minify = !test && !debug,
     options = {},
     vars = {},
     alias = {},
