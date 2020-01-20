@@ -25,7 +25,8 @@
     "postpublish": "git checkout config",
     "find-eslint-rules": "eslint-find-rules --unused ./config/.eslintrc.js",
     "test-babel": "babel --config-file ./config/.babelrc-node test/* > /dev/null && babel --config-file ./config/.babelrc-browser test/* > /dev/null",
-    "test-webpack": "babel-node --plugins=transform-es2015-modules-commonjs ./node_modules/.bin/webpack --progress"
+    "test-webpack": "babel-node --plugins=transform-es2015-modules-commonjs ./node_modules/.bin/webpack --progress",
+    "check-updates": "npm-check-updates"
   },
   "browserslist": [
     "IE >= 9",
