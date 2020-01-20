@@ -139,7 +139,7 @@ export function getWebpackConfig({
     ];
 
     const optimization = {
-        minimize:           minify,
+        minimize:           true,
         namedModules:       debug,
         concatenateModules: true,
         minimizer:          [
