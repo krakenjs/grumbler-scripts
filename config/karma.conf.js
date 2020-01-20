@@ -89,8 +89,7 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
         basePath: __dirname,
 
         frameworks: [
-            'mocha',
-            'sinon-chai'
+            'mocha'
         ],
 
         client: {

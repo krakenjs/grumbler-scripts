@@ -216,11 +216,6 @@ export function getWebpackConfig({
     }
 
     rules.push({
-        test:   /sinon\.js$/,
-        loader: 'imports?define=>false,require=>false'
-    });
-
-    rules.push({
         test:    /\.jsx?$/,
         exclude: /(dist)/,
         loader:  'babel-loader',
@@ -269,7 +264,6 @@ export function getWebpackConfig({
         resolve: {
             alias: {
                 ...alias,
-                'sinon':            'sinon/pkg/sinon.js',
                 '@babel/runtime': join(dirname(require.resolve('@babel/runtime/helpers/extends')), '..')
             },
             extensions: [ '.js', '.jsx' ],
