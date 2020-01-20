@@ -395,7 +395,7 @@ module.exports = {
         'unicorn/prefer-add-event-listener': 'error',
         'unicorn/prefer-exponentiation-operator': 'off',
         'unicorn/prefer-spread': 'error',
-        'unicorn/consistent-function-scoping': 'error',
+        'unicorn/consistent-function-scoping': 'off',
         'unicorn/expiring-todo-comments': 'error',
         'unicorn/no-console-spaces': 'error',
         'unicorn/no-for-loop': 'error',
