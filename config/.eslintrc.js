@@ -337,7 +337,7 @@ module.exports = {
         'flowtype/no-weak-types': [ 'error', { 'any': true, 'Object': false, 'Function': false } ],
         'flowtype/object-type-delimiter': [ 'error', 'comma' ],
         'flowtype/require-parameter-type': [ 'off', { 'excludeArrowFunctions': true } ],
-        'flowtype/require-return-type': [ 'error', 'always', { 'annotateUndefined': 'never', 'excludeArrowFunctions': true } ],
+        'flowtype/require-return-type': [ 'error', 'always', { 'annotateUndefined': 'ignore', 'excludeArrowFunctions': true } ],
         'flowtype/require-valid-file-annotation': [ 'error', 'always', { 'annotationStyle': 'block' } ],
         'flowtype/semi': [ 'error', 'always' ],
         'flowtype/space-after-type-colon': [ 'error', 'always', { 'allowLineBreak': true } ],
