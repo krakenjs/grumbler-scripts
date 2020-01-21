@@ -196,7 +196,8 @@ export function getWebpackConfig({
             ...plugins,
             new BundleAnalyzerPlugin({
                 analyzerMode: 'static',
-                defaultSizes: 'gzip'
+                defaultSizes: 'gzip',
+                openAnalyzer: false
             })
         ];
     }
