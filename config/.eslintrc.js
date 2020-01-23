@@ -398,7 +398,7 @@ module.exports = {
         'unicorn/consistent-function-scoping': 'off',
         'unicorn/expiring-todo-comments': 'error',
         'unicorn/no-console-spaces': 'error',
-        'unicorn/no-for-loop': 'error',
+        'unicorn/no-for-loop': 'off',
         'unicorn/no-keyword-prefix': 'off',
         'unicorn/no-nested-ternary': 'off',
         'unicorn/no-unreadable-array-destructuring': 'error',
