@@ -150,7 +150,9 @@ export function getWebpackConfig({
                     compress: {
                         pure_getters: true,
                         unsafe_proto: true,
-                        passes:       3
+                        passes:       3,
+                        join_vars:    minify,
+                        sequences:    minify
                     },
                     output: {
                         beautify: enableBeautify
