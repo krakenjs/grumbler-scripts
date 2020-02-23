@@ -104,6 +104,7 @@ export function getWebpackConfig({
     const enableCaching = cache && !test;
     const enableTreeShake = web && !test && !debug;
     const enableBeautify = debug || test || !minify;
+    const enableStyling = true;
 
     if (filename && !filename.endsWith('.js')) {
         if (minify && !filename.endsWith('.min')) {
@@ -207,6 +208,23 @@ export function getWebpackConfig({
     const globalObject = `(typeof self !== 'undefined' ? self : this)`;
 
     const rules = [];
+
+    if (enableStyling) {
+        rules.push({
+            test: /\.s?css$/i,
+            use:  [
+                'isomorphic-style-loader',
+                {
+                    loader:  'css-loader',
+                    options: {
+                        importLoaders: 1
+                    }
+                },
+                'scoped-css-loader',
+                'sass-loader'
+            ]
+        });
+    }
 
     if (enableCaching) {
         rules.push({
