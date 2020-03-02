@@ -211,7 +211,7 @@ export function getWebpackConfig({
 
     if (enableStyling) {
         rules.push({
-            test: /\.s?css$/i,
+            test: /\.scss$/i,
             use:  [
                 'isomorphic-style-loader',
                 {
