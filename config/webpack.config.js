@@ -149,11 +149,12 @@ export function getWebpackConfig({
                 terserOptions: {
                     warnings: false,
                     compress: {
-                        pure_getters: true,
-                        unsafe_proto: true,
-                        passes:       3,
-                        join_vars:    minify,
-                        sequences:    minify
+                        pure_getters:  true,
+                        unsafe_proto:  true,
+                        passes:        3,
+                        join_vars:     minify,
+                        sequences:     minify,
+                        drop_debugger: !debug
                     },
                     output: {
                         beautify: enableBeautify
