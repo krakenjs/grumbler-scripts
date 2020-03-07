@@ -95,7 +95,8 @@ export function getWebpackConfig({
     env = (test ? 'test' : 'production'),
     sourcemaps = true,
     cache = false,
-    analyze = false
+    analyze = false,
+    optimize = (env !== 'local')
 } : WebpackConfigOptions = {}) : Object {
 
     const enableSourceMap = sourcemaps && web && !test;
@@ -139,7 +140,7 @@ export function getWebpackConfig({
         new webpack.DefinePlugin(jsonifyPrimitives(vars))
     ];
 
-    const optimization = {
+    const optimization = optimize ? {
         minimize:           true,
         namedModules:       debug,
         concatenateModules: true,
@@ -166,7 +167,7 @@ export function getWebpackConfig({
                 cache:     enableCaching && TERSER_CACHE_DIR
             })
         ]
-    };
+    } : {};
 
     if (enableCheckCircularDeps) {
         plugins = [
