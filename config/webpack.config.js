@@ -6,22 +6,18 @@ import { tmpdir } from 'os';
 import { existsSync, mkdirSync } from 'fs';
 
 import semver from 'semver';
-import rimraf from 'rimraf';
 import webpack from 'webpack';
 import TerserPlugin from 'terser-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
-const HARD_SOURCE_CACHE_DIR = join(tmpdir(), 'cache-hard-source');
-const BABEL_CACHE_DIR = join(tmpdir(), 'cache-babel');
-const TERSER_CACHE_DIR = join(tmpdir(), 'cache-terser');
-const CACHE_LOADER_DIR = join(tmpdir(), 'cache-loader');
+const HARD_SOURCE_CACHE_DIR = join(tmpdir(), `cache-hard-source-${ process.pid }`);
+const BABEL_CACHE_DIR = join(tmpdir(), `cache-babel-${  process.pid }`);
+const TERSER_CACHE_DIR = join(tmpdir(), `cache-terser-${  process.pid }`);
+const CACHE_LOADER_DIR = join(tmpdir(), `cache-loader-${  process.pid }`);
 
 for (const path of [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, TERSER_CACHE_DIR, CACHE_LOADER_DIR ]) {
-    if (existsSync(path)) {
-        rimraf.sync(path);
-    }
     if (!existsSync(path)) {
         mkdirSync(path);
     }
