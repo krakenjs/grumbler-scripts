@@ -70,7 +70,8 @@ type WebpackConfigOptions = {|
     path? : string,
     sourcemaps? : boolean,
     cache? : boolean,
-    analyze? : boolean
+    analyze? : boolean,
+    dynamic? : boolean
 |};
 
 export function getWebpackConfig({
@@ -92,6 +93,7 @@ export function getWebpackConfig({
     sourcemaps = true,
     cache = false,
     analyze = false,
+    dynamic = false,
     optimize = (env !== 'local')
 } : WebpackConfigOptions = {}) : Object {
 
@@ -175,7 +177,7 @@ export function getWebpackConfig({
         ];
     }
     
-    if (enableCaching) {
+    if (enableCaching && !dynamic) {
         plugins = [
             ...plugins,
             new HardSourceWebpackPlugin({
