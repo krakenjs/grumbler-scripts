@@ -121,6 +121,7 @@
     "karma-spec-reporter": "0.0.32",
     "karma-webpack": "4.0.0-rc.3",
     "mocha": "^7",
+    "node-cleanup": "^2.1.2",
     "node-sass": "^4.13.1",
     "npm-check-updates": "^4.0.1",
     "npx": "^10.2.1",

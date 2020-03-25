@@ -5,23 +5,59 @@ import { join, resolve, dirname } from 'path';
 import { tmpdir } from 'os';
 import { existsSync, mkdirSync } from 'fs';
 
+import rimraf from 'rimraf';
 import semver from 'semver';
 import webpack from 'webpack';
+import nodeCleanup from 'node-cleanup';
 import TerserPlugin from 'terser-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
-const HARD_SOURCE_CACHE_DIR = join(tmpdir(), `cache-hard-source-${ process.pid }`);
-const BABEL_CACHE_DIR = join(tmpdir(), `cache-babel-${  process.pid }`);
-const TERSER_CACHE_DIR = join(tmpdir(), `cache-terser-${  process.pid }`);
-const CACHE_LOADER_DIR = join(tmpdir(), `cache-loader-${  process.pid }`);
+let cacheDirsCreated = false;
 
-for (const path of [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, TERSER_CACHE_DIR, CACHE_LOADER_DIR ]) {
-    if (!existsSync(path)) {
-        mkdirSync(path);
+const setupCacheDirs = ({ dynamic = false } = {}) => {
+    const id = dynamic ? process.pid.toString() : 'static';
+
+    const HARD_SOURCE_CACHE_DIR = join(tmpdir(), `cache-hard-source-${ id }`);
+    const BABEL_CACHE_DIR = join(tmpdir(), `cache-babel-${ id }`);
+    const TERSER_CACHE_DIR = join(tmpdir(), `cache-terser-${ id }`);
+    const CACHE_LOADER_DIR = join(tmpdir(), `cache-loader-${ id }`);
+
+    const dirs = [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, TERSER_CACHE_DIR, CACHE_LOADER_DIR ];
+
+    if (!cacheDirsCreated) {
+        for (const path of dirs) {
+            if (!existsSync(path)) {
+                mkdirSync(path);
+            }
+        }
+
+        if (dynamic) {
+            nodeCleanup(() => {
+                for (const path of dirs) {
+                    if (existsSync(path)) {
+                        try {
+                            rimraf.sync(path);
+                        } catch (err) {
+                            // pass
+                        }
+                    }
+                }
+
+            });
+        }
+
+        cacheDirsCreated = true;
     }
-}
+
+    return {
+        hardSource:  HARD_SOURCE_CACHE_DIR,
+        babel:       BABEL_CACHE_DIR,
+        terser:      TERSER_CACHE_DIR,
+        cacheLoader: CACHE_LOADER_DIR
+    };
+};
 
 function jsonifyPrimitives(item : mixed) : mixed {
     if (Array.isArray(item)) {
@@ -134,6 +170,8 @@ export function getWebpackConfig({
         ? 'development'
         : 'production';
 
+    const cacheDirs = setupCacheDirs({ dynamic });
+
     let plugins = [
         new webpack.DefinePlugin(jsonifyPrimitives(vars))
     ];
@@ -162,7 +200,7 @@ export function getWebpackConfig({
                 },
                 parallel:  true,
                 sourceMap: enableSourceMap,
-                cache:     enableCaching && TERSER_CACHE_DIR
+                cache:     enableCaching && cacheDirs.terser
             })
         ]
     } : {};
@@ -181,7 +219,7 @@ export function getWebpackConfig({
         plugins = [
             ...plugins,
             new HardSourceWebpackPlugin({
-                cacheDirectory: HARD_SOURCE_CACHE_DIR
+                cacheDirectory: cacheDirs.hardSource
             })
         ];
     }
@@ -231,7 +269,7 @@ export function getWebpackConfig({
             test:    /\.jsx?$/,
             loader:  'cache-loader',
             options: {
-                cacheDirectory: CACHE_LOADER_DIR
+                cacheDirectory: cacheDirs.cacheLoader
             }
         });
     }
@@ -241,7 +279,7 @@ export function getWebpackConfig({
         exclude: /(dist)/,
         loader:  'babel-loader',
         options: {
-            cacheDirectory: enableCaching && BABEL_CACHE_DIR,
+            cacheDirectory: enableCaching && cacheDirs.babel,
             extends:        join(__dirname, './.babelrc-browser')
         }
     });
