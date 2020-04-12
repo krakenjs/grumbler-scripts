@@ -107,7 +107,8 @@ type WebpackConfigOptions = {|
     sourcemaps? : boolean,
     cache? : boolean,
     analyze? : boolean,
-    dynamic? : boolean
+    dynamic? : boolean,
+    babelConfig? : string
 |};
 
 export function getWebpackConfig({
@@ -130,7 +131,8 @@ export function getWebpackConfig({
     cache = false,
     analyze = false,
     dynamic = false,
-    optimize = (env !== 'local')
+    optimize = (env !== 'local'),
+    babelConfig = join(__dirname, './.babelrc-browser')
 } : WebpackConfigOptions = {}) : Object {
 
     const enableSourceMap = sourcemaps && web && !test;
@@ -280,7 +282,7 @@ export function getWebpackConfig({
         loader:  'babel-loader',
         options: {
             cacheDirectory: enableCaching && cacheDirs.babel,
-            extends:        join(__dirname, './.babelrc-browser')
+            extends:        babelConfig
         }
     });
     
