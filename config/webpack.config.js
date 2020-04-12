@@ -127,7 +127,7 @@ export function getWebpackConfig({
     alias = {},
     path = resolve('./dist'),
     env = (test ? 'test' : 'production'),
-    sourcemaps = true,
+    sourcemaps = minify,
     cache = false,
     analyze = false,
     dynamic = false,
