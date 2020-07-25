@@ -13,20 +13,36 @@ import TerserPlugin from 'terser-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import { readdir } from 'fs-extra';
+import rmrf from 'rmfr';
+import processExists from 'process-exists';
 
 let cacheDirsCreated = false;
 
 const setupCacheDirs = ({ dynamic = false } = {}) => {
+    const tmpDir = tmpdir();
+
+    const HARD_SOURCE_CACHE_FOLDER = 'cache-hard-source';
+    const BABEL_CACHE_FOLDER = 'cache-babel';
+    const TERSER_CACHE_FOLDER = 'cache-terser';
+    const CACHE_LOADER_FOLDER = 'cache-loader';
+
+    const folders = [ HARD_SOURCE_CACHE_FOLDER, BABEL_CACHE_FOLDER, TERSER_CACHE_FOLDER, CACHE_LOADER_FOLDER ];
+
     const id = dynamic ? process.pid.toString() : 'static';
 
-    const HARD_SOURCE_CACHE_DIR = join(tmpdir(), `cache-hard-source-${ id }`);
-    const BABEL_CACHE_DIR = join(tmpdir(), `cache-babel-${ id }`);
-    const TERSER_CACHE_DIR = join(tmpdir(), `cache-terser-${ id }`);
-    const CACHE_LOADER_DIR = join(tmpdir(), `cache-loader-${ id }`);
+    const HARD_SOURCE_CACHE_DIR = join(tmpDir, `cache-hard-source-${ id }`);
+    const BABEL_CACHE_DIR = join(tmpDir, `cache-babel-${ id }`);
+    const TERSER_CACHE_DIR = join(tmpDir, `cache-terser-${ id }`);
+    const CACHE_LOADER_DIR = join(tmpDir, `cache-loader-${ id }`);
 
     const dirs = [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, TERSER_CACHE_DIR, CACHE_LOADER_DIR ];
 
-    if (!cacheDirsCreated) {
+    const create = () => {
+        if (cacheDirsCreated) {
+            return;
+        }
+
         for (const path of dirs) {
             if (!existsSync(path)) {
                 mkdirSync(path);
@@ -48,8 +64,44 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
             });
         }
 
+        (async () => {
+            try {
+                for (const folder of await readdir(tmpDir)) {
+                    const match = folder.match(/^[\w-]+-(\d+)$/);
+
+                    if (!match) {
+                        continue;
+                    }
+
+                    for (const cacheFolder of folders) {
+                        if (folder.indexOf(cacheFolder) !== 0) {
+                            continue;
+                        }
+
+                        const pid = parseInt(match[0], 10);
+
+                        if (pid === process.pid || await processExists(pid)) {
+                            continue;
+                        }
+
+                        try {
+                            await rmrf(join(tmpDir, folder));
+                        } catch (err) {
+                            // eslint-disable-next-line no-console
+                            console.error(err);
+                        }
+                    }
+                }
+            } catch (err) {
+                // eslint-disable-next-line no-console
+                console.error(err);
+            }
+        })();
+
         cacheDirsCreated = true;
-    }
+    };
+
+    create();
 
     return {
         hardSource:  HARD_SOURCE_CACHE_DIR,
