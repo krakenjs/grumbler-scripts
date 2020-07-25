@@ -427,6 +427,7 @@ module.exports = {
         'eslint-comments/no-use': 'off',
         'eslint-comments/no-aggregating-enable': 'error',
         'eslint-comments/no-restricted-disable': 'off',
+        'eslint-comments/require-description': 'off',
 
         'promise/always-return': 'off',
         'promise/no-return-wrap': 'error',
