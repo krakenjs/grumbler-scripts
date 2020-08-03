@@ -4,7 +4,7 @@ module.exports = {
     'extends': './.eslintrc-browser.js',
 
     rules: {
-        'compat-compat': 'off',
+        'compat/compat': 'off',
         'max-lines': 'off'
     },
 };
