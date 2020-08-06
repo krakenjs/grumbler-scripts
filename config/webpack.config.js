@@ -111,7 +111,7 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
     };
 };
 
-function jsonifyPrimitives(item : mixed) : mixed {
+function jsonifyPrimitives(item : mixed) : Object {
     if (Array.isArray(item)) {
         return JSON.stringify(item);
     } else if (typeof item === 'object' && item !== null) {

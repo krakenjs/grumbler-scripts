@@ -11,8 +11,8 @@
                 ]
             }
         ],
-        "@babel/react",
-        "@babel/flow"
+        "@babel/preset-react",
+        "@babel/preset-flow"
     ],
 
     "plugins": [
