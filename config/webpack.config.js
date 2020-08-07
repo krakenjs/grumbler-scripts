@@ -78,9 +78,9 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
                             continue;
                         }
 
-                        const pid = parseInt(match[0], 10);
+                        const pid = parseInt(match[1], 10);
 
-                        if (pid === process.pid || await processExists(pid)) {
+                        if (typeof pid !== 'number' || pid === process.pid || await processExists(pid)) {
                             continue;
                         }
 
