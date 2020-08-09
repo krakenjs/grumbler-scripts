@@ -21,7 +21,6 @@
     "clean": "rimraf dist coverage",
     "reinstall": "rimraf flow-typed && rimraf node_modules && npm install && flow-typed install",
     "debug": "cross-env NODE_ENV=debug",
-    "prepublish": "in-publish && echo 'in publish' || echo 'not in publish'",
     "prepublishOnly": "npm run babel",
     "postpublish": "git checkout config",
     "find-eslint-rules": "eslint-find-rules --unused ./config/.eslintrc.js",
