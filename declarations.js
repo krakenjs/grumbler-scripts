@@ -16,3 +16,5 @@ declare var __LOCAL__ : boolean;
 declare var __STAGE__ : boolean;
 declare var __SANDBOX__ : boolean;
 declare var __PRODUCTION__ : boolean;
+
+declare var __UID__ : string;

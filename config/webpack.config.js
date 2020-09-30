@@ -133,6 +133,16 @@ function jsonifyPrimitives(item : mixed) : Object {
     }
 }
 
+function uniqueID() : string {
+    const chars = '0123456789abcdef';
+
+    const randomID = 'xxxxxxxxxx'.replace(/./g, () => {
+        return chars.charAt(Math.floor(Math.random() * chars.length));
+    });
+
+    return randomID;
+}
+
 export function getCurrentVersion(pkg : {| version : string |}) : string {
     return pkg.version.replace(/[^\d]+/g, '_');
 }
@@ -217,6 +227,7 @@ export function getWebpackConfig({
         __PRODUCTION__: env === 'production',
         __WINDOW__:     () => 'global',
         __GLOBAL__:     () => 'global',
+        __UID__:        uniqueID(),
         global:         (web ? (() => 'window') : (() => 'global'))
     };
 

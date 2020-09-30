@@ -31,6 +31,7 @@ module.exports = {
         '__LOCAL__': true,
         '__STAGE__': true,
         '__SANDBOX__': true,
-        '__PRODUCTION__': true
+        '__PRODUCTION__': true,
+        '__UID__': true
     },
 };
