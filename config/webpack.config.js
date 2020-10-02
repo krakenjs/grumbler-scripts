@@ -17,6 +17,8 @@ import { readdir } from 'fs-extra';
 import rmrf from 'rmfr';
 import processExists from 'process-exists';
 
+import type { WebpackConfigOptions } from './types';
+
 let cacheDirsCreated = false;
 
 const setupCacheDirs = ({ dynamic = false } = {}) => {
@@ -150,28 +152,6 @@ export function getCurrentVersion(pkg : {| version : string |}) : string {
 export function getNextVersion(pkg : {| version : string |}, level? : string = 'patch') : string {
     return getCurrentVersion({ version: semver.inc(pkg.version, level) });
 }
-
-type WebpackConfigOptions = {|
-    context? : string,
-    entry? : string | $ReadOnlyArray<string>,
-    filename? : string,
-    modulename? : string,
-    minify? : boolean,
-    test? : boolean,
-    options? : Object,
-    vars? : mixed,
-    alias? : { [string] : string },
-    libraryTarget? : string,
-    web? : boolean,
-    debug? : boolean,
-    env? : string,
-    path? : string,
-    sourcemaps? : boolean,
-    cache? : boolean,
-    analyze? : boolean,
-    dynamic? : boolean,
-    babelConfig? : string
-|};
 
 export function getWebpackConfig({
     context = process.cwd(),
