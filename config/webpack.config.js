@@ -223,7 +223,7 @@ export function getWebpackConfig({
 
     const optimization = optimize ? {
         minimize:           true,
-        namedModules:       debug,
+        moduleIds:          debug ? 'named' : false,
         concatenateModules: true,
         minimizer:          [
             new TerserPlugin({
@@ -273,8 +273,6 @@ export function getWebpackConfig({
         options.devtool = 'inline-source-map';
     } else if (enableSourceMap) {
         options.devtool = 'source-map';
-    } else {
-        options.devtool = '';
     }
 
     if (analyze) {
@@ -356,13 +354,9 @@ export function getWebpackConfig({
         output,
 
         node: {
-            console:      false,
             global:       false,
-            process:      false,
             __filename:   false,
-            __dirname:    false,
-            Buffer:       false,
-            setImmediate: false
+            __dirname:    false
         },
 
         resolve: {
