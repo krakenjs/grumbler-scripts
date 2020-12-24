@@ -223,7 +223,7 @@ export function getWebpackConfig({
 
     const optimization = optimize ? {
         minimize:           true,
-        moduleIds:          debug ? 'named' : false,
+        moduleIds:          debug ? 'named' : 'size',
         concatenateModules: true,
         minimizer:          [
             new TerserPlugin({
