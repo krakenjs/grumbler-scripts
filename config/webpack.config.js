@@ -288,7 +288,9 @@ export function getWebpackConfig({
 
     const globalObject = `(typeof self !== 'undefined' ? self : this)`;
 
-    const rules = [];
+    const rules = [
+        { test: /\.m?js/, type: 'javascript/auto', resolve: { fullySpecified: false } }
+    ];
 
     if (enableStyling) {
         rules.push({
@@ -309,7 +311,7 @@ export function getWebpackConfig({
 
     if (enableCaching) {
         rules.push({
-            test:    /\.jsx?$/,
+            test:    /\.m?jsx?$/,
             loader:  'cache-loader',
             options: {
                 cacheDirectory: cacheDirs.cacheLoader
@@ -318,7 +320,7 @@ export function getWebpackConfig({
     }
 
     rules.push({
-        test:    /\.jsx?$/,
+        test:    /\.m?jsx?$/,
         exclude: /(dist)/,
         loader:  'babel-loader',
         options: {
@@ -364,7 +366,7 @@ export function getWebpackConfig({
                 ...alias,
                 '@babel/runtime': join(dirname(require.resolve('@babel/runtime/helpers/extends')), '..')
             },
-            extensions: [ '.js', '.jsx' ],
+            extensions: [ '.js', '.jsx', '.jsx', '.mjs' ],
             modules:    [
                 __dirname,
                 'node_modules'
