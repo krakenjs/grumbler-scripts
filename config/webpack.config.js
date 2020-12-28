@@ -273,6 +273,8 @@ export function getWebpackConfig({
         options.devtool = 'inline-source-map';
     } else if (enableSourceMap) {
         options.devtool = 'source-map';
+    } else {
+        options.devtool = false;
     }
 
     if (analyze) {
