@@ -16,7 +16,7 @@ export function fooz<T>(bar : T) : T {
 }
 
 export class Foo {
-    bar = 1337;
+    bar : number = 1337;
 
     @fooz
     baz() : number {
