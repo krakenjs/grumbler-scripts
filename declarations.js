@@ -1,6 +1,6 @@
 /* @flow */
 
-// $FlowFixMe
+// $FlowFixMe[toplevel-library-import]
 import { ENV } from './config/constants';
 
 declare var __TEST__ : boolean;
