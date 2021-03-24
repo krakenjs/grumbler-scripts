@@ -4,7 +4,23 @@ import { argv } from 'yargs';
 
 import { getWebpackConfig } from './webpack.config';
 
-export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
+
+type KarmaConfig = {||};
+
+type Karma = {|
+    LOG_DEBUG : 'LOG_DEBUG',
+    LOG_WARN : 'LOG_WARN',
+    set : (KarmaConfig) => void
+|};
+
+type Config = {|
+    testDir? : string,
+    windowDir? : string,
+    entry? : string,
+    basePath? : string
+|};
+
+export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
     const {
         testDir = 'test',
         windowDir = `${ testDir }/windows`,
@@ -172,7 +188,7 @@ export function getKarmaConfig(karma : Object, cfg : Object = {}) : Object {
 }
 
 // eslint-disable-next-line import/no-default-export
-export default (karma : Object) =>
+export default (karma : Karma) : void =>
     karma.set(getKarmaConfig(karma, {
         basePath: process.cwd()
     }));

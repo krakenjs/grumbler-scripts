@@ -4,8 +4,9 @@
 import { tmpdir } from 'os';
 
 import { getWebpackConfig } from './config/webpack.config';
+import type { WebpackConfig } from './config/types';
 
-export const WEBPACK_CONFIG_TEST = getWebpackConfig({
+export const WEBPACK_CONFIG_TEST : WebpackConfig = getWebpackConfig({
     entry:         './test/module.js',
     libraryTarget: 'window',
 

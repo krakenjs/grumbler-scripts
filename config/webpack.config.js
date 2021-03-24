@@ -17,7 +17,7 @@ import { readdir } from 'fs-extra';
 import rmrf from 'rmfr';
 import processExists from 'process-exists';
 
-import type { WebpackConfigOptions } from './types';
+import type { WebpackConfigOptions, WebpackConfig } from './types';
 
 let cacheDirsCreated = false;
 
@@ -175,7 +175,7 @@ export function getWebpackConfig({
     dynamic = false,
     optimize = (env !== 'local'),
     babelConfig = join(__dirname, './.babelrc-browser')
-} : WebpackConfigOptions = {}) : Object {
+} : WebpackConfigOptions = {}) : WebpackConfig {
 
     const enableSourceMap = sourcemaps && web && !test;
     const enableInlineSourceMap = enableSourceMap && (test || debug);
