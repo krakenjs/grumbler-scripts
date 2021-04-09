@@ -113,7 +113,18 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
     };
 };
 
-function jsonifyPrimitives(item : mixed) : Object {
+type JSONifyPrimitivesOptions = {|
+    autoWindowGlobal : boolean
+|};
+
+const getJSONifyPrimitivesOptionsDefault = () : JSONifyPrimitivesOptions => {
+    // $FlowFixMe
+    return {};
+};
+
+function jsonifyPrimitives(item : mixed, opts? : JSONifyPrimitivesOptions = getJSONifyPrimitivesOptionsDefault()) : Object {
+    const { autoWindowGlobal = false } = opts;
+
     if (Array.isArray(item)) {
         return JSON.stringify(item);
     } else if (typeof item === 'object' && item !== null) {
@@ -122,7 +133,11 @@ function jsonifyPrimitives(item : mixed) : Object {
         }
         const result = {};
         for (const key of Object.keys(item)) {
-            result[key] = jsonifyPrimitives(item[key]);
+            const newVal = jsonifyPrimitives(item[key]);
+
+            result[key] = autoWindowGlobal
+                ? `window[${ JSON.stringify(key) }] || ${ newVal }`
+                : newVal;
         }
         return result;
     } else if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean' || item === null || item === undefined) {
@@ -218,7 +233,9 @@ export function getWebpackConfig({
     const cacheDirs = setupCacheDirs({ dynamic });
 
     let plugins = [
-        new webpack.DefinePlugin(jsonifyPrimitives(vars))
+        new webpack.DefinePlugin(jsonifyPrimitives(vars, {
+            autoWindowGlobal: test
+        }))
     ];
 
     const optimization = optimize ? {
