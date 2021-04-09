@@ -136,7 +136,7 @@ function jsonifyPrimitives(item : mixed, opts? : JSONifyPrimitivesOptions = getJ
             const newVal = jsonifyPrimitives(item[key]);
 
             result[key] = autoWindowGlobal
-                ? `window[${ JSON.stringify(key) }] || ${ newVal }`
+                ? `((${ JSON.stringify(key) } in window) ? window[${ JSON.stringify(key) }] : ${ newVal })`
                 : newVal;
         }
         return result;
