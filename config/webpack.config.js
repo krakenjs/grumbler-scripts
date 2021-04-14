@@ -206,7 +206,7 @@ export function getWebpackConfig({
         }
         filename = `${ filename }.js`;
     }
-
+    
     vars = {
         ...vars,
         __MIN__:        minify,
@@ -234,8 +234,7 @@ export function getWebpackConfig({
 
     let plugins = [
         new webpack.DefinePlugin(jsonifyPrimitives(vars, {
-            // only use for client-side tests
-            autoWindowGlobal: test && web
+            autoWindowGlobal: test
         }))
     ];
 
@@ -277,7 +276,7 @@ export function getWebpackConfig({
             })
         ];
     }
-
+    
     if (enableCaching && !dynamic) {
         plugins = [
             ...plugins,
@@ -346,7 +345,7 @@ export function getWebpackConfig({
             extends:        babelConfig
         }
     });
-
+    
     rules.push({
         test:   /\.(html?|css|json|svg)$/,
         loader: 'raw-loader'
@@ -364,7 +363,7 @@ export function getWebpackConfig({
     if (libraryTarget) {
         output.libraryTarget = libraryTarget;
     }
-
+    
     return {
 
         context,
