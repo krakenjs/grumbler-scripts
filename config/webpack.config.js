@@ -125,26 +125,51 @@ const getJSONifyPrimitivesOptionsDefault = () : JSONifyPrimitivesOptions => {
 function jsonifyPrimitives(item : mixed, opts? : JSONifyPrimitivesOptions = getJSONifyPrimitivesOptionsDefault()) : Object {
     const { autoWindowGlobal = false } = opts;
 
+    if (autoWindowGlobal) {
+        if (typeof item !== 'object' || item === null) {
+            throw new Error(`Must pass object to use autoWindowGlobal option`);
+        }
+
+        if (item.hasOwnProperty('__literal__')) {
+            return item.__literal__;
+        }
+
+        const result = {};
+
+        for (const key of Object.keys(item)) {
+            const val = item[key];
+
+            if (typeof val === 'function') {
+                // $FlowFixMe
+                result[key] = val();
+            } else {
+                result[key] = `(
+                    (${ JSON.stringify(key) } in window)
+                        ? window[${ JSON.stringify(key) }]
+                        : ${ JSON.stringify(val) || 'undefined' }
+                )`;
+            }
+        }
+
+        return result;
+    }
+
     if (Array.isArray(item)) {
         return JSON.stringify(item);
+    } else if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean' || item === null || item === undefined) {
+        return JSON.stringify(item);
+    } else if (typeof item === 'function') {
+        // $FlowFixMe
+        return item();
     } else if (typeof item === 'object' && item !== null) {
         if (item.hasOwnProperty('__literal__')) {
             return item.__literal__;
         }
         const result = {};
         for (const key of Object.keys(item)) {
-            const newVal = jsonifyPrimitives(item[key]);
-
-            result[key] = autoWindowGlobal
-                ? `((${ JSON.stringify(key) } in window) ? window[${ JSON.stringify(key) }] : ${ newVal })`
-                : newVal;
+            result[key] = jsonifyPrimitives(item[key]);
         }
         return result;
-    } else if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean' || item === null || item === undefined) {
-        return JSON.stringify(item);
-    } else if (typeof item === 'function') {
-        // $FlowFixMe
-        return item();
     } else {
         throw new TypeError(`Unrecognized type: ${ typeof item }`);
     }
