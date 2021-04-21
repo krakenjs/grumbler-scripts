@@ -144,7 +144,7 @@ function jsonifyPrimitives(item : mixed, opts? : JSONifyPrimitivesOptions = getJ
                 result[key] = val();
             } else {
                 result[key] = `(
-                    (${ JSON.stringify(key) } in window)
+                    (typeof window !== 'undefined' && ${ JSON.stringify(key) } in window)
                         ? window[${ JSON.stringify(key) }]
                         : ${ JSON.stringify(val) || 'undefined' }
                 )`;
