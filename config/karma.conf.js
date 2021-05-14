@@ -163,7 +163,7 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
                     type: 'text'
                 },
                 {
-                    type: 'lcov'
+                    type: 'lcovonly'
                 },
                 {
                     type:   'html',
