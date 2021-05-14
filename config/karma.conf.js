@@ -163,10 +163,7 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
                     type: 'text'
                 },
                 {
-                    type: 'lcovonly'
-                },
-                {
-                    type:   'html',
+                    type:   'lcov',
                     dir:    'coverage/',
                     subdir: '.'
                 }
