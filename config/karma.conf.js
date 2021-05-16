@@ -163,14 +163,14 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
                     type: 'text'
                 },
                 {
-                    type:   'html',
+                    type:   'lcov',
                     dir:    'coverage/',
                     subdir: '.'
                 }
             ]
         };
     }
-    
+
 
     if (headless) {
         karmaConfig.customLaunchers.xChrome.flags.push('--headless');
