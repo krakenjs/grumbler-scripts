@@ -19,7 +19,8 @@ export type WebpackConfigOptions = {|
     cache? : boolean,
     analyze? : boolean,
     dynamic? : boolean,
-    babelConfig? : string
+    babelConfig? : string,
+    publicPath? : string
 |};
 
 export type WebpackConfig = {||};

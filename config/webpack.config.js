@@ -214,7 +214,8 @@ export function getWebpackConfig({
     analyze = false,
     dynamic = false,
     optimize = (env !== 'local'),
-    babelConfig = join(__dirname, './.babelrc-browser')
+    babelConfig = join(__dirname, './.babelrc-browser'),
+    publicPath
 } : WebpackConfigOptions = {}) : WebpackConfig {
 
     const enableSourceMap = sourcemaps && web && !test;
@@ -383,7 +384,8 @@ export function getWebpackConfig({
         globalObject,
         umdNamedDefine: true,
         library:        modulename,
-        pathinfo:       false
+        pathinfo:       false,
+        publicPath
     };
 
     if (libraryTarget) {
