@@ -1,4 +1,5 @@
 /* eslint import/no-nodejs-modules: off, complexity: off */
+
 import { join, resolve, dirname } from 'path';
 import { tmpdir } from 'os';
 import { existsSync, mkdirSync } from 'fs';
@@ -22,27 +23,22 @@ let cacheDirsCreated = false;
 
 const setupCacheDirs = ({ dynamic = false } = {}) => {
     const tmpDir = tmpdir();
+
     const HARD_SOURCE_CACHE_FOLDER = 'cache-hard-source';
     const BABEL_CACHE_FOLDER = 'cache-babel';
     const TERSER_CACHE_FOLDER = 'cache-terser';
     const CACHE_LOADER_FOLDER = 'cache-loader';
-    const folders = [
-        HARD_SOURCE_CACHE_FOLDER,
-        BABEL_CACHE_FOLDER,
-        TERSER_CACHE_FOLDER,
-        CACHE_LOADER_FOLDER
-    ];
+
+    const folders = [ HARD_SOURCE_CACHE_FOLDER, BABEL_CACHE_FOLDER, TERSER_CACHE_FOLDER, CACHE_LOADER_FOLDER ];
+
     const id = dynamic ? process.pid.toString() : 'static';
+
     const HARD_SOURCE_CACHE_DIR = join(tmpDir, `cache-hard-source-${ id }`);
     const BABEL_CACHE_DIR = join(tmpDir, `cache-babel-${ id }`);
     const TERSER_CACHE_DIR = join(tmpDir, `cache-terser-${ id }`);
     const CACHE_LOADER_DIR = join(tmpDir, `cache-loader-${ id }`);
-    const dirs = [
-        HARD_SOURCE_CACHE_DIR,
-        BABEL_CACHE_DIR,
-        TERSER_CACHE_DIR,
-        CACHE_LOADER_DIR
-    ];
+
+    const dirs = [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, TERSER_CACHE_DIR, CACHE_LOADER_DIR ];
 
     const create = () => {
         if (cacheDirsCreated) {
@@ -66,6 +62,7 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
                         }
                     }
                 }
+
             });
         }
 
@@ -85,11 +82,7 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
 
                         const pid = parseInt(match[1], 10);
 
-                        if (
-                            typeof pid !== 'number' ||
-                            pid === process.pid ||
-                            (await processExists(pid))
-                        ) {
+                        if (typeof pid !== 'number' || pid === process.pid || await processExists(pid)) {
                             continue;
                         }
 
@@ -111,6 +104,7 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
     };
 
     create();
+
     return {
         hardSource:  HARD_SOURCE_CACHE_DIR,
         babel:       BABEL_CACHE_DIR,
@@ -120,18 +114,15 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
 };
 
 type JSONifyPrimitivesOptions = {
-    autoWindowGlobal : boolean;
+    autoWindowGlobal : boolean
 };
 
 const getJSONifyPrimitivesOptionsDefault = () : JSONifyPrimitivesOptions => {
-    // @ts-ignore - wat is this doing
+    // @ts-ignore - this is missing the field it requires above
     return {};
 };
 
-function jsonifyPrimitives(
-    item : Record<string, unknown>,
-    opts : JSONifyPrimitivesOptions = getJSONifyPrimitivesOptionsDefault()
-) : Record<string, any> {
+function jsonifyPrimitives(item : Record<string, unknown>, opts : JSONifyPrimitivesOptions = getJSONifyPrimitivesOptionsDefault()) : Record<string, any> {
     const { autoWindowGlobal = false } = opts;
 
     if (autoWindowGlobal) {
@@ -150,14 +141,12 @@ function jsonifyPrimitives(
             const val = item[key];
 
             if (typeof val === 'function') {
-                // @ts-ignore - verify what this property is for/does
+                // @ts-ignore
                 result[key] = val();
             } else {
-                // @ts-ignore - verify what this property is for/does
+                // @ts-ignore - what are valid keys here
                 result[key] = `(
-                    (typeof window !== 'undefined' && ${ JSON.stringify(
-        key
-    ) } in window)
+                    (typeof window !== 'undefined' && ${ JSON.stringify(key) } in window)
                         ? window[${ JSON.stringify(key) }]
                         : ${ JSON.stringify(val) || 'undefined' }
                 )`;
@@ -168,33 +157,24 @@ function jsonifyPrimitives(
     }
 
     if (Array.isArray(item)) {
-        // @ts-ignore - stringify expects a string like
+        // @ts-ignore - this is a string but expected an Object return type
         return JSON.stringify(item);
-    } else if (
-        typeof item === 'string' ||
-        typeof item === 'number' ||
-        typeof item === 'boolean' ||
-        item === null ||
-        item === undefined
-    ) {
-        // @ts-ignore - stringify expects a string like
+    } else if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean' || item === null || item === undefined) {
+        // @ts-ignore - this is a string but expected an Object return type
         return JSON.stringify(item);
     } else if (typeof item === 'function') {
-        // @ts-ignore - type narrowing not functioning. should be resolved in tsc@5
+        // @ts-ignore
         return item();
     } else if (typeof item === 'object' && item !== null) {
         if (item.hasOwnProperty('__literal__')) {
-            // @ts-ignore - verify what this property is for/does
+            // @ts-ignore
             return item.__literal__;
         }
-
         const result = {};
-
         for (const key of Object.keys(item)) {
-            // @ts-ignore - verify this function
+            // @ts-ignore - type valid keys
             result[key] = jsonifyPrimitives(item[key]);
         }
-
         return result;
     } else {
         throw new TypeError(`Unrecognized type: ${ typeof item }`);
@@ -203,26 +183,23 @@ function jsonifyPrimitives(
 
 function uniqueID() : string {
     const chars = '0123456789abcdef';
+
     const randomID = 'xxxxxxxxxx'.replace(/./g, () => {
         return chars.charAt(Math.floor(Math.random() * chars.length));
     });
+
     return randomID;
 }
 
 export function getCurrentVersion(pkg : { version : string }) : string {
     return pkg.version.replace(/[^\d]+/g, '_');
 }
-export function getNextVersion(
-    pkg : {
-        version : string;
-    },
-    level = 'patch'
-) : string {
-    return getCurrentVersion({
-        // @ts-ignore - potentially lib type issue
-        version: semver.inc(pkg.version, level)
-    });
+
+export function getNextVersion(pkg : {version : string }, level = 'patch') : string {
+    // @ts-ignore - potential lib issue with semver.inc
+    return getCurrentVersion({ version: semver.inc(pkg.version, level) });
 }
+
 export function getWebpackConfig({
     context = process.cwd(),
     entry = './src/index.ts',
@@ -230,22 +207,25 @@ export function getWebpackConfig({
     modulename,
     libraryTarget = 'umd',
     web = true,
-    test = process.env.NODE_ENV === 'test',
+    test = (process.env.NODE_ENV === 'test'),
     debug = test,
     minify = !test && !debug,
     options = {},
     vars = {},
     alias = {},
     path = resolve('./dist'),
-    env = test ? 'test' : 'production',
+    env = (test ? 'test' : 'production'),
     sourcemaps = minify,
     cache = false,
     analyze = false,
     dynamic = false,
-    // @ts-ignore - property does not exist error
-    optimize = env !== 'local',
-    babelConfig = join(__dirname, './.babelrc-browser')
+    // @ts-ignore - property optimize not in type def
+    optimize = (env !== 'local'),
+    babelConfig = join(__dirname, './.babelrc-browser'),
+    // @ts-ignore - property publicPath not in type def
+    publicPath
 } : WebpackConfigOptions = {}) : WebpackConfig {
+
     const enableSourceMap = sourcemaps && web && !test;
     const enableInlineSourceMap = enableSourceMap && (test || debug);
     const enableCheckCircularDeps = test;
@@ -258,12 +238,11 @@ export function getWebpackConfig({
         if (minify && !filename.endsWith('.min')) {
             filename = `${ filename }.min`;
         }
-
         filename = `${ filename }.js`;
     }
 
     vars = {
-        // @ts-ignore - refine parameter types
+        // @ts-ignore - spreading an unknown property
         ...vars,
         __MIN__:        minify,
         __TEST__:       test,
@@ -279,56 +258,55 @@ export function getWebpackConfig({
         __WINDOW__:     () => 'global',
         __GLOBAL__:     () => 'global',
         __UID__:        uniqueID(),
-        global:         web ? () => 'window' : () => 'global'
+        global:         (web ? (() => 'window') : (() => 'global'))
     };
-    const mode = debug || test ? 'development' : 'production';
-    const cacheDirs = setupCacheDirs({
-        dynamic
-    });
+
+    const mode = (debug || test)
+        ? 'development'
+        : 'production';
+
+    const cacheDirs = setupCacheDirs({ dynamic });
+
     let plugins = [
         new webpack.DefinePlugin(
-            // @ts-ignore what is this function
+            // @ts-ignore
             jsonifyPrimitives(vars, {
                 // only use for client-side tests
                 autoWindowGlobal: test && web
             })
         )
     ];
-    const optimization = optimize
-        ? {
-            minimize:           true,
-            namedModules:       debug,
-            concatenateModules: true,
-            minimizer:          [
-                new TerserPlugin({
-                    test:          /\.js$/,
-                    terserOptions: {
-                        // @ts-ignore - check if this property exists
-                        warnings: false,
-                        compress: {
-                            pure_getters:  true,
-                            unsafe_proto:  true,
-                            passes:        3,
-                            join_vars:     minify,
-                            sequences:     minify,
-                            drop_debugger: !debug
-                        },
-                        output: {
-                            beautify: enableBeautify
-                        },
-                        mangle: minify ? true : false
+
+    const optimization = optimize ? {
+        minimize:           true,
+        namedModules:       debug,
+        concatenateModules: true,
+        minimizer:          [
+            new TerserPlugin({
+                test:          /\.js$/,
+                terserOptions: {
+                    warnings: false,
+                    compress: {
+                        pure_getters:  true,
+                        unsafe_proto:  true,
+                        passes:        3,
+                        join_vars:     minify,
+                        sequences:     minify,
+                        drop_debugger: !debug
                     },
-                    parallel:  true,
-                    // @ts-ignore - check if this property exists
-                    sourceMap: enableSourceMap,
-                    cache:     enableCaching && cacheDirs.terser
-                })
-            ]
-        }
-        : {};
+                    output: {
+                        beautify: enableBeautify
+                    },
+                    mangle: minify ? true : false
+                },
+                parallel:  true,
+                sourceMap: enableSourceMap,
+                cache:     enableCaching && cacheDirs.terser
+            })
+        ]
+    } : {};
 
     if (enableCheckCircularDeps) {
-        // @ts-ignore - investigate before merge
         plugins = [
             ...plugins,
             new CircularDependencyPlugin({
@@ -339,7 +317,6 @@ export function getWebpackConfig({
     }
 
     if (enableCaching && !dynamic) {
-        // @ts-ignore - investigate before merge
         plugins = [
             ...plugins,
             new HardSourceWebpackPlugin({
@@ -370,6 +347,7 @@ export function getWebpackConfig({
     }
 
     const globalObject = `(typeof self !== 'undefined' ? self : this)`;
+
     const rules = [];
 
     if (enableStyling) {
@@ -408,18 +386,20 @@ export function getWebpackConfig({
             extends:        babelConfig
         }
     });
+
     rules.push({
         test:   /\.(html?|css|json|svg)$/,
         loader: 'raw-loader'
     });
 
-    const output : Record<string, any> = {
+    const output : Record<string, unknown> = {
         path,
         filename,
         globalObject,
         umdNamedDefine: true,
         library:        modulename,
-        pathinfo:       false
+        pathinfo:       false,
+        publicPath
     };
 
     if (libraryTarget) {
@@ -427,10 +407,13 @@ export function getWebpackConfig({
     }
 
     return {
+
         context,
         mode,
         entry,
+
         output,
+
         node: {
             console:      false,
             global:       false,
@@ -440,26 +423,33 @@ export function getWebpackConfig({
             Buffer:       false,
             setImmediate: false
         },
+
         resolve: {
             alias: {
                 ...alias,
-                '@babel/runtime': join(
-                    dirname(require.resolve('@babel/runtime/helpers/extends')),
-                    '..'
-                )
+                '@babel/runtime': join(dirname(require.resolve('@babel/runtime/helpers/extends')), '..')
             },
             extensions: [ '.js', '.jsx', '.mjs', '.ts', '.tsx' ],
-            modules:    [ __dirname, 'node_modules' ]
+            modules:    [
+                __dirname,
+                'node_modules'
+            ]
         },
+
         module: {
             rules
         },
-        bail:  true,
+
+        bail: true,
+
         stats: {
             optimizationBailout: true
         },
+
         optimization,
         plugins,
+
         ...options
     };
 }
+
