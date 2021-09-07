@@ -1,12 +1,12 @@
-/* @flow */
-
 module.exports = {
     'extends': './.eslintrc.js',
 
     rules: {
         'import/no-dynamic-require': 'error',
         'no-restricted-globals': [ 'error', 'Promise' ],
-        'promise/no-native': 'error',
+        // no-native rules fails in typescript scenarios. Issue below
+        // https://github.com/xjamundx/eslint-plugin-promise/issues/2005
+        //'promise/no-native': 'error',
         'import/no-nodejs-modules': 'error',
         'compat/compat': 'error',
         'no-process-env': 'error'

@@ -1,86 +1,73 @@
-/* @flow */
-
 import { argv } from 'yargs';
 
+import { WebpackConfig } from './types';
 import { getWebpackConfig } from './webpack.config';
 
-
-type KarmaConfig = {||};
-
-type Karma = {|
-    LOG_DEBUG : 'LOG_DEBUG',
-    LOG_WARN : 'LOG_WARN',
-    set : (KarmaConfig) => void
-|};
-
-type Config = {|
-    testDir? : string,
-    windowDir? : string,
-    entry? : string,
-    basePath? : string
-|};
-
+type KarmaConfig = Record<string, unknown>;
+type Karma = {
+    LOG_DEBUG : 'LOG_DEBUG';
+    LOG_WARN : 'LOG_WARN';
+    set : (arg0 : KarmaConfig) => void;
+};
+type Config = {
+    testDir ?: string;
+    windowDir ?: string;
+    entry ?: string;
+    basePath ?: string;
+    webpack ?: WebpackConfig;
+};
 export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
     const {
         testDir = 'test',
         windowDir = `${ testDir }/windows`,
-        entry = `${ testDir }/index.js`
+        entry = `${ testDir }/index.ts`
     } = cfg;
-
     process.env.NODE_ENV = 'test';
-
-    const debug          = Boolean(argv.debug);
-    const quick          = Boolean(argv.quick);
+    const debug = Boolean(argv.debug);
+    const quick = Boolean(argv.quick);
     const captureConsole = Boolean(argv.console);
-    const keepOpen       = Boolean(argv['keep-open']) || debug;
-    const autoWatch      = Boolean(keepOpen);
-    const coverage       = argv.coverage !== false && !quick && !keepOpen;
-    const logLevel       = argv['log-level'] || argv.loglevel || (keepOpen ? 'info' : '');
-    const headless       = !keepOpen;
-    const devTools       = Boolean(argv.devTools);
-
-    // $FlowFixMe
+    const keepOpen = Boolean(argv['keep-open']) || debug;
+    const autoWatch = Boolean(keepOpen);
+    const coverage = argv.coverage !== false && !quick && !keepOpen;
+    const logLevel =
+        argv['log-level'] || argv.loglevel || (keepOpen ? 'info' : '');
+    const headless = !keepOpen;
+    const devTools = Boolean(argv.devTools);
+    // @ts-ignore
     const browsers : string = argv.browser;
-
-    const karmaConfig : Object = {
-
+    const karmaConfig : Record<string, any> = {
         files: [
             {
                 pattern:  entry,
                 included: true,
                 served:   true
             },
-
             {
-                pattern:  `${ testDir }/**/*.js`,
+                pattern:  `${ testDir }/**/*.ts`,
                 included: false,
                 served:   true
             },
-
             {
-                pattern:  `${ testDir }/**/*.jsx`,
+                pattern:  `${ testDir }/**/*.tsx`,
                 included: false,
                 served:   true
             },
-
             {
                 pattern:  `${ testDir }/**/*.htm`,
                 included: false,
                 served:   true
             }
         ],
-
         preprocessors: {
-            [ entry ]:                     [ 'webpack', 'sourcemap' ],
-            [ `${ testDir }/*.js` ]:       [ 'webpack',  'sourcemap' ],
-            [ `${ testDir }/*.jsx` ]:      [ 'webpack',  'sourcemap' ],
-            [ `${ windowDir }/**/*.js` ]:  [ 'webpack',  'sourcemap' ],
-            [ `${ windowDir }/**/*.jsx` ]: [ 'webpack',  'sourcemap' ],
-            [ `src/**/*.js` ]:             [ 'coverage', 'sourcemap' ]
+            [entry]:                     [ 'webpack', 'sourcemap' ],
+            [`${ testDir }/**/*.ts`]:    [ 'webpack', 'sourcemap' ],
+            [`${ testDir }/**/*.tsx`]:   [ 'webpack', 'sourcemap' ],
+            [`${ windowDir }/**/*.ts`]:  [ 'webpack', 'sourcemap' ],
+            [`${ windowDir }/**/*.tsx`]: [ 'webpack', 'sourcemap' ],
+            [`src/**/*.ts`]:             [ 'coverage', 'sourcemap' ],
+            [`src/**/*.tsx`]:            [ 'coverage', 'sourcemap' ]
         },
-
         customLaunchers: {
-
             xChrome: {
                 base:  'Chrome',
                 flags: [
@@ -94,52 +81,35 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
                 debug
             }
         },
-
-        reporters: [
-            quick ? 'progress' : 'spec'
-        ],
-
+        reporters:  [ quick ? 'progress' : 'spec' ],
         autoWatch,
-        logLevel: debug ? karma.LOG_DEBUG : logLevel || karma.LOG_WARN,
-
-        basePath: __dirname,
-
-        frameworks: [
-            'mocha'
-        ],
-
-        client: {
+        logLevel:   debug ? karma.LOG_DEBUG : logLevel || karma.LOG_WARN,
+        basePath:   __dirname,
+        frameworks: [ 'mocha' ],
+        client:     {
             captureConsole,
-
             mocha: {
                 timeout: process.env.TRAVIS ? 60 * 1000 : 10 * 1000,
                 bail:    true
             }
         },
-
-        port: 9876,
-
-        colors: true,
-
+        port:              9876,
+        colors:            true,
         webpackMiddleware: {
             noInfo: !debug,
             stats:  !debug
         },
-
         browserNoActivityTimeout:   60 * 60 * 1000,
         browserDisconnectTimeout:   30 * 1000,
         browserDisconnectTolerance: 2,
         captureTimeout:             120000,
         reportSlowerThan:           10000,
-
-        browserConsoleLogOptions: {
+        browserConsoleLogOptions:   {
             level:    debug ? 'debug' : 'error',
             format:   '%b %T: %m',
             terminal: true
         },
-
         singleRun: !keepOpen,
-        
         ...cfg
     };
 
@@ -151,7 +121,6 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
 
     if (coverage) {
         karmaConfig.reporters.push('coverage');
-
         karmaConfig.coverageReporter = {
             instrumenterOptions: {
                 istanbul: {
@@ -171,13 +140,14 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
         };
     }
 
-
     if (headless) {
         karmaConfig.customLaunchers.xChrome.flags.push('--headless');
     }
 
     if (devTools) {
-        karmaConfig.customLaunchers.xChrome.flags.push('--auto-open-devtools-for-tabs');
+        karmaConfig.customLaunchers.xChrome.flags.push(
+            '--auto-open-devtools-for-tabs'
+        );
     }
 
     if (!karmaConfig.webpack) {
@@ -189,6 +159,8 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
 
 // eslint-disable-next-line import/no-default-export
 export default (karma : Karma) : void =>
-    karma.set(getKarmaConfig(karma, {
-        basePath: process.cwd()
-    }));
+    karma.set(
+        getKarmaConfig(karma, {
+            basePath: process.cwd()
+        })
+    );

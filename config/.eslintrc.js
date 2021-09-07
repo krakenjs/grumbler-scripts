@@ -1,11 +1,12 @@
-/* @flow */
-
 module.exports = {
+    'parser': '@typescript-eslint/parser',
 
-    'parser': require.resolve('babel-eslint'),
+    'extends': [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+    ],
 
     'plugins': [
-        'flowtype',
         'compat',
         'unicorn',
         'eslint-comments',
@@ -13,7 +14,8 @@ module.exports = {
         'security',
         'import',
         'const-immutable',
-        'react'
+        'react',
+        '@typescript-eslint',
     ],
 
     'env': {
@@ -25,11 +27,15 @@ module.exports = {
     },
 
     'settings': {
-        'import/extensions': [ '.js', '.jsx' ],
+        'import/extensions': [ '.js', '.jsx', '.ts', '.tsx' ],
         'import/resolver': {
             'node': {
-                'extensions': [ '.js', '.jsx' ]
-            }
+                'extensions': [ '.js', '.jsx', '.ts', '.tsx' ]
+            },
+            'eslint-import-resolver-typescript': true
+        },
+        'import/parsers': {
+            '@typescript-eslint/parser': ['.ts', '.tsx']
         },
         'react': {
             'version': '16.0'
@@ -46,14 +52,13 @@ module.exports = {
     },
 
     'globals': {
-        '$Values': true,
-        '$ReadOnlyArray': true,
-        '$PropertyType': true,
-        '$TupleMap': true,
-        '$ObjMap': true
+        'JSX': true
     },
 
     'rules': {
+        '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/type-annotation-spacing': ['error', {'before': true, 'after': true }],
+
         'comma-dangle': 'error',
         'no-cond-assign': 'error',
         'no-console': 'error',
@@ -165,7 +170,7 @@ module.exports = {
         'no-undef-init': 'error',
         'no-undef': 'error',
         'no-undefined': 'off',
-        'no-unused-vars': 'error',
+        // 'no-unused-vars': 'error', - covered in typescript
         'no-use-before-define': 'error',
         'callback-return': 'off',
         'global-require': 'off',
@@ -286,7 +291,7 @@ module.exports = {
         'no-await-in-loop': 'off',
         'no-buffer-constructor': 'off',
         'no-compare-neg-zero': 'error',
-        'no-duplicate-imports': 'error',
+        'no-duplicate-imports': 'off', // replaced by import/no-duplicates
         'no-global-assign': 'error',
         'no-mixed-operators': 'error',
         'no-multi-assign': 'off',
@@ -327,48 +332,6 @@ module.exports = {
         'prefer-exponentiation-operator': 'off',
         'prefer-named-capture-group': 'off',
         'prefer-regex-literals': 'error',
-        
-
-        'flowtype/boolean-style': [ 'error', 'boolean' ],
-        'flowtype/define-flow-type': 'off',
-        'flowtype/delimiter-dangle': [ 'error', 'never' ],
-        'flowtype/generic-spacing': [ 'error', 'never' ],
-        'flowtype/no-primitive-constructor-types': 'error',
-        'flowtype/no-weak-types': [ 'error', { 'any': true, 'Object': false, 'Function': false } ],
-        'flowtype/object-type-delimiter': [ 'error', 'comma' ],
-        'flowtype/require-parameter-type': [ 'off', { 'excludeArrowFunctions': true } ],
-        'flowtype/require-return-type': [ 'error', 'always', { 'annotateUndefined': 'ignore', 'excludeArrowFunctions': true } ],
-        'flowtype/require-valid-file-annotation': [ 'error', 'always', { 'annotationStyle': 'block' } ],
-        'flowtype/semi': [ 'error', 'always' ],
-        'flowtype/space-after-type-colon': [ 'error', 'always', { 'allowLineBreak': true } ],
-        'flowtype/space-before-generic-bracket': [ 'error', 'never' ],
-        'flowtype/space-before-type-colon': [ 'error', 'always' ],
-        'flowtype/type-id-match': [ 'off', '^([A-Z][a-z0-9]+)+$' ],
-        'flowtype/union-intersection-spacing': [ 'error', 'always' ],
-        'flowtype/use-flow-type': 'error',
-        'flowtype/valid-syntax': 'error',
-        'flowtype/no-dupe-keys': 'error',
-        'flowtype/no-types-missing-file-annotation': 'error',
-        'flowtype/require-variable-type': 'off',
-        'flowtype/sort-keys': 'off',
-        'flowtype/no-unused-expressions': 'error',
-        'flowtype/array-style-complex-type': 'error',
-        'flowtype/array-style-simple-type': 'off',
-        'flowtype/newline-after-flow-annotation': 'off',
-        'flowtype/no-existential-type': 'off',
-        'flowtype/no-flow-fix-me-comments': 'off',
-        'flowtype/no-mutable-array': 'error',
-        'flowtype/require-exact-type': 'error',
-        'flowtype/require-types-at-top': 'off',
-        'flowtype/type-import-style': 'off',
-        'flowtype/arrow-parens': 'off',
-        'flowtype/no-mixed': 'off',
-        'flowtype/require-compound-type-alias': 'off',
-        'flowtype/require-indexer-name': 'off',
-        'flowtype/require-inexact-type': 'off',
-        'flowtype/require-readonly-react-props': 'off',
-        'flowtype/spread-exact-type': 'off',
-
 
         'compat/compat': 'off',
 
@@ -506,7 +469,7 @@ module.exports = {
         'react/jsx-closing-tag-location': 'error',
         'react/jsx-curly-spacing': [ 'error', { 'when': 'always', 'allowMultiline': false } ],
         'react/jsx-equals-spacing': [ 'error', 'never' ],
-        'react/jsx-filename-extension': 'error',
+        'react/jsx-filename-extension': [2, { 'extensions': ['.js', '.jsx', '.ts', '.tsx'] }],
         'react/jsx-first-prop-new-line': [ 'error', 'multiline-multiprop' ],
         'react/jsx-handler-names': 'off',
         'react/jsx-indent': [ 'error', 4 ],
@@ -590,5 +553,4 @@ module.exports = {
         'react/style-prop-object': 'error',
         'react/void-dom-elements-no-children': 'error'
     }
-
 }

@@ -1,4 +1,3 @@
-/* @flow */
 /** @jsx jsxTest */
 
 function jsxTest(name : string) : HTMLElement {
@@ -7,6 +6,7 @@ function jsxTest(name : string) : HTMLElement {
 
 export function render() : HTMLElement {
     return (
+        // @ts-ignore
         <div />
     );
 }
