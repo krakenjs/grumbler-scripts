@@ -3,7 +3,8 @@ import { argv } from 'yargs';
 import { WebpackConfig } from './types';
 import { getWebpackConfig } from './webpack.config';
 
-type KarmaConfig = Record<string, unknown>;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type KarmaConfig = Record<string, any>;
 
 type Karma = {
     LOG_DEBUG : 'LOG_DEBUG';
@@ -41,7 +42,7 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
     // @ts-ignore
     const browsers : string = argv.browser;
 
-    const karmaConfig : Record<string, any> = {
+    const karmaConfig : KarmaConfig = {
 
         files: [
             {

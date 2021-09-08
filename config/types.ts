@@ -5,6 +5,7 @@ export type WebpackConfigOptions = {
     modulename ?: string;
     minify ?: boolean;
     test ?: boolean;
+    // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     options ?: Record<string, any>;
     vars ?: unknown;
     alias ?: Record<string, string>;

@@ -122,7 +122,7 @@ const getJSONifyPrimitivesOptionsDefault = () : JSONifyPrimitivesOptions => {
     return {};
 };
 
-function jsonifyPrimitives(item : Record<string, unknown>, opts : JSONifyPrimitivesOptions = getJSONifyPrimitivesOptionsDefault()) : Record<string, any> {
+function jsonifyPrimitives(item : Record<string, unknown>, opts : JSONifyPrimitivesOptions = getJSONifyPrimitivesOptionsDefault()) : Record<string, unknown> {
     const { autoWindowGlobal = false } = opts;
 
     if (autoWindowGlobal) {
