@@ -1,6 +1,8 @@
+import webpack from 'webpack';
+
 export type WebpackConfigOptions = {
     context ?: string;
-    entry ?: string | ReadonlyArray<string>;
+    entry ?: string | string[];
     filename ?: string;
     modulename ?: string;
     minify ?: boolean;
@@ -19,6 +21,8 @@ export type WebpackConfigOptions = {
     analyze ?: boolean;
     dynamic ?: boolean;
     babelConfig ?: string;
+    publicPath ?: string;
+    optimize ?: boolean;
 };
 
-export type WebpackConfig = Record<string, unknown>;
+export type WebpackConfig = webpack.Configuration;

@@ -1,4 +1,4 @@
-/* eslint import/no-nodejs-modules: off, import/no-default-export: off */
+/* eslint import/no-default-export: off */
 
 import { tmpdir } from 'os';
 

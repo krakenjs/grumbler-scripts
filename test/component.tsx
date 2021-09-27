@@ -6,7 +6,7 @@ function jsxTest(name : string) : HTMLElement {
 
 export function render() : HTMLElement {
     return (
-        // @ts-ignore
+        // @ts-ignore - no intrinsics by default
         <div />
     );
 }

@@ -39,8 +39,7 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
     const headless       = !keepOpen;
     const devTools       = Boolean(argv.devTools);
 
-    // @ts-ignore
-    const browsers : string = argv.browser;
+    const browsers : string = argv.browser as string;
 
     const karmaConfig : KarmaConfig = {
 

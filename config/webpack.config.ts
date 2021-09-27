@@ -1,11 +1,11 @@
-/* eslint import/no-nodejs-modules: off, complexity: off */
+/* eslint complexity: off */
 
 import { join, resolve, dirname } from 'path';
 import { tmpdir } from 'os';
 import { existsSync, mkdirSync } from 'fs';
 
 import rimraf from 'rimraf';
-import semver from 'semver';
+import semver, { ReleaseType } from 'semver';
 import webpack from 'webpack';
 import nodeCleanup from 'node-cleanup';
 // @ts-ignore - need to update to ts version
@@ -114,15 +114,14 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
 };
 
 type JSONifyPrimitivesOptions = {
-    autoWindowGlobal : boolean
+    autoWindowGlobal ?: boolean
 };
 
 const getJSONifyPrimitivesOptionsDefault = () : JSONifyPrimitivesOptions => {
-    // @ts-ignore - this is missing the field it requires above
     return {};
 };
 
-function jsonifyPrimitives(item : Record<string, unknown>, opts : JSONifyPrimitivesOptions = getJSONifyPrimitivesOptionsDefault()) : Record<string, unknown> {
+function jsonifyPrimitives(item : Record<string, unknown>, opts : JSONifyPrimitivesOptions = getJSONifyPrimitivesOptionsDefault()) : Record<string, unknown> | string {
     const { autoWindowGlobal = false } = opts;
 
     if (autoWindowGlobal) {
@@ -157,17 +156,15 @@ function jsonifyPrimitives(item : Record<string, unknown>, opts : JSONifyPrimiti
     }
 
     if (Array.isArray(item)) {
-        // @ts-ignore - this is a string but expected an Object return type
         return JSON.stringify(item);
     } else if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean' || item === null || item === undefined) {
-        // @ts-ignore - this is a string but expected an Object return type
         return JSON.stringify(item);
     } else if (typeof item === 'function') {
-        // @ts-ignore
+        // @ts-ignore - no call signature. what is item?
         return item();
     } else if (typeof item === 'object' && item !== null) {
         if (item.hasOwnProperty('__literal__')) {
-            // @ts-ignore
+            // @ts-ignore - verify what this property is for/does
             return item.__literal__;
         }
         const result = {};
@@ -196,8 +193,8 @@ export function getCurrentVersion(pkg : { version : string }) : string {
 }
 
 export function getNextVersion(pkg : {version : string }, level = 'patch') : string {
-    // @ts-ignore - potential lib issue with semver.inc
-    return getCurrentVersion({ version: semver.inc(pkg.version, level) });
+    const version = semver.inc(pkg.version, level as ReleaseType) || '';
+    return getCurrentVersion({ version });
 }
 
 export function getWebpackConfig({
@@ -219,10 +216,8 @@ export function getWebpackConfig({
     cache = false,
     analyze = false,
     dynamic = false,
-    // @ts-ignore - property optimize not in type def
     optimize = (env !== 'local'),
     babelConfig = join(__dirname, './.babelrc-browser'),
-    // @ts-ignore - property publicPath not in type def
     publicPath
 } : WebpackConfigOptions = {}) : WebpackConfig {
 
@@ -269,7 +264,7 @@ export function getWebpackConfig({
 
     let plugins = [
         new webpack.DefinePlugin(
-            // @ts-ignore
+            // @ts-ignore - jsonifyPrimitives returns strings or objects and Define takes an object
             jsonifyPrimitives(vars, {
                 // only use for client-side tests
                 autoWindowGlobal: test && web
@@ -337,7 +332,7 @@ export function getWebpackConfig({
         plugins = [
             // @ts-ignore - investigate before merge
             ...plugins,
-            // @ts-ignore - investigate before merge
+            // @ts-ignore - BundleAnalyzerPlugin not assignable to DefinePlugin?
             new BundleAnalyzerPlugin({
                 analyzerMode: 'static',
                 defaultSizes: 'gzip',
@@ -443,6 +438,7 @@ export function getWebpackConfig({
         bail: true,
 
         stats: {
+            // @ts-ignore - optimizationBailout is string, but we pass boolean
             optimizationBailout: true
         },
 
