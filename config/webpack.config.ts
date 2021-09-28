@@ -121,38 +121,44 @@ const getJSONifyPrimitivesOptionsDefault = () : JSONifyPrimitivesOptions => {
     return {};
 };
 
-function jsonifyPrimitives(item : Record<string, unknown>, opts : JSONifyPrimitivesOptions = getJSONifyPrimitivesOptionsDefault()) : Record<string, unknown> | string {
+function createWindowGlobal(item : Record<string, unknown>) {
+    if (typeof item !== 'object' || item === null) {
+        throw new Error(`Must pass object to use autoWindowGlobal option`);
+    }
+
+    if (item.hasOwnProperty('__literal__')) {
+        return item.__literal__;
+    }
+
+    const result : Record<string, unknown> = {};
+
+    for (const key of Object.keys(item)) {
+        const val = item[key];
+
+        if (typeof val === 'function') {
+            result[key] = val();
+        } else {
+            result[key] = `(
+                (typeof window !== 'undefined' && ${ JSON.stringify(key) } in window)
+                    ? window[${ JSON.stringify(key) }]
+                    : ${ JSON.stringify(val) || 'undefined' }
+            )`;
+        }
+    }
+
+    return result;
+}
+
+/**
+ * jsonifyPrimitives is used to parse data for the DefinePlugin however Define Plugin takes a Record type
+ * but `jsonifyPrimitives` can return strings so we have to cast at call site
+* TODO: why is jsonifyPrimitives so mixed
+*/
+function jsonifyPrimitives(item : unknown, opts : JSONifyPrimitivesOptions = getJSONifyPrimitivesOptionsDefault()) : Record<string, unknown> | string {
     const { autoWindowGlobal = false } = opts;
 
     if (autoWindowGlobal) {
-        if (typeof item !== 'object' || item === null) {
-            throw new Error(`Must pass object to use autoWindowGlobal option`);
-        }
-
-        if (item.hasOwnProperty('__literal__')) {
-            // @ts-ignore - verify what this property is for/does
-            return item.__literal__;
-        }
-
-        const result = {};
-
-        for (const key of Object.keys(item)) {
-            const val = item[key];
-
-            if (typeof val === 'function') {
-                // @ts-ignore
-                result[key] = val();
-            } else {
-                // @ts-ignore - what are valid keys here
-                result[key] = `(
-                    (typeof window !== 'undefined' && ${ JSON.stringify(key) } in window)
-                        ? window[${ JSON.stringify(key) }]
-                        : ${ JSON.stringify(val) || 'undefined' }
-                )`;
-            }
-        }
-
-        return result;
+        createWindowGlobal(item as Record<string, unknown>);
     }
 
     if (Array.isArray(item)) {
@@ -160,16 +166,15 @@ function jsonifyPrimitives(item : Record<string, unknown>, opts : JSONifyPrimiti
     } else if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean' || item === null || item === undefined) {
         return JSON.stringify(item);
     } else if (typeof item === 'function') {
-        // @ts-ignore - no call signature. what is item?
         return item();
     } else if (typeof item === 'object' && item !== null) {
         if (item.hasOwnProperty('__literal__')) {
-            // @ts-ignore - verify what this property is for/does
+            // @ts-ignore - ts cant narrow here. what is this property?
             return item.__literal__;
         }
         const result = {};
         for (const key of Object.keys(item)) {
-            // @ts-ignore - type valid keys
+            // @ts-ignore - implicit any from accessor. see comment on return value to fix this later
             result[key] = jsonifyPrimitives(item[key]);
         }
         return result;
@@ -237,7 +242,6 @@ export function getWebpackConfig({
     }
 
     vars = {
-        // @ts-ignore - spreading an unknown property
         ...vars,
         __MIN__:        minify,
         __TEST__:       test,
@@ -264,7 +268,7 @@ export function getWebpackConfig({
 
     let plugins = [
         new webpack.DefinePlugin(
-            // @ts-ignore - jsonifyPrimitives returns strings or objects and Define takes an object
+            // @ts-ignore - DefinePlugin takes a record but jsonifyPrimitives can return a string in some cases
             jsonifyPrimitives(vars, {
                 // only use for client-side tests
                 autoWindowGlobal: test && web
@@ -330,9 +334,9 @@ export function getWebpackConfig({
 
     if (analyze) {
         plugins = [
-            // @ts-ignore - investigate before merge
+            // @ts-ignore - not all plugins obey Plugin interface from webpack. Probably resolvable after we update the dependencies to newer versions.
             ...plugins,
-            // @ts-ignore - BundleAnalyzerPlugin not assignable to DefinePlugin?
+            // @ts-ignore - see above plugin comment
             new BundleAnalyzerPlugin({
                 analyzerMode: 'static',
                 defaultSizes: 'gzip',

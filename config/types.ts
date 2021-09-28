@@ -9,7 +9,7 @@ export type WebpackConfigOptions = {
     test ?: boolean;
     // eslint-disable-next-line  @typescript-eslint/no-explicit-any
     options ?: Record<string, any>;
-    vars ?: unknown;
+    vars ?: Record<string, unknown>;
     alias ?: Record<string, string>;
     libraryTarget ?: string;
     web ?: boolean;
