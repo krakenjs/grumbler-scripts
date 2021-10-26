@@ -5,7 +5,8 @@ import { tmpdir } from 'os';
 import { existsSync, mkdirSync } from 'fs';
 
 import rimraf from 'rimraf';
-import semver, { ReleaseType } from 'semver';
+import type { ReleaseType } from 'semver';
+import semver from 'semver';
 import webpack from 'webpack';
 import nodeCleanup from 'node-cleanup';
 // @ts-ignore - need to update to ts version
@@ -21,7 +22,7 @@ import type { WebpackConfigOptions, WebpackConfig } from './types';
 
 let cacheDirsCreated = false;
 
-const setupCacheDirs = ({ dynamic = false } = {}) => {
+const setupCacheDirs = ({ dynamic = false } = {}) : Record<string, string> => {
     const tmpDir = tmpdir();
 
     const HARD_SOURCE_CACHE_FOLDER = 'cache-hard-source';
@@ -40,7 +41,7 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
 
     const dirs = [ HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, TERSER_CACHE_DIR, CACHE_LOADER_DIR ];
 
-    const create = () => {
+    const create = () : void => {
         if (cacheDirsCreated) {
             return;
         }
@@ -57,7 +58,7 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
                     if (existsSync(path)) {
                         try {
                             rimraf.sync(path);
-                        } catch (err) {
+                        } catch (err : unknown) {
                             // pass
                         }
                     }
@@ -66,6 +67,7 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
             });
         }
 
+        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         (async () => {
             try {
                 for (const folder of await readdir(tmpDir)) {
@@ -88,13 +90,13 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
 
                         try {
                             await rmrf(join(tmpDir, folder));
-                        } catch (err) {
+                        } catch (err : unknown) {
                             // eslint-disable-next-line no-console
                             console.error(err);
                         }
                     }
                 }
-            } catch (err) {
+            } catch (err : unknown) {
                 // eslint-disable-next-line no-console
                 console.error(err);
             }
@@ -114,14 +116,14 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
 };
 
 type JSONifyPrimitivesOptions = {
-    autoWindowGlobal ?: boolean
+    autoWindowGlobal ?: boolean,
 };
 
 const getJSONifyPrimitivesOptionsDefault = () : JSONifyPrimitivesOptions => {
     return {};
 };
 
-function createWindowGlobal(item : Record<string, unknown>) {
+function createWindowGlobal(item : Record<string, unknown>) : unknown {
     if (typeof item !== 'object' || item === null) {
         throw new Error(`Must pass object to use autoWindowGlobal option`);
     }
@@ -166,11 +168,12 @@ function jsonifyPrimitives(item : unknown, opts : JSONifyPrimitivesOptions = get
     } else if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean' || item === null || item === undefined) {
         return JSON.stringify(item);
     } else if (typeof item === 'function') {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
         return item();
     } else if (typeof item === 'object' && item !== null) {
         if (item.hasOwnProperty('__literal__')) {
             // @ts-ignore - ts cant narrow here. what is this property?
-            return item.__literal__;
+            return item.__literal__; // eslint-disable-line @typescript-eslint/no-unsafe-return
         }
         const result = {};
         for (const key of Object.keys(item)) {
@@ -197,8 +200,8 @@ export function getCurrentVersion(pkg : { version : string }) : string {
     return pkg.version.replace(/[^\d]+/g, '_');
 }
 
-export function getNextVersion(pkg : {version : string }, level = 'patch') : string {
-    const version = semver.inc(pkg.version, level as ReleaseType) || '';
+export function getNextVersion(pkg : { version : string }, level = 'patch') : string {
+    const version = semver.inc(pkg.version, level as ReleaseType) ?? '';
     return getCurrentVersion({ version });
 }
 
@@ -281,6 +284,8 @@ export function getWebpackConfig({
         namedModules:       debug,
         concatenateModules: true,
         minimizer:          [
+            // - Terser needs to updated to the version with ts support
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
             new TerserPlugin({
                 test:          /\.js$/,
                 terserOptions: {

@@ -1,9 +1,11 @@
 export { render } from './component';
 
 export async function foo() : Promise<unknown> {
-    async function bar(...args : unknown[]) : Promise<number> {
+    async function bar(...args : Array<unknown>) : Promise<number> {
         args.push(1);
-        return await new Promise<number>((resolve) => resolve(10));
+        return await new Promise<number>((resolve) => {
+            resolve(10);
+        });
     }
 
     const {

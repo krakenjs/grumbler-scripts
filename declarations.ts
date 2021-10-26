@@ -1,5 +1,5 @@
 /* eslint @typescript-eslint/no-unused-vars: "off" */
-import { ENV } from './config/constants';
+import type { ENV } from './config/constants';
 
 
 type $Values<O extends Record<string, unknown>> = O[keyof O];

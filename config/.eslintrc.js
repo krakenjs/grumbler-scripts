@@ -1,10 +1,6 @@
 module.exports = {
-    'parser': '@typescript-eslint/parser',
 
-    'extends': [
-        'eslint:recommended',
-        'plugin:@typescript-eslint/recommended',
-    ],
+    'parser': require.resolve('babel-eslint'),
 
     'plugins': [
         'compat',
@@ -14,8 +10,7 @@ module.exports = {
         'security',
         'import',
         'const-immutable',
-        'react',
-        '@typescript-eslint',
+        'react'
     ],
 
     'env': {
@@ -27,15 +22,11 @@ module.exports = {
     },
 
     'settings': {
-        'import/extensions': [ '.js', '.jsx', '.ts', '.tsx' ],
+        'import/extensions': [ '.js', '.jsx' ],
         'import/resolver': {
             'node': {
-                'extensions': [ '.js', '.jsx', '.ts', '.tsx' ]
-            },
-            'eslint-import-resolver-typescript': true
-        },
-        'import/parsers': {
-            '@typescript-eslint/parser': ['.ts', '.tsx']
+                'extensions': [ '.js', '.jsx' ]
+            }
         },
         'react': {
             'version': '16.0'
@@ -52,13 +43,14 @@ module.exports = {
     },
 
     'globals': {
-        'JSX': true
+        '$Values': true,
+        '$ReadOnlyArray': true,
+        '$PropertyType': true,
+        '$TupleMap': true,
+        '$ObjMap': true
     },
 
     'rules': {
-        '@typescript-eslint/ban-ts-comment': 'off',
-        '@typescript-eslint/type-annotation-spacing': ['error', {'before': true, 'after': true }],
-
         'comma-dangle': 'error',
         'no-cond-assign': 'error',
         'no-console': 'error',
@@ -170,7 +162,7 @@ module.exports = {
         'no-undef-init': 'error',
         'no-undef': 'error',
         'no-undefined': 'off',
-        // 'no-unused-vars': 'error', - covered in typescript
+        'no-unused-vars': 'error',
         'no-use-before-define': 'error',
         'callback-return': 'off',
         'global-require': 'off',
@@ -291,7 +283,7 @@ module.exports = {
         'no-await-in-loop': 'off',
         'no-buffer-constructor': 'off',
         'no-compare-neg-zero': 'error',
-        'no-duplicate-imports': 'off', // replaced by import/no-duplicates
+        'no-duplicate-imports': 'error',
         'no-global-assign': 'error',
         'no-mixed-operators': 'error',
         'no-multi-assign': 'off',
@@ -332,6 +324,7 @@ module.exports = {
         'prefer-exponentiation-operator': 'off',
         'prefer-named-capture-group': 'off',
         'prefer-regex-literals': 'error',
+
 
         'compat/compat': 'off',
 
@@ -469,7 +462,7 @@ module.exports = {
         'react/jsx-closing-tag-location': 'error',
         'react/jsx-curly-spacing': [ 'error', { 'when': 'always', 'allowMultiline': false } ],
         'react/jsx-equals-spacing': [ 'error', 'never' ],
-        'react/jsx-filename-extension': [2, { 'extensions': ['.js', '.jsx', '.ts', '.tsx'] }],
+        'react/jsx-filename-extension': 'error',
         'react/jsx-first-prop-new-line': [ 'error', 'multiline-multiprop' ],
         'react/jsx-handler-names': 'off',
         'react/jsx-indent': [ 'error', 4 ],
@@ -553,4 +546,5 @@ module.exports = {
         'react/style-prop-object': 'error',
         'react/void-dom-elements-no-children': 'error'
     }
+
 }

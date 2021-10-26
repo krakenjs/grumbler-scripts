@@ -1,23 +1,23 @@
+/* eslint-disable eslint-comments/disable-enable-pair, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
 import { argv } from 'yargs';
 
-import { WebpackConfig } from './types';
+import type { WebpackConfig } from './types';
 import { getWebpackConfig } from './webpack.config';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type KarmaConfig = Record<string, any>;
+type KarmaConfig = Record<string, unknown>;
 
 type Karma = {
-    LOG_DEBUG : 'LOG_DEBUG';
-    LOG_WARN : 'LOG_WARN';
-    set : (arg0 : KarmaConfig) => void;
+    LOG_DEBUG : 'LOG_DEBUG',
+    LOG_WARN : 'LOG_WARN',
+    set : (arg0 : KarmaConfig) => void,
 };
 
 type Config = {
-    testDir ?: string;
-    windowDir ?: string;
-    entry ?: string;
-    basePath ?: string;
-    webpack ?: WebpackConfig;
+    testDir ?: string,
+    windowDir ?: string,
+    entry ?: string,
+    basePath ?: string,
+    webpack ?: WebpackConfig,
 };
 
 export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
@@ -194,6 +194,6 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
 
 // eslint-disable-next-line import/no-default-export
 export default (karma : Karma) : void =>
-    karma.set(getKarmaConfig(karma, {
-        basePath: process.cwd()
-    }));
+{ karma.set(getKarmaConfig(karma, {
+    basePath: process.cwd()
+})); };
