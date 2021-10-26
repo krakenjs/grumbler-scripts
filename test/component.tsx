@@ -5,6 +5,7 @@ function jsxTest(name : string) : HTMLElement {
 }
 
 export function render() : HTMLElement {
+    // @ts-ignore
     return (
         <div />
     );

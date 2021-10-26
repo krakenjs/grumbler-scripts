@@ -155,6 +155,7 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
     }
 
     if (coverage) {
+        // @ts-ignore
         karmaConfig.reporters.push('coverage');
 
         karmaConfig.coverageReporter = {
@@ -178,10 +179,12 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
 
 
     if (headless) {
+        // @ts-ignore
         karmaConfig.customLaunchers.xChrome.flags.push('--headless');
     }
 
     if (devTools) {
+        // @ts-ignore
         karmaConfig.customLaunchers.xChrome.flags.push('--auto-open-devtools-for-tabs');
     }
 

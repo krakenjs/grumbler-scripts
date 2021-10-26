@@ -69,7 +69,6 @@
     "@types/fs-extra": "^9.0.12",
     "@types/hard-source-webpack-plugin": "^1.0.3",
     "@types/node-cleanup": "^2.1.1",
-    "@types/react": "^17.0.33",
     "@types/rimraf": "^3.0.1",
     "@types/rmfr": "^2.0.1",
     "@types/semver": "^7.3.7",
