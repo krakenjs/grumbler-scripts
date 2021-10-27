@@ -1,4 +1,4 @@
-/* eslint-disable eslint-comments/disable-enable-pair, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable eslint-comments/disable-enable-pair */
 import { argv } from 'yargs';
 
 import type { WebpackConfig } from './types';

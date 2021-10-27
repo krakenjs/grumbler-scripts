@@ -51,7 +51,7 @@ module.exports = {
       '@typescript-eslint/no-extraneous-class': 'off',
       '@typescript-eslint/no-floating-promises': 'error',
       '@typescript-eslint/no-for-in-array': 'error',
-      '@typescript-eslint/no-implicit-any-catch': 'error',
+      '@typescript-eslint/no-implicit-any-catch': 'off', // TODO: can we turn this off
       '@typescript-eslint/no-inferrable-types': 'error',
       '@typescript-eslint/no-invalid-void-type': 'error',
       '@typescript-eslint/no-meaningless-void-operator': 'error',
@@ -72,10 +72,10 @@ module.exports = {
       '@typescript-eslint/no-unnecessary-type-assertion': 'error',
       '@typescript-eslint/no-unnecessary-type-constraint': 'error',
       '@typescript-eslint/no-unsafe-argument': 'error',
-      '@typescript-eslint/no-unsafe-assignment': 'error',
-      '@typescript-eslint/no-unsafe-call': 'error',
-      '@typescript-eslint/no-unsafe-member-access': 'error',
-      '@typescript-eslint/no-unsafe-return': 'error',
+      '@typescript-eslint/no-unsafe-assignment': 'off', // TODO: can we turn this off
+      '@typescript-eslint/no-unsafe-call': 'off', // TODO: can we turn this off
+      '@typescript-eslint/no-unsafe-member-access': 'off', // TODO: can we turn this off
+      '@typescript-eslint/no-unsafe-return': 'off', // TODO: can we turn this off
       '@typescript-eslint/no-var-requires': 'error',
       '@typescript-eslint/non-nullable-type-assertion-style': 'error',
       '@typescript-eslint/prefer-as-const': 'error',
@@ -86,7 +86,7 @@ module.exports = {
       '@typescript-eslint/prefer-literal-enum-member': 'off',
       '@typescript-eslint/prefer-namespace-keyword': 'error',
       '@typescript-eslint/prefer-nullish-coalescing': 'error',
-      '@typescript-eslint/prefer-optional-chain': 'error',
+      '@typescript-eslint/prefer-optional-chain': 'off', // TODO: can we turn this off
       '@typescript-eslint/prefer-readonly': 'off',
       '@typescript-eslint/prefer-readonly-parameter-types': 'off',
       '@typescript-eslint/prefer-reduce-type-parameter': 'off',

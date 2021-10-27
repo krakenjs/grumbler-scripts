@@ -168,12 +168,12 @@ function jsonifyPrimitives(item : unknown, opts : JSONifyPrimitivesOptions = get
     } else if (typeof item === 'string' || typeof item === 'number' || typeof item === 'boolean' || item === null || item === undefined) {
         return JSON.stringify(item);
     } else if (typeof item === 'function') {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+         
         return item();
     } else if (typeof item === 'object' && item !== null) {
         if (item.hasOwnProperty('__literal__')) {
             // @ts-ignore - ts cant narrow here. what is this property?
-            return item.__literal__; // eslint-disable-line @typescript-eslint/no-unsafe-return
+            return item.__literal__;
         }
         const result = {};
         for (const key of Object.keys(item)) {
@@ -285,7 +285,7 @@ export function getWebpackConfig({
         concatenateModules: true,
         minimizer:          [
             // - Terser needs to updated to the version with ts support
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+             
             new TerserPlugin({
                 test:          /\.js$/,
                 terserOptions: {
