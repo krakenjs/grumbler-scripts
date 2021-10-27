@@ -190,6 +190,7 @@ export function getCurrentVersion(pkg : {| version : string |}) : string {
 }
 
 export function getNextVersion(pkg : {| version : string |}, level? : string = 'patch') : string {
+    // $FlowIssue - semver has updated lib defs that don't match
     return getCurrentVersion({ version: semver.inc(pkg.version, level) });
 }
 
