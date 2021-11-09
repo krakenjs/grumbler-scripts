@@ -90,7 +90,7 @@
     "cross-env": "^6.0.3",
     "css-loader": "^3.4.2",
     "eslint": "^8.1.0",
-    "eslint-find-rules": "^3.3.1",
+    "eslint-find-rules": "^4.0.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-import-resolver-typescript": "^2.5.0",
     "eslint-plugin-compat": "^3.13.0",
