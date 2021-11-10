@@ -102,7 +102,7 @@
     "eslint-plugin-react": "7.27.0",
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-unicorn": "^38.0.1",
-    "flow-bin": "0.163.0",
+    "flow-bin": "0.164.0",
     "flow-runtime": "^0.17.0",
     "flow-typed": "3.2.1",
     "fs-extra": "^9.0.1",
