@@ -192,7 +192,7 @@ module.exports = {
         'id-blacklist':                     'off',
         'id-length':                        'off',
         'id-match':                         'off',
-        'indent':                           [ 'error', 4 ],
+        'indent':                           ["error", 4, { "ignoredNodes": ["JSXElement *", "JSXElement"]}],
         'jsx-quotes':                       'off',
         'key-spacing':                      [ 'error', { 'afterColon': true, 'mode': 'minimum', 'align': { 'beforeColon': false, 'afterColon': true, 'on': 'value', 'mode': 'minimum' } } ],
         'keyword-spacing':                  'error',
