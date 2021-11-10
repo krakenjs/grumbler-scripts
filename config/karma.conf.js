@@ -44,6 +44,11 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
 
     const karmaConfig : Object = {
 
+        plugins: [
+          'karma-webpack',
+          'karma-mocha'
+        ],
+
         files: [
             {
                 pattern:  entry,
@@ -105,7 +110,8 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
         basePath: __dirname,
 
         frameworks: [
-            'mocha'
+            'mocha',
+            'webpack'
         ],
 
         client: {
@@ -139,7 +145,7 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
         },
 
         singleRun: !keepOpen,
-        
+
         ...cfg
     };
 
