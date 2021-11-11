@@ -104,10 +104,7 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
 
         basePath: __dirname,
 
-        frameworks: [
-            'mocha',
-            'webpack'
-        ],
+        frameworks: [ 'mocha' ],
 
         client: {
             captureConsole,
