@@ -45,8 +45,8 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
     const karmaConfig : Object = {
 
         plugins: [
-          'karma-webpack',
-          'karma-mocha'
+            'karma-webpack',
+            'karma-mocha'
         ],
 
         files: [
