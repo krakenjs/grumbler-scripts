@@ -1,6 +1,8 @@
 # Upgrade Guides
 
-## Upgrade v3 to v4
+## Upgrade v3 to v5
+
+Note: An erroneous v4 was published in Jan 2021 so we are skipping v4.
 
 V4 is intended to be the final release of `grumbler-scripts` which supports the [flow](https://flow.org/) type checker. As part of the transition plan we wanted to update all the dependencies one final time before transitioning. As such v4 will have major version bumps of eslint, karma and their related packages.
 
