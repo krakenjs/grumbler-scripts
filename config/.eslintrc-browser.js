@@ -9,7 +9,8 @@ module.exports = {
         'promise/no-native': 'error',
         'import/no-nodejs-modules': 'error',
         'compat/compat': 'error',
-        'no-process-env': 'error'
+        'no-process-env': 'error',
+        'dont-use-includes': 'error'
     },
 
     'globals': {
