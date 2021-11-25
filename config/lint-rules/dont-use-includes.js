@@ -1,5 +1,4 @@
-/* @flow */
-/* eslint flowtype/require-return-type: 0, import/unambiguous: 0, import/no-commonjs: 0 */
+/* eslint flowtype/require-valid-file-annotation: 0, flowtype/require-return-type: 0, import/unambiguous: 0, import/no-commonjs: 0 */
 
 module.exports = {
     create(context) {
