@@ -356,7 +356,7 @@ export function getWebpackConfig({
 
     if (enableCaching) {
         rules.push({
-            test:    /\.m?jsx?$/,
+            test:    /\.m?(j|t)sx?$/,
             loader:  'cache-loader',
             options: {
                 cacheDirectory: cacheDirs.cacheLoader
@@ -365,7 +365,7 @@ export function getWebpackConfig({
     }
 
     rules.push({
-        test:    /\.m?jsx?$/,
+        test:    /\.m?(j|t)sx?$/,
         exclude: /(dist)/,
         loader:  'babel-loader',
         options: {
@@ -416,7 +416,7 @@ export function getWebpackConfig({
                 ...alias,
                 '@babel/runtime': join(dirname(require.resolve('@babel/runtime/helpers/extends')), '..')
             },
-            extensions: [ '.js', '.jsx', '.mjs' ],
+            extensions: [ '.js', '.jsx', '.mjs', '.ts', '.tsx' ],
             modules:    [
                 __dirname,
                 'node_modules'

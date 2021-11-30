@@ -76,7 +76,14 @@ export function getKarmaConfig(karma : Karma, cfg : Config) : KarmaConfig {
             [ `${ testDir }/*.jsx` ]:      [ 'webpack',  'sourcemap' ],
             [ `${ windowDir }/**/*.js` ]:  [ 'webpack',  'sourcemap' ],
             [ `${ windowDir }/**/*.jsx` ]: [ 'webpack',  'sourcemap' ],
-            [ `src/**/*.js` ]:             [ 'coverage', 'sourcemap' ]
+            [ `src/**/*.js` ]:             [ 'coverage', 'sourcemap' ],
+
+            [`${ testDir }/**/*.ts`]:     [ 'webpack', 'sourcemap' ],
+            [`${ testDir }/**/*.tsx`]:    [ 'webpack', 'sourcemap' ],
+            [`${ windowDir }/**/*.ts`]:   [ 'webpack', 'sourcemap' ],
+            [`${ windowDir }/**/*.tsx`]:  [ 'webpack', 'sourcemap' ],
+            [`src/**/*.ts`]:              [ 'coverage', 'sourcemap' ],
+            [`src/**/*.tsx`]:             [ 'coverage', 'sourcemap' ]
         },
 
         customLaunchers: {
