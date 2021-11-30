@@ -1,6 +1,6 @@
 {
   "name": "grumbler-scripts",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "Javascript module template.",
   "main": "index.js",
   "scripts": {
@@ -105,7 +105,7 @@
     "flow-bin": "0.164.0",
     "flow-runtime": "^0.17.0",
     "flow-typed": "3.4.0",
-    "fs-extra": "^10.0.0",
+    "fs-extra": "^9.0.1",
     "hard-source-webpack-plugin": "^0.13.1",
     "imports": "^1.0.0",
     "in-publish": "^2.0.0",
