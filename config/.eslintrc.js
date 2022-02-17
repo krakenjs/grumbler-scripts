@@ -29,7 +29,7 @@ module.exports = {
         'import/extensions': [ '.js', '.jsx' ],
         'import/resolver':   {
             'node': {
-                'extensions': [ '.js', '.jsx' ]
+                'extensions': [ '.js', '.jsx', '.mjs' ]
             }
         },
         'react': {
