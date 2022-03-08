@@ -1,6 +1,10 @@
 Grumbler Scripts
 ----------------
 
+```
+npm install @krakenjs/grumbler-scripts
+```
+
 Shared scripts for grumbler based modules.
 
 ## Package.json scripts
@@ -16,10 +20,6 @@ Shared scripts for grumbler based modules.
     "webpack": "babel-node --plugins=transform-es2015-modules-commonjs ./node_modules/.bin/webpack --progress",
     "test": "npm run lint && npm run flow-typed && npm run flow && npm run karma",
     "build": "npm run test && npm run babel && npm run webpack && npm run flow:build",
-    "release": "npm run release:patch",
-    "release:patch": "./node_modules/grumbler-scripts/publish.sh patch",
-    "release:minor": "./node_modules/grumbler-scripts/publish.sh minor",
-    "release:major": "./node_modules/grumbler-scripts/publish.sh major",
     "clean": "rimraf dist coverage",
     "reinstall": "rimraf flow-typed && rimraf node_modules && npm install && flow-typed install"
 }
@@ -35,7 +35,7 @@ Shared scripts for grumbler based modules.
 /* @flow */
 
 module.exports = {
-    'extends': './node_modules/grumbler-scripts/config/.eslintrc-node.js'
+    'extends': './node_modules/@krakenjs/grumbler-scripts/config/.eslintrc-node.js'
 };
 ```
 
@@ -45,7 +45,7 @@ module.exports = {
 /* @flow */
 
 module.exports = {
-    'extends': './node_modules/grumbler-scripts/config/.eslintrc-browser.js'
+    'extends': './node_modules/@krakenjs/grumbler-scripts/config/.eslintrc-browser.js'
 };
 ```
 
@@ -57,7 +57,7 @@ module.exports = {
 
 ```json
 {
-    "extends": "grumbler-scripts/config/.babelrc-node"
+    "extends": "@krakenjs/grumbler-scripts/config/.babelrc-node"
 }
 ```
 
@@ -65,7 +65,7 @@ module.exports = {
 
 ```json
 {
-    "extends": "grumbler-scripts/config/.babelrc-browser"
+    "extends": "@krakenjs/grumbler-scripts/config/.babelrc-browser"
 }
 ```
 
@@ -76,7 +76,7 @@ module.exports = {
 ```javascript
 /* @flow */
 
-import { getWebpackConfig } from 'grumbler-scripts/config/webpack.config';
+import { getWebpackConfig } from '@krakenjs/grumbler-scripts/config/webpack.config';
 
 const FILE_NAME = 'mylibrary';
 const MODULE_NAME = 'mylibrary';
@@ -97,8 +97,8 @@ export default [ WEBPACK_CONFIG ];
 ```javascript
 /* @flow */
 
-import { getKarmaConfig } from 'grumbler-scripts/config/karma.conf';
-import { getWebpackConfig } from 'grumbler-scripts/config/webpack.config';
+import { getKarmaConfig } from '@krakenjs/grumbler-scripts/config/karma.conf';
+import { getWebpackConfig } from '@krakenjs/grumbler-scripts/config/webpack.config';
 
 export default (karma : Object) =>
     karma.set(getKarmaConfig(karma, {
