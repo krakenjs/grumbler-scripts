@@ -15,4 +15,3 @@ Breaking:
 ```
 mv .babelrc babel.config.json
 ```
-

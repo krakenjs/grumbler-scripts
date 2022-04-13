@@ -2,7 +2,7 @@
 
 If you aren't yet on v5 see the [upgrade guide](./UPGRADE.md).
 
-*NOTE*: This is experimental and not yet supported.
+_NOTE_: This is experimental and not yet supported.
 
 ## Setup Typescript Config in your project
 
