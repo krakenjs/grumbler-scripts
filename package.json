@@ -8,10 +8,12 @@
     "lint": "eslint --ext js,jsx config/ test/ *.js",
     "flow-typed": "flow-typed install",
     "flow": "flow",
+    "format": "prettier --write --ignore-unknown .",
+    "format:check": "prettier --check .",
     "karma": "cross-env NODE_ENV=test babel-node --plugins=transform-es2015-modules-commonjs ./node_modules/.bin/karma start",
     "babel": "babel ./config --ignore=node_modules --ignore=./config/types.js --out-dir ./config",
     "webpack": "babel-node --plugins=transform-es2015-modules-commonjs ./node_modules/.bin/webpack --progress",
-    "test": "npm run lint && npm run flow && npm run test-babel && npm run test-webpack && npm run find-eslint-rules",
+    "test": "npm run format:check && npm run lint && npm run flow && npm run test-babel && npm run test-webpack && npm run find-eslint-rules",
     "build": "npm run test && npm run babel && npm run webpack",
     "clean": "rimraf dist coverage",
     "reinstall": "rimraf flow-typed && rimraf node_modules && npm install && flow-typed install",
@@ -25,7 +27,13 @@
     "prepare": "husky install",
     "prerelease": "npm run test",
     "release": "standard-version --commit-all",
-    "postrelease": "git push && git push --follow-tags && npm publish"
+    "postrelease": "git push && git push --follow-tags && npm publish",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*": [
+      "prettier --write --ignore-unknown"
+    ]
   },
   "standard-version": {
     "types": [
@@ -190,6 +198,8 @@
     "@commitlint/cli": "^16.2.1",
     "@commitlint/config-conventional": "^16.2.1",
     "husky": "^7.0.4",
+    "lint-staged": "^12.3.8",
+    "prettier": "^2.6.2",
     "standard-version": "^9.3.2"
   }
 }

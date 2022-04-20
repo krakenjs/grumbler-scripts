@@ -1,5 +1,4 @@
-Grumbler Scripts
-----------------
+## Grumbler Scripts
 
 ```
 npm install @krakenjs/grumbler-scripts
@@ -29,13 +28,19 @@ Shared scripts for grumbler based modules.
 
 ### `.eslintrc.js`
 
+## Prettier
+
+Eslint rules have no style preferences as we assume usage of [Prettier](https://prettier.io/). It is reccomended to use githooks to enforce style through Prettier. You can see documentation for how to do that [here](https://prettier.io/docs/en/install.html#git-hooks)
+
+We recommend running on precommit hooks as well as running `prettier --check .` on CI to ensure no one is skipping the githooks.
+
 #### Node
 
 ```javascript
 /* @flow */
 
 module.exports = {
-    'extends': './node_modules/@krakenjs/grumbler-scripts/config/.eslintrc-node.js'
+  extends: "./node_modules/@krakenjs/grumbler-scripts/config/.eslintrc-node.js",
 };
 ```
 
@@ -45,7 +50,8 @@ module.exports = {
 /* @flow */
 
 module.exports = {
-    'extends': './node_modules/@krakenjs/grumbler-scripts/config/.eslintrc-browser.js'
+  extends:
+    "./node_modules/@krakenjs/grumbler-scripts/config/.eslintrc-browser.js",
 };
 ```
 
@@ -57,7 +63,7 @@ module.exports = {
 
 ```json
 {
-    "extends": "@krakenjs/grumbler-scripts/config/.babelrc-node"
+  "extends": "@krakenjs/grumbler-scripts/config/.babelrc-node"
 }
 ```
 
@@ -65,7 +71,7 @@ module.exports = {
 
 ```json
 {
-    "extends": "@krakenjs/grumbler-scripts/config/.babelrc-browser"
+  "extends": "@krakenjs/grumbler-scripts/config/.babelrc-browser"
 }
 ```
 
@@ -76,18 +82,18 @@ module.exports = {
 ```javascript
 /* @flow */
 
-import { getWebpackConfig } from '@krakenjs/grumbler-scripts/config/webpack.config';
+import { getWebpackConfig } from "@krakenjs/grumbler-scripts/config/webpack.config";
 
-const FILE_NAME = 'mylibrary';
-const MODULE_NAME = 'mylibrary';
+const FILE_NAME = "mylibrary";
+const MODULE_NAME = "mylibrary";
 
 export let WEBPACK_CONFIG = getWebpackConfig({
-    filename:   `${ FILE_NAME }.min.js`,
-    modulename: MODULE_NAME,
-    minify:     true
+  filename: `${FILE_NAME}.min.js`,
+  modulename: MODULE_NAME,
+  minify: true,
 });
 
-export default [ WEBPACK_CONFIG ];
+export default [WEBPACK_CONFIG];
 ```
 
 ## Karma
@@ -97,12 +103,14 @@ export default [ WEBPACK_CONFIG ];
 ```javascript
 /* @flow */
 
-import { getKarmaConfig } from '@krakenjs/grumbler-scripts/config/karma.conf';
-import { getWebpackConfig } from '@krakenjs/grumbler-scripts/config/webpack.config';
+import { getKarmaConfig } from "@krakenjs/grumbler-scripts/config/karma.conf";
+import { getWebpackConfig } from "@krakenjs/grumbler-scripts/config/webpack.config";
 
-export default (karma : Object) =>
-    karma.set(getKarmaConfig(karma, {
-        basePath: __dirname,
-        webpack:  getWebpackConfig()
-    }));
+export default (karma: Object) =>
+  karma.set(
+    getKarmaConfig(karma, {
+      basePath: __dirname,
+      webpack: getWebpackConfig(),
+    })
+  );
 ```
