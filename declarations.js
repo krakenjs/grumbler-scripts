@@ -1,7 +1,7 @@
 /* @flow */
 
 // $FlowFixMe[toplevel-library-import]
-import { ENV } from "./config/constants";
+import { ENV } from './config/constants';
 
 declare var __TEST__: boolean;
 declare var __WEB__: boolean;

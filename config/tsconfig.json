@@ -1,22 +1,22 @@
 {
-  "exclude": ["dist/**/*"],
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "jsx": "preserve",
-    "noEmit": true,
-    "declaration": false,
-    "emitDeclarationOnly": false,
-    "isolatedModules": false,
-    "strict": true,
-    "esModuleInterop": true,
+    "exclude": ["dist/**/*"],
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "jsx": "preserve",
+        "noEmit": true,
+        "declaration": false,
+        "emitDeclarationOnly": false,
+        "isolatedModules": false,
+        "strict": true,
+        "esModuleInterop": true,
 
-    "allowJs": true,
-    "skipLibCheck": true,
+        "allowJs": true,
+        "skipLibCheck": true,
 
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
 
-    "forceConsistentCasingInFileNames": true
-  }
+        "forceConsistentCasingInFileNames": true
+    }
 }

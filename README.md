@@ -40,7 +40,7 @@ We recommend running on precommit hooks as well as running `prettier --check .` 
 /* @flow */
 
 module.exports = {
-  extends: "./node_modules/@krakenjs/grumbler-scripts/config/.eslintrc-node.js",
+    extends: './node_modules/@krakenjs/grumbler-scripts/config/.eslintrc-node.js',
 };
 ```
 
@@ -50,8 +50,7 @@ module.exports = {
 /* @flow */
 
 module.exports = {
-  extends:
-    "./node_modules/@krakenjs/grumbler-scripts/config/.eslintrc-browser.js",
+    extends: './node_modules/@krakenjs/grumbler-scripts/config/.eslintrc-browser.js',
 };
 ```
 
@@ -63,7 +62,7 @@ module.exports = {
 
 ```json
 {
-  "extends": "@krakenjs/grumbler-scripts/config/.babelrc-node"
+    "extends": "@krakenjs/grumbler-scripts/config/.babelrc-node"
 }
 ```
 
@@ -71,7 +70,7 @@ module.exports = {
 
 ```json
 {
-  "extends": "@krakenjs/grumbler-scripts/config/.babelrc-browser"
+    "extends": "@krakenjs/grumbler-scripts/config/.babelrc-browser"
 }
 ```
 
@@ -82,15 +81,15 @@ module.exports = {
 ```javascript
 /* @flow */
 
-import { getWebpackConfig } from "@krakenjs/grumbler-scripts/config/webpack.config";
+import { getWebpackConfig } from '@krakenjs/grumbler-scripts/config/webpack.config';
 
-const FILE_NAME = "mylibrary";
-const MODULE_NAME = "mylibrary";
+const FILE_NAME = 'mylibrary';
+const MODULE_NAME = 'mylibrary';
 
 export let WEBPACK_CONFIG = getWebpackConfig({
-  filename: `${FILE_NAME}.min.js`,
-  modulename: MODULE_NAME,
-  minify: true,
+    filename: `${FILE_NAME}.min.js`,
+    modulename: MODULE_NAME,
+    minify: true,
 });
 
 export default [WEBPACK_CONFIG];
@@ -103,14 +102,14 @@ export default [WEBPACK_CONFIG];
 ```javascript
 /* @flow */
 
-import { getKarmaConfig } from "@krakenjs/grumbler-scripts/config/karma.conf";
-import { getWebpackConfig } from "@krakenjs/grumbler-scripts/config/webpack.config";
+import { getKarmaConfig } from '@krakenjs/grumbler-scripts/config/karma.conf';
+import { getWebpackConfig } from '@krakenjs/grumbler-scripts/config/webpack.config';
 
 export default (karma: Object) =>
-  karma.set(
-    getKarmaConfig(karma, {
-      basePath: __dirname,
-      webpack: getWebpackConfig(),
-    })
-  );
+    karma.set(
+        getKarmaConfig(karma, {
+            basePath: __dirname,
+            webpack: getWebpackConfig(),
+        })
+    );
 ```
