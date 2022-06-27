@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 7.0.2 (2022-06-27)
+
+### Bug Fixes
+
+- update eslint packages ([#35](https://github.com/krakenjs/grumbler/issues/35)) ([48f8112](https://github.com/krakenjs/grumbler/commit/48f8112e46c94a5241efc437e4de182559a370cc))
+
 ### 7.0.1 (2022-06-01)
 
 - switch to dart sass ([#34](https://github.com/krakenjs/grumbler/issues/34)) ([a6bc4b1](https://github.com/krakenjs/grumbler/commit/a6bc4b162aa8069fbcc97b6218bd038137b15054))
