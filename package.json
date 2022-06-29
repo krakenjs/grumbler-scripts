@@ -86,7 +86,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/krakenjs/grumbler.git"
+    "url": "git://github.com/krakenjs/grumbler-scripts.git"
   },
   "keywords": [
     "template"
