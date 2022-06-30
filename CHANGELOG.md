@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 7.0.4 (2022-06-30)
+
+### Bug Fixes
+
+- update eslint rules with less typescript style ones ([84f58ac](https://github.com/krakenjs/grumbler-scripts/commit/84f58aca2901ea9d956628208e796225523572cc))
+
 ### 7.0.3 (2022-06-29)
 
 - update typescript eslint for prettier ([6defee3](https://github.com/krakenjs/grumbler/commit/6defee351ea70d26733b56cf6654bbecfc911d7f))
