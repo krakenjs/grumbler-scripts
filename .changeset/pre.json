@@ -10,5 +10,7 @@
     "@krakenjs/typescript-config-grumbler": "7.0.4",
     "@krakenjs/webpack-config-grumbler": "7.0.4"
   },
-  "changesets": []
+  "changesets": [
+    "rotten-dancers-breathe"
+  ]
 }

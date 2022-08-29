@@ -1,6 +1,6 @@
 {
   "name": "@krakenjs/webpack-config-grumbler",
-  "version": "7.0.4",
+  "version": "8.0.0-next.0",
   "description": "Webpack config for grumbler modules",
   "main": "dist/index.js",
   "scripts": {
@@ -21,6 +21,9 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "browserslist": [
     "IE >= 9",
     "chrome >= 27",
@@ -29,7 +32,7 @@
     "opera >= 23"
   ],
   "dependencies": {
-    "@krakenjs/babel-config-grumbler": "7.0.4",
+    "@krakenjs/babel-config-grumbler": "8.0.0-next.0",
     "babel-loader": "^8.1.0",
     "cache-loader": "^4.1.0",
     "circular-dependency-plugin": "^5.0.2",

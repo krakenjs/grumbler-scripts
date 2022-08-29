@@ -1,5 +1,25 @@
 ### 7.0.4 (2022-06-30)
 
+## 8.0.0-next.0
+
+### Major Changes
+
+- 4cc9d5b: 8.0.0-alpha
+
+  - Move to a monorepo structure using npm workspaces
+  - Remove flow from build steps
+  - Update actions and publishing for use with changesets
+
+### Patch Changes
+
+- Updated dependencies [4cc9d5b]
+  - @krakenjs/babel-config-grumbler@8.0.0-next.0
+  - @krakenjs/eslint-config-grumbler@8.0.0-next.0
+  - @krakenjs/flow-config-grumbler@8.0.0-next.0
+  - @krakenjs/karma-config-grumbler@8.0.0-next.0
+  - @krakenjs/typescript-config-grumbler@8.0.0-next.0
+  - @krakenjs/webpack-config-grumbler@8.0.0-next.0
+
 ### Bug Fixes
 
 - update eslint rules with less typescript style ones ([84f58ac](https://github.com/krakenjs/grumbler-scripts/commit/84f58aca2901ea9d956628208e796225523572cc))
