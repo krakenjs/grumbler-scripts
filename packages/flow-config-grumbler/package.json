@@ -1,0 +1,24 @@
+{
+  "name": "@krakenjs/flow-config-grumbler",
+  "version": "7.0.4",
+  "description": "Flow config and files for grumbler modules",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/krakenjs/grumbler-scripts.git"
+  },
+  "keywords": [
+    "template"
+  ],
+  "licenses": [
+    {
+      "type": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  ],
+  "readmeFilename": "README.md",
+  "devDependencies": {}
+}

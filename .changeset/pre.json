@@ -1,0 +1,14 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "@krakenjs/babel-config-grumbler": "7.0.4",
+    "@krakenjs/eslint-config-grumbler": "7.0.4",
+    "@krakenjs/flow-config-grumbler": "7.0.4",
+    "@krakenjs/grumbler-scripts": "7.0.4",
+    "@krakenjs/karma-config-grumbler": "7.0.4",
+    "@krakenjs/typescript-config-grumbler": "7.0.4",
+    "@krakenjs/webpack-config-grumbler": "7.0.4"
+  },
+  "changesets": []
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@krakenjs/typescript-config-grumbler",
+  "version": "7.0.4",
+  "description": "Typescript configs for grumbler modules",
+  "scripts": {
+    "postrelease": "git push && git push --follow-tags && npm publish",
+    "prerelease": "npm run test",
+    "release": "standard-version --commit-all",
+    "lint": "eslint .",
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/krakenjs/grumbler-scripts.git"
+  },
+  "keywords": [
+    "template"
+  ],
+  "licenses": [
+    {
+      "type": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  ]
+}
