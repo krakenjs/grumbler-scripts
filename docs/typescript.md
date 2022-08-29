@@ -6,7 +6,7 @@ _NOTE_: This is experimental and not yet supported.
 
 ## Setup Typescript Config in your project
 
-1. Install Typescript linter depdendencies. At the time of writing these are using v5.2.0
+1. Install Typescript linter dependencies. At the time of writing these are using v5.2.0
 
 ```shell
 npm install -D @typescript-eslint/eslint-plugin @typescript-eslint/parser
@@ -17,7 +17,7 @@ npm install -D @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 // .eslintrc.js
 module.exports = {
-    'extends': './node_modules/grumbler-scripts/config/.eslintrc-typescript.js',
+    'extends': './node_modules/@krakenjs/grumbler-scripts/config/.eslintrc-typescript.js',
 };
 ```
 
@@ -26,8 +26,8 @@ module.exports = {
 ```
 // babel.config.js
 module.exports = {
-    'extends': 'grumbler-scripts/config/.babelrc-browser',
-    'presets': [ 'grumbler-scripts/config/flow-ts-babel-preset' ]
+    'extends': '@krakenjs/grumbler-scripts/config/.babelrc-browser',
+    'presets': [ '@krakenjs/grumbler-scripts/config/flow-ts-babel-preset' ]
 };
 ```
 
@@ -36,7 +36,7 @@ module.exports = {
 ```
 /* eslint import/no-default-export: off */
 
-import { getKarmaConfig } from 'grumbler-scripts/config/karma.conf';
+import { getKarmaConfig } from '@krakenjs/grumbler-scripts/config/karma.conf';
 
 import { WEBPACK_CONFIG_TEST } from './webpack.config';
 
@@ -72,7 +72,7 @@ export const WEBPACK_CONFIG_TEST : WebpackConfig = getWebpackConfig({
 
 ```
 {
-    "extends": "grumbler-scripts/config/tsconfig.json"
+    "extends": "@krakenjs/grumbler-scripts/config/tsconfig.json"
 }
 ```
 
