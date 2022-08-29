@@ -21,6 +21,9 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "browserslist": [
     "IE >= 9",
     "chrome >= 27",

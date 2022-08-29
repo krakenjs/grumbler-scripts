@@ -20,6 +20,9 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "eslint": "^8.1.0",
     "eslint-import-resolver-typescript": "2.7.1",

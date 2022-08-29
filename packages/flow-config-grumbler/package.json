@@ -19,6 +19,9 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "readmeFilename": "README.md",
   "devDependencies": {}
 }
