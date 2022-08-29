@@ -11,6 +11,8 @@
     "@krakenjs/webpack-config-grumbler": "7.0.4"
   },
   "changesets": [
+    "nervous-needles-bake",
+    "purple-snails-poke",
     "rotten-dancers-breathe"
   ]
 }

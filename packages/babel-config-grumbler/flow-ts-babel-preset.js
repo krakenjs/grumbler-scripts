@@ -8,5 +8,5 @@ const preset = () => ({
   ],
 });
 
-// eslint-disable-next-line import/no-default-export
-export default preset;
+// eslint-disable-next-line import/no-commonjs
+module.exports = preset;

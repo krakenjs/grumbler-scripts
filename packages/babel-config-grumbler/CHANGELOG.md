@@ -1,5 +1,11 @@
 # @krakenjs/babel-config-grumbler
 
+## 8.0.0-next.1
+
+### Patch Changes
+
+- Update babel preset to use commonjs
+
 ## 8.0.0-next.0
 
 ### Major Changes

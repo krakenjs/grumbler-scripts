@@ -1,5 +1,18 @@
 ### 7.0.4 (2022-06-30)
 
+## 8.0.0-next.1
+
+### Patch Changes
+
+- Update babel preset to use commonjs
+- Updated dependencies
+  - @krakenjs/babel-config-grumbler@8.0.0-next.1
+  - @krakenjs/eslint-config-grumbler@8.0.0-next.1
+  - @krakenjs/flow-config-grumbler@8.0.0-next.1
+  - @krakenjs/karma-config-grumbler@8.0.0-next.1
+  - @krakenjs/typescript-config-grumbler@8.0.0-next.1
+  - @krakenjs/webpack-config-grumbler@8.0.0-next.1
+
 ## 8.0.0-next.0
 
 ### Major Changes
