@@ -1,3 +1,4 @@
 .changeset/
 build
 coverage
+dist

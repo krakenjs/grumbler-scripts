@@ -10,7 +10,6 @@ Each package has its own installation instructions in it's respective README.
 
 - [@krakenjs/babel-config-grumbler](./packages/babel-config-grumbler/README.md)
 - [@krakenjs/eslint-config-grumbler](./packages/eslint-config-grumbler/README.md)
-- [@krakenjs/flow-config-grumbler](./packages/flow-config-grumbler/README.md)
 - [@krakenjs/grumbler-scripts](./packages/grumbler-scripts/README.md)
 - [@krakenjs/karma-config-grumbler](./packages/karma-config-grumbler/README.md)
 - [@krakenjs/typescript-config-grumbler](./packages/typescript-config-grumbler/README.md)
