@@ -54,4 +54,4 @@ To release a new version please leverage Github Actions. There is a release acti
 
 #### Release a new alpha
 
-TODO: document alpha releases
+There is no Github Action for alpha release at this time. Because this repo utilizes changesets we can follow their process locally in the meantime. This document can be seen [here](https://github.com/changesets/changesets/blob/main/docs/prereleases.md).
