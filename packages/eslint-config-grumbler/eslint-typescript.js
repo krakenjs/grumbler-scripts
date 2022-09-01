@@ -8,11 +8,6 @@
  */
 module.exports = {
   parser: "@typescript-eslint/parser",
-  parserOptions: {
-    warnOnUnsupportedTypeScriptVersion: false,
-    sourceType: "module",
-    jsx: true,
-  },
 
   parserOptions: {
     project: ["./tsconfig.json"],
