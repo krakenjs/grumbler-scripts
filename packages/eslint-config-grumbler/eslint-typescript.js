@@ -18,6 +18,15 @@ module.exports = {
     project: ["./tsconfig.json"],
   },
 
+  extends: [
+    "plugin:security/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+  ],
+
   plugins: ["@typescript-eslint"],
 
   settings: {
