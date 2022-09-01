@@ -1,3 +1,5 @@
+/* @flow */
+
 /**
  * Credit to https://github.com/xojs/eslint-config-xo-typescript.
  * eslint-config-xo-typescript is copy pasted here for now and we will be moving to
@@ -6,6 +8,8 @@
  * TODO: internally we need to scope our eslint-config-xo package to an internal scope
  * so we can install xo from public npm
  */
+
+// eslint-disable-next-line import/no-commonjs
 module.exports = {
   parser: "@typescript-eslint/parser",
 

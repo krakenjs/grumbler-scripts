@@ -145,7 +145,7 @@ module.exports = {
     "no-useless-call": "error",
     "no-useless-concat": "error",
     "no-void": "error",
-    "no-warning-comments": "error",
+    "no-warning-comments": "off",
     "no-with": "error",
     radix: "error",
     "vars-on-top": "off",
