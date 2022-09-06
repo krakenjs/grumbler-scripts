@@ -1,5 +1,17 @@
 ### 7.0.4 (2022-06-30)
 
+## 8.0.0-next.2
+
+### Patch Changes
+
+- dc0ad37: Update eslint rules
+- Updated dependencies [dc0ad37]
+  - @krakenjs/babel-config-grumbler@8.0.0-next.2
+  - @krakenjs/eslint-config-grumbler@8.0.0-next.2
+  - @krakenjs/karma-config-grumbler@8.0.0-next.2
+  - @krakenjs/typescript-config-grumbler@8.0.0-next.2
+  - @krakenjs/webpack-config-grumbler@8.0.0-next.2
+
 ## 8.0.0-next.1
 
 ### Patch Changes

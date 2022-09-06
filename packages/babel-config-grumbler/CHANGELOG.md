@@ -1,5 +1,11 @@
 # @krakenjs/babel-config-grumbler
 
+## 8.0.0-next.2
+
+### Patch Changes
+
+- dc0ad37: Update eslint rules
+
 ## 8.0.0-next.1
 
 ### Patch Changes

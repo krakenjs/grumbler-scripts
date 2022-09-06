@@ -1,5 +1,13 @@
 # @krakenjs/webpack-config-grumbler
 
+## 8.0.0-next.2
+
+### Patch Changes
+
+- dc0ad37: Update eslint rules
+- Updated dependencies [dc0ad37]
+  - @krakenjs/babel-config-grumbler@8.0.0-next.2
+
 ## 8.0.0-next.1
 
 ### Patch Changes

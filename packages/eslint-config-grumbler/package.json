@@ -1,6 +1,6 @@
 {
   "name": "@krakenjs/eslint-config-grumbler",
-  "version": "8.0.0-next.1",
+  "version": "8.0.0-next.2",
   "description": "Eslint configs for grumbler modules",
   "main": "eslint.js",
   "scripts": {
