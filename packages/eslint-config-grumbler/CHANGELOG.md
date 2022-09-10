@@ -1,5 +1,11 @@
 # @krakenjs/eslint-config-grumbler
 
+## 8.0.0-next.3
+
+### Patch Changes
+
+- ea1491e: patch bump for webpack deps
+
 ## 8.0.0-next.2
 
 ### Patch Changes

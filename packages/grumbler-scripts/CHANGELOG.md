@@ -1,5 +1,17 @@
 ### 7.0.4 (2022-06-30)
 
+## 8.0.0-next.3
+
+### Patch Changes
+
+- ea1491e: patch bump for webpack deps
+- Updated dependencies [ea1491e]
+  - @krakenjs/babel-config-grumbler@8.0.0-next.3
+  - @krakenjs/eslint-config-grumbler@8.0.0-next.3
+  - @krakenjs/karma-config-grumbler@8.0.0-next.3
+  - @krakenjs/typescript-config-grumbler@8.0.0-next.3
+  - @krakenjs/webpack-config-grumbler@8.0.0-next.3
+
 ## 8.0.0-next.2
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @krakenjs/webpack-config-grumbler
 
+## 8.0.0-next.3
+
+### Patch Changes
+
+- ea1491e: patch bump for webpack deps
+- Updated dependencies [ea1491e]
+  - @krakenjs/babel-config-grumbler@8.0.0-next.3
+
 ## 8.0.0-next.2
 
 ### Patch Changes
