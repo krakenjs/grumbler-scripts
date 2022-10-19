@@ -28,15 +28,21 @@ export function getKarmaConfig(karma: Karma, cfg: Config): KarmaConfig {
 
   process.env.NODE_ENV = "test";
 
+  // $FlowFixMe
   const debug = Boolean(argv.debug);
+  // $FlowFixMe
   const quick = Boolean(argv.quick);
+  // $FlowFixMe
   const captureConsole = Boolean(argv.console);
+  // $FlowFixMe
   const keepOpen = Boolean(argv["keep-open"]) || debug;
   const autoWatch = Boolean(keepOpen);
   const coverage = argv.coverage !== false && !quick && !keepOpen;
   const logLevel =
+    // $FlowFixMe
     argv["log-level"] || argv.loglevel || (keepOpen ? "info" : "");
   const headless = !keepOpen;
+  // $FlowFixMe
   const devTools = Boolean(argv.devTools);
 
   // $FlowFixMe
