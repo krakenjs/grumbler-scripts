@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 7.1.0 (2022-10-19)
+
+### Features
+
+- add jsx support to tsconfig.json ([#40](https://github.com/krakenjs/grumbler-scripts/issues/40)) ([5dfde8a](https://github.com/krakenjs/grumbler-scripts/commit/5dfde8a8bcce1542277a5b2b74be9a3b25cbe3fe))
+
 ### 7.0.4 (2022-06-30)
 
 ### Bug Fixes
