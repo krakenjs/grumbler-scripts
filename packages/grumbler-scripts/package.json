@@ -1,6 +1,6 @@
 {
   "name": "@krakenjs/grumbler-scripts",
-  "version": "8.0.0-next.4",
+  "version": "8.0.0-next.5",
   "description": "Common configs for grumbler modules",
   "scripts": {
     "lint": "eslint .",
@@ -31,11 +31,11 @@
     "opera >= 23"
   ],
   "dependencies": {
-    "@krakenjs/babel-config-grumbler": "8.0.0-next.4",
-    "@krakenjs/eslint-config-grumbler": "8.0.0-next.4",
-    "@krakenjs/karma-config-grumbler": "8.0.0-next.4",
-    "@krakenjs/typescript-config-grumbler": "8.0.0-next.4",
-    "@krakenjs/webpack-config-grumbler": "8.0.0-next.4",
+    "@krakenjs/babel-config-grumbler": "8.0.0-next.5",
+    "@krakenjs/eslint-config-grumbler": "8.0.0-next.5",
+    "@krakenjs/karma-config-grumbler": "8.0.0-next.5",
+    "@krakenjs/typescript-config-grumbler": "8.0.0-next.5",
+    "@krakenjs/webpack-config-grumbler": "8.0.0-next.5",
     "webpack": "^5.74.0"
   },
   "devDependencies": {
