@@ -1,6 +1,6 @@
 {
   "name": "@krakenjs/karma-config-grumbler",
-  "version": "8.0.0-next.3",
+  "version": "8.0.0-next.4",
   "description": "Karma config for grumbler modules",
   "main": "dist/index.js",
   "scripts": {
@@ -25,7 +25,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@krakenjs/webpack-config-grumbler": "8.0.0-next.3",
+    "@krakenjs/webpack-config-grumbler": "8.0.0-next.4",
     "karma": "^6.3.8",
     "karma-chrome-launcher": "^3.1.0",
     "karma-commonjs": "^1.0.0",

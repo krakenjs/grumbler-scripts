@@ -1,5 +1,15 @@
 # @krakenjs/karma-config-grumbler
 
+## 8.0.0-next.4
+
+### Patch Changes
+
+- Update dependencies across the board
+- f20a91c: Update tsconfig to handle jsx syntax from @krakenjs/jsx-pragmatic
+- Updated dependencies
+- Updated dependencies [f20a91c]
+  - @krakenjs/webpack-config-grumbler@8.0.0-next.4
+
 ## 8.0.0-next.3
 
 ### Patch Changes

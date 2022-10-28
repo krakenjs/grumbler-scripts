@@ -1,5 +1,12 @@
 # @krakenjs/eslint-config-grumbler
 
+## 8.0.0-next.4
+
+### Patch Changes
+
+- Update dependencies across the board
+- f20a91c: Update tsconfig to handle jsx syntax from @krakenjs/jsx-pragmatic
+
 ## 8.0.0-next.3
 
 ### Patch Changes
