@@ -33,10 +33,10 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "@changesets/cli": "^2.24.3",
-    "husky": "^7.0.4",
-    "lint-staged": "^12.3.8",
-    "prettier": "^2.6.2"
+    "@changesets/cli": "^2.25.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1"
   },
   "workspaces": [
     "packages/*"
