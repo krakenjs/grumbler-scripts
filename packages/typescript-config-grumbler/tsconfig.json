@@ -3,7 +3,6 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "jsx": "preserve",
     "noEmit": true,
     "declaration": false,
     "emitDeclarationOnly": false,
