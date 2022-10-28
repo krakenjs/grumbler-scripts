@@ -26,17 +26,17 @@
   },
   "dependencies": {
     "@krakenjs/webpack-config-grumbler": "8.0.0-next.4",
-    "karma": "^6.3.8",
-    "karma-chrome-launcher": "^3.1.0",
+    "karma": "^6.4.1",
+    "karma-chrome-launcher": "^3.1.1",
     "karma-commonjs": "^1.0.0",
-    "karma-coverage": "^2.0.1",
+    "karma-coverage": "^2.2.0",
     "karma-firefox-launcher": "^2.1.2",
     "karma-ie-launcher": "^1.0.0",
     "karma-mocha": "^2.0.1",
     "karma-safari-launcher": "^1.0.0",
     "karma-sinon-chai": "^2.0.2",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-spec-reporter": "0.0.32",
-    "karma-webpack": "4.0.0-rc.3"
+    "karma-sourcemap-loader": "^0.3.8",
+    "karma-spec-reporter": "0.0.34",
+    "karma-webpack": "5.0.0"
   }
 }

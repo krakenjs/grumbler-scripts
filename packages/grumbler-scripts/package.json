@@ -4,7 +4,7 @@
   "description": "Common configs for grumbler modules",
   "scripts": {
     "lint": "eslint .",
-    "test-webpack": "webpack --config ./webpack.config.js --progress",
+    "test-webpack": "webpack --version && webpack --config ./webpack.config.js --progress",
     "test": "npm run lint && npm run test-webpack"
   },
   "repository": {
@@ -35,9 +35,10 @@
     "@krakenjs/eslint-config-grumbler": "8.0.0-next.4",
     "@krakenjs/karma-config-grumbler": "8.0.0-next.4",
     "@krakenjs/typescript-config-grumbler": "8.0.0-next.4",
-    "@krakenjs/webpack-config-grumbler": "8.0.0-next.4"
+    "@krakenjs/webpack-config-grumbler": "8.0.0-next.4",
+    "webpack": "^5.74.0"
   },
   "devDependencies": {
-    "webpack-cli": "^4.10.0"
+    "babel-loader": "^9.0.0"
   }
 }
