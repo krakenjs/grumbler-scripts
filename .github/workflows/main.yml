@@ -28,5 +28,8 @@ jobs:
         # blocks PRs without changesets
         run: npx changeset status --since=main
 
+      - name: 🚧 Run build script
+        run: npm run build
+
       - name: 🧪 Run test script
         run: npm run test
