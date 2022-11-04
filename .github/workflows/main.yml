@@ -31,5 +31,8 @@ jobs:
       - name: 🚧 Run build script
         run: npm run build
 
+      - name: 📖 Run lint script
+        run: npm run lint
+
       - name: 🧪 Run test script
         run: npm run test
