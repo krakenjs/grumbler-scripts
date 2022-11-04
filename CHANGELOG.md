@@ -1,5 +1,8 @@
 # Changelog
 
+_WARNING_
+This is the legacy changelog from before v8. For up to date changes see individual packages
+
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 ## 7.1.0 (2022-10-19)

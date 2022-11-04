@@ -52,4 +52,6 @@ flow-typed
 .idea
 
 .DS_Store
-package-lock.json
+
+# Built assets
+dist/
