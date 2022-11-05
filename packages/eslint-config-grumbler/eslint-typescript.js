@@ -622,15 +622,6 @@ module.exports = {
         reservedFirst: true,
       },
     ],
-    "react/jsx-tag-spacing": [
-      "error",
-      {
-        closingSlash: "never",
-        beforeSelfClosing: "never",
-        afterOpening: "never",
-        beforeClosing: "never",
-      },
-    ],
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "react/jsx-wrap-multilines": [
