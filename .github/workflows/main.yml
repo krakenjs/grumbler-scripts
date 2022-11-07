@@ -11,8 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: ⬇️ Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
+          ref: ${{github.event.pull_request.head.sha}}
           fetch-depth: 0
 
       - name: ⎔ Setup node
@@ -26,7 +27,7 @@ jobs:
 
       - name: 🧾 Check for changeset
         # blocks PRs without changesets
-        run: npx changeset status --since=main
+        run: npx changeset status --since=origin/main
 
       - name: 🚧 Run build script
         run: npm run build
