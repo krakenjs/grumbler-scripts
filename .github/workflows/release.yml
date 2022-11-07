@@ -28,6 +28,9 @@ jobs:
       - name: 📥 Download deps
         uses: bahmutov/npm-install@v1
 
+      - name: Setup npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
+
       - name: 🚢 Create Release Pull Request or Publish to npm
         id: changesets
         uses: changesets/action@v1
@@ -36,4 +39,3 @@ jobs:
           version: npm run changeset:version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
