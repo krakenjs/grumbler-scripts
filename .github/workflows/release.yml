@@ -12,10 +12,11 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: ⬇️ Checkout repo
-        uses: actions/checkout@v2
+      - name: Checkout Repo
+        uses: actions/checkout@v3
         with:
-          ref: ${{ github.head_ref }}
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
 
       - name: ⎔ Setup node
         # sets up the .npmrc file to publddish to npm
