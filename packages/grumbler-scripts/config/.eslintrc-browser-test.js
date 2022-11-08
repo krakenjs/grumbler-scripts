@@ -1,3 +1,3 @@
 module.exports = {
-  extends: "@krakenjs/eslint-config-grumbler/eslint-browser-test",
+  extends: "@krakenjs/eslint-config-grumbler/eslintrc-browser-test",
 };
