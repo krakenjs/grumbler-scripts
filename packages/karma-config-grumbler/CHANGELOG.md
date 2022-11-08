@@ -1,5 +1,13 @@
 # @krakenjs/karma-config-grumbler
 
+## 8.0.2
+
+### Patch Changes
+
+- 2cc47d5: fix: update eslint file names in grumbler-scripts main
+- Updated dependencies [2cc47d5]
+  - @krakenjs/webpack-config-grumbler@8.0.2
+
 ## 8.0.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # @krakenjs/babel-config-grumbler
 
+## 8.0.2
+
+### Patch Changes
+
+- 2cc47d5: fix: update eslint file names in grumbler-scripts main
+
 ## 8.0.1
 
 ### Patch Changes
