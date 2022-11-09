@@ -1,5 +1,17 @@
 ### 7.0.4 (2022-06-30)
 
+## 8.0.3
+
+### Patch Changes
+
+- 8f0ca8c: Fix typo in grumbler-scripts eslint-browser.test.js file reference
+- Updated dependencies [8f0ca8c]
+  - @krakenjs/babel-config-grumbler@8.0.3
+  - @krakenjs/eslint-config-grumbler@8.0.3
+  - @krakenjs/karma-config-grumbler@8.0.3
+  - @krakenjs/typescript-config-grumbler@8.0.3
+  - @krakenjs/webpack-config-grumbler@8.0.3
+
 ## 8.0.2
 
 ### Patch Changes

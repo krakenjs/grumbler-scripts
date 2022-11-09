@@ -1,5 +1,13 @@
 # @krakenjs/karma-config-grumbler
 
+## 8.0.3
+
+### Patch Changes
+
+- 8f0ca8c: Fix typo in grumbler-scripts eslint-browser.test.js file reference
+- Updated dependencies [8f0ca8c]
+  - @krakenjs/webpack-config-grumbler@8.0.3
+
 ## 8.0.2
 
 ### Patch Changes
