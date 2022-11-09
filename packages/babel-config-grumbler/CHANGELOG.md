@@ -1,5 +1,11 @@
 # @krakenjs/babel-config-grumbler
 
+## 8.0.3
+
+### Patch Changes
+
+- 8f0ca8c: Fix typo in grumbler-scripts eslint-browser.test.js file reference
+
 ## 8.0.2
 
 ### Patch Changes
