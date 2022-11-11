@@ -16,7 +16,7 @@ npm install -D @krakenjs/babel-config-grumbler
 
     ```json
     {
-        "extends": "@krakenjs/babel-config-grumbler/babel-node"
+        "extends": "@krakenjs/babel-config-grumbler/babelrc-node"
     }
     ```
 
@@ -24,7 +24,7 @@ npm install -D @krakenjs/babel-config-grumbler
 
     ```json
     {
-        "extends": "@krakenjs/babel-config-grumbler/babel-browser"
+        "extends": "@krakenjs/babel-config-grumbler/babelrc-browser"
     }
     ```
 

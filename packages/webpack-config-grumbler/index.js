@@ -256,7 +256,7 @@ export function getWebpackConfig({
   analyze = false,
   dynamic = false,
   optimize = env !== "local",
-  babelConfig = "@krakenjs/babel-config-grumbler/babel-browser",
+  babelConfig = "@krakenjs/babel-config-grumbler/babelrc-browser",
   publicPath,
 } = {}) {
   const enableSourceMap = sourcemaps && web && !test;
