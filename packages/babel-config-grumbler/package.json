@@ -2,7 +2,7 @@
   "name": "@krakenjs/babel-config-grumbler",
   "version": "8.0.3",
   "description": "Babel scripts for grumbler modules",
-  "main": "babel-browser.js",
+  "main": "babelrc-browser.js",
   "scripts": {
     "lint": "eslint ."
   },

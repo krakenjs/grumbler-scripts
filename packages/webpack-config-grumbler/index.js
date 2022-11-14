@@ -256,7 +256,7 @@ export function getWebpackConfig({
   analyze = false,
   dynamic = false,
   optimize = env !== "local",
-  babelConfig = "@krakenjs/babel-config-grumbler/babel-browser",
+  babelConfig = "@krakenjs/babel-config-grumbler/babelrc-browser",
   publicPath,
 } = {}) {
   const enableSourceMap = sourcemaps && web && !test;
@@ -383,15 +383,15 @@ export function getWebpackConfig({
     rules.push({
       test: /\.scss$/i,
       use: [
-        "isomorphic-style-loader",
+        require.resolve("isomorphic-style-loader"),
         {
-          loader: "css-loader",
+          loader: require.resolve("css-loader"),
           options: {
             importLoaders: 1,
           },
         },
-        "scoped-css-loader",
-        "sass-loader",
+        require.resolve("scoped-css-loader"),
+        require.resolve("sass-loader"),
       ],
     });
   }
@@ -399,7 +399,7 @@ export function getWebpackConfig({
   if (enableCaching) {
     rules.push({
       test: /\.m?(j|t)sx?$/,
-      loader: "cache-loader",
+      loader: require.resolve("cache-loader"),
       options: {
         cacheDirectory: cacheDirs.cacheLoader,
       },
@@ -409,7 +409,7 @@ export function getWebpackConfig({
   rules.push({
     test: /\.m?(j|t)sx?$/,
     exclude: /(dist)/,
-    loader: "babel-loader",
+    loader: require.resolve("babel-loader"),
     options: {
       cacheDirectory: enableCaching && cacheDirs.babel,
       extends: babelConfig,
@@ -418,7 +418,7 @@ export function getWebpackConfig({
 
   rules.push({
     test: /\.(html?|css|json|svg)$/,
-    loader: "raw-loader",
+    loader: require.resolve("raw-loader"),
   });
 
   const output = {

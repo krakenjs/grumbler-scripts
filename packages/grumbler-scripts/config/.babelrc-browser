@@ -1,1 +1,1 @@
-{ "extends": "@krakenjs/babel-config-grumbler/babel-browser" }
+{ "extends": "@krakenjs/babel-config-grumbler/babelrc-browser" }
