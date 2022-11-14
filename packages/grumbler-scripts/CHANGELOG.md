@@ -1,5 +1,21 @@
 ### 7.0.4 (2022-06-30)
 
+## 8.0.4
+
+### Patch Changes
+
+- 713430f: Consist filenames for babel configs. All files are `babelrc-*`
+- 713430f: Update webpack dependencies to remove flow-bin and include webpack-dev-middleware
+- 713430f: Ensure webpack loaders are required from @krakenjs/webpack-config-grumbler as they will not be guaranteed to be hoisted in complex projects
+- Updated dependencies [713430f]
+- Updated dependencies [713430f]
+- Updated dependencies [713430f]
+  - @krakenjs/babel-config-grumbler@8.0.4
+  - @krakenjs/eslint-config-grumbler@8.0.4
+  - @krakenjs/karma-config-grumbler@8.0.4
+  - @krakenjs/webpack-config-grumbler@8.0.4
+  - @krakenjs/typescript-config-grumbler@8.0.4
+
 ## 8.0.3
 
 ### Patch Changes
