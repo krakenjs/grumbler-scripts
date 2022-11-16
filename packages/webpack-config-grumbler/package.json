@@ -1,6 +1,6 @@
 {
   "name": "@krakenjs/webpack-config-grumbler",
-  "version": "8.0.4",
+  "version": "8.0.5",
   "description": "Webpack config for grumbler modules",
   "main": "dist/index.js",
   "scripts": {
@@ -31,7 +31,7 @@
     "opera >= 23"
   ],
   "dependencies": {
-    "@krakenjs/babel-config-grumbler": "8.0.4",
+    "@krakenjs/babel-config-grumbler": "8.0.5",
     "babel-loader": "^8.1.0",
     "cache-loader": "^4.1.0",
     "circular-dependency-plugin": "^5.2.2",

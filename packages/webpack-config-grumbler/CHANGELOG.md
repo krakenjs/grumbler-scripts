@@ -1,5 +1,13 @@
 # @krakenjs/webpack-config-grumbler
 
+## 8.0.5
+
+### Patch Changes
+
+- 4e3cc63: Add typescript-eslint plugins to eslint dependencies
+- Updated dependencies [4e3cc63]
+  - @krakenjs/babel-config-grumbler@8.0.5
+
 ## 8.0.4
 
 ### Patch Changes

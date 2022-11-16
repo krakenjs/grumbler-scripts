@@ -1,5 +1,11 @@
 # @krakenjs/eslint-config-grumbler
 
+## 8.0.5
+
+### Patch Changes
+
+- 4e3cc63: Add typescript-eslint plugins to eslint dependencies
+
 ## 8.0.4
 
 ### Patch Changes
