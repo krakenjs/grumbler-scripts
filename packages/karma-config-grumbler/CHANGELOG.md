@@ -1,5 +1,13 @@
 # @krakenjs/karma-config-grumbler
 
+## 8.0.6
+
+### Patch Changes
+
+- fe92b50: Downgrade css-loader to 3.4.2 to avoid visual drifts
+- Updated dependencies [fe92b50]
+  - @krakenjs/webpack-config-grumbler@8.0.6
+
 ## 8.0.5
 
 ### Patch Changes

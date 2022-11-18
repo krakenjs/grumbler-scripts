@@ -1,5 +1,11 @@
 # @krakenjs/eslint-config-grumbler
 
+## 8.0.6
+
+### Patch Changes
+
+- fe92b50: Downgrade css-loader to 3.4.2 to avoid visual drifts
+
 ## 8.0.5
 
 ### Patch Changes
