@@ -1,6 +1,6 @@
 {
   "name": "@krakenjs/typescript-config-grumbler",
-  "version": "8.0.5",
+  "version": "8.0.6",
   "description": "Typescript configs for grumbler modules",
   "scripts": {
     "lint": "eslint ."
