@@ -1,5 +1,13 @@
 # @krakenjs/karma-config-grumbler
 
+## 8.0.7
+
+### Patch Changes
+
+- 78074bf: Revert versions of more packages to match grumbler-scripts@7
+- Updated dependencies [78074bf]
+  - @krakenjs/webpack-config-grumbler@8.0.7
+
 ## 8.0.6
 
 ### Patch Changes
