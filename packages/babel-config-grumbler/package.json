@@ -1,6 +1,6 @@
 {
   "name": "@krakenjs/babel-config-grumbler",
-  "version": "8.0.6",
+  "version": "8.0.7",
   "description": "Babel scripts for grumbler modules",
   "main": "babelrc-browser.js",
   "scripts": {
