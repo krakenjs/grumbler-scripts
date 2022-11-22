@@ -3,6 +3,7 @@
   "version": "8.0.7",
   "description": "Webpack config for grumbler modules",
   "main": "dist/index.js",
+  "types": "./index.d.ts",
   "scripts": {
     "build": "babel index.js --out-dir ./dist",
     "lint": "eslint ."
