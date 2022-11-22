@@ -154,7 +154,7 @@ module.exports = {
     "func-call-spacing": "off",
     "@typescript-eslint/func-call-spacing": ["error", "never"],
     "keyword-spacing": "off",
-    "@typescript-eslint/keyword-spacing": "error",
+    "@typescript-eslint/keyword-spacing": "off",
     "lines-between-class-members": "off",
     "@typescript-eslint/lines-between-class-members": [
       "error",
