@@ -26,3 +26,8 @@ type WebpackConfigOptions = {
 declare const getWebpackConfig: (
   arg0: WebpackConfigOptions
 ) => webpack.Configuration;
+
+declare const getNextVersion: (
+  pkg: { version: string; [key: string]: unknown },
+  level?: string
+) => string;
