@@ -7,4 +7,4 @@
 "@krakenjs/typescript-config-grumbler": minor
 ---
 
-Add TS types for webpack
+Add TS types for webpack, and remove comments in babel

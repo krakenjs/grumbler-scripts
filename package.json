@@ -31,10 +31,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   ],
-  "dependencies": {
-    "@krakenjs/webpack-config-grumbler": "^8.0.7",
-    "@types/webpack": "^5.28.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@changesets/cli": "^2.25.2",
     "husky": "^8.0.1",

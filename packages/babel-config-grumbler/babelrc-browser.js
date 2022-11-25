@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-commonjs
 module.exports = {
+  comments: false,
   presets: [
     [
       "@babel/env",
