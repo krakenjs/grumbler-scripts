@@ -1,5 +1,20 @@
 ### 7.0.4 (2022-06-30)
 
+## 8.1.0
+
+### Minor Changes
+
+- b8942fd: Add TS types for webpack, and remove comments in babel
+
+### Patch Changes
+
+- Updated dependencies [b8942fd]
+  - @krakenjs/webpack-config-grumbler@8.1.0
+  - @krakenjs/babel-config-grumbler@8.1.0
+  - @krakenjs/eslint-config-grumbler@8.1.0
+  - @krakenjs/karma-config-grumbler@8.1.0
+  - @krakenjs/typescript-config-grumbler@8.1.0
+
 ## 8.0.7
 
 ### Patch Changes

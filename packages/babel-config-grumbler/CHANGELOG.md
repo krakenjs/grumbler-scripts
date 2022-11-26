@@ -1,5 +1,11 @@
 # @krakenjs/babel-config-grumbler
 
+## 8.1.0
+
+### Minor Changes
+
+- b8942fd: Add TS types for webpack, and remove comments in babel
+
 ## 8.0.7
 
 ### Patch Changes
