@@ -3,6 +3,7 @@
   "version": "8.0.7",
   "description": "Webpack config for grumbler modules",
   "main": "dist/index.js",
+  "types": "./index.d.ts",
   "scripts": {
     "build": "babel index.js --out-dir ./dist",
     "lint": "eslint ."
@@ -54,5 +55,8 @@
     "webpack-cli": "^4.10.0",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^4.11.1"
+  },
+  "devDependencies": {
+    "@types/webpack": "^5.28.0"
   }
 }
