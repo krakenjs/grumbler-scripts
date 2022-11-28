@@ -1,5 +1,11 @@
 # @krakenjs/eslint-config-grumbler
 
+## 8.1.1
+
+### Patch Changes
+
+- 903a199: Update member-ordering eslint rule to default
+
 ## 8.1.0
 
 ### Minor Changes

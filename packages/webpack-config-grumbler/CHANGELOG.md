@@ -1,5 +1,13 @@
 # @krakenjs/webpack-config-grumbler
 
+## 8.1.1
+
+### Patch Changes
+
+- 903a199: Update member-ordering eslint rule to default
+- Updated dependencies [903a199]
+  - @krakenjs/babel-config-grumbler@8.1.1
+
 ## 8.1.0
 
 ### Minor Changes

@@ -1,5 +1,17 @@
 ### 7.0.4 (2022-06-30)
 
+## 8.1.1
+
+### Patch Changes
+
+- 903a199: Update member-ordering eslint rule to default
+- Updated dependencies [903a199]
+  - @krakenjs/eslint-config-grumbler@8.1.1
+  - @krakenjs/babel-config-grumbler@8.1.1
+  - @krakenjs/karma-config-grumbler@8.1.1
+  - @krakenjs/typescript-config-grumbler@8.1.1
+  - @krakenjs/webpack-config-grumbler@8.1.1
+
 ## 8.1.0
 
 ### Minor Changes
