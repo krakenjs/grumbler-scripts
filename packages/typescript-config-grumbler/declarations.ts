@@ -1,30 +1,30 @@
 /* eslint @typescript-eslint/no-unused-vars: "off" */
 export const ENV = {
-  LOCAL: "local" as "local",
-  STAGE: "stage" as "stage",
-  SANDBOX: "sandbox" as "sandbox",
-  PRODUCTION: "production" as "production",
-  TEST: "test" as "test",
-  DEMO: "demo" as "demo",
-};
+  LOCAL: "local",
+  STAGE: "stage",
+  SANDBOX: "sandbox",
+  PRODUCTION: "production",
+  TEST: "test",
+  DEMO: "demo",
+} as const;
 
-type $Values<O extends Record<string, unknown>> = O[keyof O];
+export interface Global {
+  __TEST__: boolean;
+  __WEB__: boolean;
+  __MIN__: boolean;
+  __DEBUG__: boolean;
+  __ENV__: typeof ENV[keyof typeof ENV];
+  __TREE_SHAKE__: boolean;
 
-declare let __TEST__: boolean;
-declare let __WEB__: boolean;
-declare let __MIN__: boolean;
-declare let __DEBUG__: boolean;
-declare let __ENV__: $Values<typeof ENV>;
-declare let __TREE_SHAKE__: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  __WINDOW__: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  __GLOBAL__: any;
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare let __WINDOW__: any;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-declare let __GLOBAL__: any;
+  __LOCAL__: boolean;
+  __STAGE__: boolean;
+  __SANDBOX__: boolean;
+  __PRODUCTION__: boolean;
 
-declare let __LOCAL__: boolean;
-declare let __STAGE__: boolean;
-declare let __SANDBOX__: boolean;
-declare let __PRODUCTION__: boolean;
-
-declare let __UID__: string;
+  __UID__: string;
+}
