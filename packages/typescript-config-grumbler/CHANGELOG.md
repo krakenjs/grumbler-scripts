@@ -1,5 +1,11 @@
 # @krakenjs/typescript-config-grumbler
 
+## 8.1.2
+
+### Patch Changes
+
+- 93a918f: update global variable exports
+
 ## 8.1.1
 
 ### Patch Changes
