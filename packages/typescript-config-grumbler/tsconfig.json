@@ -1,5 +1,6 @@
 {
   "exclude": ["dist/**/*"],
+  "files": ["./declarations.ts"],
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
