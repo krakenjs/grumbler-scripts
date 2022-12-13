@@ -1,5 +1,11 @@
 # @krakenjs/typescript-config-grumbler
 
+## 8.1.3
+
+### Patch Changes
+
+- 7c0502e: Revert global variable update
+
 ## 8.1.2
 
 ### Patch Changes

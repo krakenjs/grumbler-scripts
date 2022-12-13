@@ -1,5 +1,12 @@
 ### 7.0.4 (2022-06-30)
 
+## 8.1.3
+
+### Patch Changes
+
+- Updated dependencies [7c0502e]
+  - @krakenjs/typescript-config-grumbler@8.1.3
+
 ## 8.1.2
 
 ### Patch Changes
