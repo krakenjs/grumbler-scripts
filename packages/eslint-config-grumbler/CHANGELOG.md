@@ -1,5 +1,11 @@
 # @krakenjs/eslint-config-grumbler
 
+## 8.1.2
+
+### Patch Changes
+
+- 3cb3ad2: pin version of eslint-plugin-compat due to known issue with 4.1.0 (https://github.com/amilajack/eslint-plugin-compat/pull/529)
+
 ## 8.1.1
 
 ### Patch Changes
