@@ -1,5 +1,12 @@
 ### 7.0.4 (2022-06-30)
 
+## 8.1.4
+
+### Patch Changes
+
+- Updated dependencies [3cb3ad2]
+  - @krakenjs/eslint-config-grumbler@8.1.2
+
 ## 8.1.3
 
 ### Patch Changes
