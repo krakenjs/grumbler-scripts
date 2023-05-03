@@ -30,7 +30,6 @@ module.exports = {
       "@babel/plugin-transform-runtime",
       { corejs: false, helpers: true, regenerator: false, useESModules: true },
     ],
-    ["babel-plugin-react-scoped-css", { include: ".scoped.(sa|sc|c)ss$" }],
   ],
 
   env: {
