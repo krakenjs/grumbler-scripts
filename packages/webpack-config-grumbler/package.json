@@ -1,6 +1,6 @@
 {
   "name": "@krakenjs/webpack-config-grumbler",
-  "version": "8.1.1",
+  "version": "8.1.1-alpha.1",
   "description": "Webpack config for grumbler modules",
   "main": "dist/index.js",
   "types": "./index.d.ts",
@@ -47,7 +47,6 @@
     "rmfr": "^2.0.0",
     "sass": "^1.55.0",
     "sass-loader": "^8.0.2",
-    "scoped-css-loader": "^1.0.0",
     "semver": "^7.3.8",
     "terser-webpack-plugin": "^2.3.2",
     "webpack": "^4.44.1",

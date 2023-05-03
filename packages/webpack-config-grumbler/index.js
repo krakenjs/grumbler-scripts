@@ -388,9 +388,15 @@ export function getWebpackConfig({
           loader: require.resolve("css-loader"),
           options: {
             importLoaders: 1,
+            modules: {
+              // see docs for v3.6.0 here: https://github.com/webpack-contrib/css-loader/tree/v3.6.0#modules
+              mode: "local",
+              exportGlobals: true,
+              localIdentName: "[local]--[hash:base64]",
+              hashPrefix: "pp-sdk",
+            },
           },
         },
-        require.resolve("scoped-css-loader"),
         require.resolve("sass-loader"),
       ],
     });
