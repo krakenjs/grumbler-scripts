@@ -1,5 +1,11 @@
 # @krakenjs/eslint-config-grumbler
 
+## 8.1.3
+
+### Patch Changes
+
+- 409e2fb: chore(deps): update unicorn plugin
+
 ## 8.1.2
 
 ### Patch Changes

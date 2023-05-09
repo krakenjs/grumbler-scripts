@@ -1,6 +1,6 @@
 {
   "name": "@krakenjs/grumbler-scripts",
-  "version": "8.1.4",
+  "version": "8.1.5",
   "description": "Common configs for grumbler modules",
   "scripts": {
     "lint": "eslint .",
@@ -32,7 +32,7 @@
   ],
   "dependencies": {
     "@krakenjs/babel-config-grumbler": "8.1.1",
-    "@krakenjs/eslint-config-grumbler": "8.1.2",
+    "@krakenjs/eslint-config-grumbler": "8.1.3",
     "@krakenjs/karma-config-grumbler": "8.1.1",
     "@krakenjs/typescript-config-grumbler": "8.1.3",
     "@krakenjs/webpack-config-grumbler": "8.1.1"
