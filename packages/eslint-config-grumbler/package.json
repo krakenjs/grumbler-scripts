@@ -37,6 +37,6 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "7.31.10",
     "eslint-plugin-security": "^1.5.0",
-    "eslint-plugin-unicorn": "^38.0.1"
+    "eslint-plugin-unicorn": "^47.0.0"
   }
 }

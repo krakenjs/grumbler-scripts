@@ -2,4 +2,4 @@
 "@krakenjs/eslint-config-grumbler": patch
 ---
 
-pin version of eslint-plugin-compat
+chore(deps): update unicorn plugin
