@@ -4,6 +4,7 @@
   "scripts": {
     "build": "npm run build --workspaces --if-present",
     "changeset:add": "changeset add",
+    "changeset:prerelease": "changeset pre enter next",
     "changeset:release": "npm run build && changeset publish",
     "changeset:version": "changeset version && npm i --package-lock-only",
     "clean": "npm exec --workspaces -- npx rimraf node_modules && npx rimraf node_modules",

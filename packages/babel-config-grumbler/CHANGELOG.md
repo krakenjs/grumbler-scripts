@@ -1,5 +1,11 @@
 # @krakenjs/babel-config-grumbler
 
+## 8.1.2-next.0
+
+### Patch Changes
+
+- de4b7a3: chore: remove deprecated babel plugins
+
 ## 8.1.1
 
 ### Patch Changes
