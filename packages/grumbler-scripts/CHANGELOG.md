@@ -1,5 +1,14 @@
 ### 7.0.4 (2022-06-30)
 
+## 8.1.6
+
+### Patch Changes
+
+- Updated dependencies [de4b7a3]
+  - @krakenjs/babel-config-grumbler@8.1.2
+  - @krakenjs/webpack-config-grumbler@8.1.2
+  - @krakenjs/karma-config-grumbler@8.1.2
+
 ## 8.1.5
 
 ### Patch Changes
