@@ -22,13 +22,11 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
 
   const HARD_SOURCE_CACHE_FOLDER = "cache-hard-source";
   const BABEL_CACHE_FOLDER = "cache-babel";
-  const TERSER_CACHE_FOLDER = "cache-terser";
   const CACHE_LOADER_FOLDER = "cache-loader";
 
   const folders = [
     HARD_SOURCE_CACHE_FOLDER,
     BABEL_CACHE_FOLDER,
-    TERSER_CACHE_FOLDER,
     CACHE_LOADER_FOLDER,
   ];
 
@@ -36,15 +34,9 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
 
   const HARD_SOURCE_CACHE_DIR = join(tmpDir, `cache-hard-source-${id}`);
   const BABEL_CACHE_DIR = join(tmpDir, `cache-babel-${id}`);
-  const TERSER_CACHE_DIR = join(tmpDir, `cache-terser-${id}`);
   const CACHE_LOADER_DIR = join(tmpDir, `cache-loader-${id}`);
 
-  const dirs = [
-    HARD_SOURCE_CACHE_DIR,
-    BABEL_CACHE_DIR,
-    TERSER_CACHE_DIR,
-    CACHE_LOADER_DIR,
-  ];
+  const dirs = [HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, CACHE_LOADER_DIR];
 
   const create = () => {
     if (cacheDirsCreated) {
@@ -117,7 +109,6 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
   return {
     hardSource: HARD_SOURCE_CACHE_DIR,
     babel: BABEL_CACHE_DIR,
-    terser: TERSER_CACHE_DIR,
     cacheLoader: CACHE_LOADER_DIR,
   };
 };
@@ -256,7 +247,7 @@ export function getWebpackConfig({
   analyze = false,
   dynamic = false,
   optimize = env !== "local",
-  babelConfig = "@krakenjs/babel-config-grumbler/babelrc-browser",
+  babelConfig = "@krakenjs/babel-config-grumbler/babel-browser",
   publicPath,
 } = {}) {
   const enableSourceMap = sourcemaps && web && !test;
@@ -309,11 +300,12 @@ export function getWebpackConfig({
   const optimization = optimize
     ? {
         minimize: true,
-        namedModules: debug,
+        moduleIds: debug ? "named" : false,
         concatenateModules: true,
         minimizer: [
           new TerserPlugin({
             test: /\.js$/,
+            parallel: true,
             terserOptions: {
               warnings: false,
               compress: {
@@ -329,9 +321,6 @@ export function getWebpackConfig({
               },
               mangle: minify ? true : false,
             },
-            parallel: true,
-            sourceMap: enableSourceMap,
-            cache: enableCaching && cacheDirs.terser,
           }),
         ],
       }
@@ -360,8 +349,6 @@ export function getWebpackConfig({
     options.devtool = "inline-source-map";
   } else if (enableSourceMap) {
     options.devtool = "source-map";
-  } else {
-    options.devtool = "";
   }
 
   if (analyze) {
@@ -383,15 +370,15 @@ export function getWebpackConfig({
     rules.push({
       test: /\.scss$/i,
       use: [
-        require.resolve("isomorphic-style-loader"),
+        "isomorphic-style-loader",
         {
-          loader: require.resolve("css-loader"),
+          loader: "css-loader",
           options: {
             importLoaders: 1,
           },
         },
-        require.resolve("scoped-css-loader"),
-        require.resolve("sass-loader"),
+        "scoped-css-loader",
+        "sass-loader",
       ],
     });
   }
@@ -399,7 +386,7 @@ export function getWebpackConfig({
   if (enableCaching) {
     rules.push({
       test: /\.m?(j|t)sx?$/,
-      loader: require.resolve("cache-loader"),
+      loader: "cache-loader",
       options: {
         cacheDirectory: cacheDirs.cacheLoader,
       },
@@ -409,7 +396,7 @@ export function getWebpackConfig({
   rules.push({
     test: /\.m?(j|t)sx?$/,
     exclude: /(dist)/,
-    loader: require.resolve("babel-loader"),
+    loader: "babel-loader",
     options: {
       cacheDirectory: enableCaching && cacheDirs.babel,
       extends: babelConfig,
@@ -418,7 +405,7 @@ export function getWebpackConfig({
 
   rules.push({
     test: /\.(html?|css|json|svg)$/,
-    loader: require.resolve("raw-loader"),
+    loader: "raw-loader",
   });
 
   const output = {
@@ -443,13 +430,9 @@ export function getWebpackConfig({
     output,
 
     node: {
-      console: false,
       global: false,
-      process: false,
       __filename: false,
       __dirname: false,
-      Buffer: false,
-      setImmediate: false,
     },
 
     resolve: {
