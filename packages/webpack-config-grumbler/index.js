@@ -16,7 +16,7 @@ import TerserPlugin from "terser-webpack-plugin";
 import CircularDependencyPlugin from "circular-dependency-plugin";
 // TODO: drop hardsource as you can just use cache
 // https://webpack.js.org/configuration/cache/#cache
-import HardSourceWebpackPlugin from "hard-source-webpack-plugin";
+// import HardSourceWebpackPlugin from "hard-source-webpack-plugin";
 // bundle analyzer seems fine
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 // leaving rmfr one alone for fear of esm but seems duplicative
@@ -345,14 +345,14 @@ export function getWebpackConfig({
     ];
   }
 
-  if (enableCaching && !dynamic) {
-    plugins = [
-      ...plugins,
-      new HardSourceWebpackPlugin({
-        cacheDirectory: cacheDirs.hardSource,
-      }),
-    ];
-  }
+  // if (enableCaching && !dynamic) {
+  // plugins = [
+  // ...plugins,
+  // new HardSourceWebpackPlugin({
+  // cacheDirectory: cacheDirs.hardSource,
+  // }),
+  // ];
+  // }
 
   if (enableInlineSourceMap) {
     options.devtool = "inline-source-map";
@@ -392,14 +392,24 @@ export function getWebpackConfig({
     });
   }
 
+  let cacheConfig = false;
+
   if (enableCaching) {
-    rules.push({
-      test: /\.m?(j|t)sx?$/,
-      loader: "cache-loader",
-      options: {
-        cacheDirectory: cacheDirs.cacheLoader,
+    cacheConfig = {
+      type: "filesystem",
+      cacheDirectory: cacheDirs.cacheLoader,
+      buildDependencies: {
+        config: [__filename],
       },
-    });
+    };
+    // cache-loader deprecated
+    // rules.push({
+    // test: /\.m?(j|t)sx?$/,
+    // loader: "cache-loader",
+    // options: {
+    // cacheDirectory: cacheDirs.cacheLoader,
+    // },
+    // });
   }
 
   rules.push({
@@ -436,6 +446,8 @@ export function getWebpackConfig({
     context,
     mode,
     entry,
+
+    cache: cacheConfig,
 
     output,
 
