@@ -423,9 +423,12 @@ export function getWebpackConfig({
     },
   });
 
+  // TODO: move to assets module
+  // https://webpack.js.org/guides/asset-modules/
   rules.push({
     test: /\.(html?|css|json|svg)$/,
-    loader: "raw-loader",
+    // loader: "raw-loader",
+    loader: "asset/source",
   });
 
   const output = {
