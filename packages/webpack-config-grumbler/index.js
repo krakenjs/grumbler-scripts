@@ -8,11 +8,20 @@ import rimraf from "rimraf";
 import semver from "semver";
 import webpack from "webpack";
 import nodeCleanup from "node-cleanup";
+// only need terser installed if customizing as its oob in v5
+// https://github.com/webpack-contrib/terser-webpack-plugin
+// TODO: verify configs
 import TerserPlugin from "terser-webpack-plugin";
+// TODO: circular is test only. can potentially drop
 import CircularDependencyPlugin from "circular-dependency-plugin";
+// TODO: drop hardsource as you can just use cache
+// https://webpack.js.org/configuration/cache/#cache
 import HardSourceWebpackPlugin from "hard-source-webpack-plugin";
+// bundle analyzer seems fine
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+// leaving rmfr one alone for fear of esm but seems duplicative
 import rmrf from "rmfr";
+// dont upgrade process-exists as sindre switched to esm and we run with babel in cjs still :/
 import processExists from "process-exists";
 
 let cacheDirsCreated = false;
@@ -247,7 +256,7 @@ export function getWebpackConfig({
   analyze = false,
   dynamic = false,
   optimize = env !== "local",
-  babelConfig = "@krakenjs/babel-config-grumbler/babel-browser",
+  babelConfig = "@krakenjs/babel-config-grumbler/babelrc-browser",
   publicPath,
 } = {}) {
   const enableSourceMap = sourcemaps && web && !test;
@@ -396,6 +405,7 @@ export function getWebpackConfig({
   rules.push({
     test: /\.m?(j|t)sx?$/,
     exclude: /(dist)/,
+    // TODO: it appears we need to run `npm install -D babel-loader` in sdk-client when i upgraded to v9.1.3. confusing but still works.
     loader: "babel-loader",
     options: {
       cacheDirectory: enableCaching && cacheDirs.babel,
