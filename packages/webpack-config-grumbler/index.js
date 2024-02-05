@@ -300,6 +300,7 @@ export function getWebpackConfig({
           new TerserPlugin({
             test: /\.js$/,
             parallel: true,
+            sourceMap: enableSourceMap,
             terserOptions: {
               warnings: false,
               compress: {
@@ -375,7 +376,6 @@ export function getWebpackConfig({
   rules.push({
     test: /\.m?(j|t)sx?$/,
     exclude: /(dist)/,
-    // TODO: it appears we need to run `npm install -D babel-loader` in sdk-client when i upgraded to v9.1.3. confusing but still works.
     loader: "babel-loader",
     options: {
       cacheDirectory: enableCaching && cacheDirs.babel,
