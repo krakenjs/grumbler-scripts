@@ -294,7 +294,6 @@ export function getWebpackConfig({
   const optimization = optimize
     ? {
         minimize: true,
-        moduleIds: debug ? "named" : false,
         concatenateModules: true,
         minimizer: [
           new TerserPlugin({
