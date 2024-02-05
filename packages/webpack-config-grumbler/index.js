@@ -12,11 +12,9 @@ import nodeCleanup from "node-cleanup";
 // https://github.com/webpack-contrib/terser-webpack-plugin
 // TODO: verify configs
 import TerserPlugin from "terser-webpack-plugin";
-// bundle analyzer seems fine
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
-// leaving rmfr one alone for fear of esm but seems duplicative
 import rmrf from "rmfr";
-// dont upgrade process-exists as sindre switched to esm and we run with babel in cjs still :/
+// current using old version of process-exists as we need cjs support for our babel-node usage of webpack
 import processExists from "process-exists";
 
 let cacheDirsCreated = false;
@@ -24,23 +22,17 @@ let cacheDirsCreated = false;
 const setupCacheDirs = ({ dynamic = false } = {}) => {
   const tmpDir = tmpdir();
 
-  const HARD_SOURCE_CACHE_FOLDER = "cache-hard-source";
   const BABEL_CACHE_FOLDER = "cache-babel";
   const CACHE_LOADER_FOLDER = "cache-loader";
 
-  const folders = [
-    HARD_SOURCE_CACHE_FOLDER,
-    BABEL_CACHE_FOLDER,
-    CACHE_LOADER_FOLDER,
-  ];
+  const folders = [BABEL_CACHE_FOLDER, CACHE_LOADER_FOLDER];
 
   const id = dynamic ? process.pid.toString() : "static";
 
-  const HARD_SOURCE_CACHE_DIR = join(tmpDir, `cache-hard-source-${id}`);
   const BABEL_CACHE_DIR = join(tmpDir, `cache-babel-${id}`);
   const CACHE_LOADER_DIR = join(tmpDir, `cache-loader-${id}`);
 
-  const dirs = [HARD_SOURCE_CACHE_DIR, BABEL_CACHE_DIR, CACHE_LOADER_DIR];
+  const dirs = [BABEL_CACHE_DIR, CACHE_LOADER_DIR];
 
   const create = () => {
     if (cacheDirsCreated) {
@@ -111,7 +103,6 @@ const setupCacheDirs = ({ dynamic = false } = {}) => {
   create();
 
   return {
-    hardSource: HARD_SOURCE_CACHE_DIR,
     babel: BABEL_CACHE_DIR,
     cacheLoader: CACHE_LOADER_DIR,
   };
@@ -329,19 +320,12 @@ export function getWebpackConfig({
       }
     : {};
 
-  // if (enableCaching && !dynamic) {
-  // plugins = [
-  // ...plugins,
-  // new HardSourceWebpackPlugin({
-  // cacheDirectory: cacheDirs.hardSource,
-  // }),
-  // ];
-  // }
-
   if (enableInlineSourceMap) {
     options.devtool = "inline-source-map";
   } else if (enableSourceMap) {
     options.devtool = "source-map";
+  } else {
+    options.devtool = "";
   }
 
   if (analyze) {
@@ -386,14 +370,6 @@ export function getWebpackConfig({
         config: [__filename],
       },
     };
-    // cache-loader deprecated
-    // rules.push({
-    // test: /\.m?(j|t)sx?$/,
-    // loader: "cache-loader",
-    // options: {
-    // cacheDirectory: cacheDirs.cacheLoader,
-    // },
-    // });
   }
 
   rules.push({
@@ -407,11 +383,8 @@ export function getWebpackConfig({
     },
   });
 
-  // TODO: move to assets module
-  // https://webpack.js.org/guides/asset-modules/
   rules.push({
     test: /\.(html?|css|json|svg)$/,
-    // loader: "raw-loader",
     loader: "asset/source",
   });
 
