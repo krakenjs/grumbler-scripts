@@ -1,6 +1,6 @@
 {
   "name": "@krakenjs/grumbler-scripts",
-  "version": "8.1.6-next.14",
+  "version": "8.1.6-next.15",
   "description": "Common configs for grumbler modules",
   "scripts": {
     "lint": "eslint .",
