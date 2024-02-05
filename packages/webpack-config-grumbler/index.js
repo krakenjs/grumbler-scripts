@@ -300,7 +300,6 @@ export function getWebpackConfig({
           new TerserPlugin({
             test: /\.js$/,
             parallel: true,
-            sourceMap: enableSourceMap,
             terserOptions: {
               warnings: false,
               compress: {
@@ -315,6 +314,7 @@ export function getWebpackConfig({
                 beautify: enableBeautify,
               },
               mangle: minify ? true : false,
+              sourceMap: enableSourceMap,
             },
           }),
         ],

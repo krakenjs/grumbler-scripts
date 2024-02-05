@@ -1,6 +1,6 @@
 {
   "name": "@krakenjs/webpack-config-grumbler",
-  "version": "8.1.2-next.10",
+  "version": "8.1.2-next.11",
   "description": "Webpack config for grumbler modules",
   "main": "dist/index.js",
   "types": "./index.d.ts",
