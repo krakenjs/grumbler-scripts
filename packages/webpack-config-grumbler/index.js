@@ -12,11 +12,6 @@ import nodeCleanup from "node-cleanup";
 // https://github.com/webpack-contrib/terser-webpack-plugin
 // TODO: verify configs
 import TerserPlugin from "terser-webpack-plugin";
-// TODO: circular is test only. can potentially drop
-import CircularDependencyPlugin from "circular-dependency-plugin";
-// TODO: drop hardsource as you can just use cache
-// https://webpack.js.org/configuration/cache/#cache
-// import HardSourceWebpackPlugin from "hard-source-webpack-plugin";
 // bundle analyzer seems fine
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 // leaving rmfr one alone for fear of esm but seems duplicative
@@ -261,7 +256,6 @@ export function getWebpackConfig({
 } = {}) {
   const enableSourceMap = sourcemaps && web && !test;
   const enableInlineSourceMap = enableSourceMap && (test || debug);
-  const enableCheckCircularDeps = test;
   const enableCaching = cache && !test;
   const enableTreeShake = web && !test && !debug;
   const enableBeautify = debug || test || !minify;
@@ -334,16 +328,6 @@ export function getWebpackConfig({
         ],
       }
     : {};
-
-  if (enableCheckCircularDeps) {
-    plugins = [
-      ...plugins,
-      new CircularDependencyPlugin({
-        exclude: /node_modules/,
-        failOnError: true,
-      }),
-    ];
-  }
 
   // if (enableCaching && !dynamic) {
   // plugins = [
