@@ -1,5 +1,11 @@
 # @krakenjs/eslint-config-grumbler
 
+## 8.2.0
+
+### Minor Changes
+
+- c108d40: added eslintrc-typescript-browser config
+
 ## 8.1.3
 
 ### Patch Changes
