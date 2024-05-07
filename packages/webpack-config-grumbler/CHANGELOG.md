@@ -1,5 +1,12 @@
 # @krakenjs/webpack-config-grumbler
 
+## 8.1.3
+
+### Patch Changes
+
+- Updated dependencies [1dbc45e]
+  - @krakenjs/babel-config-grumbler@8.2.0
+
 ## 8.1.2
 
 ### Patch Changes
