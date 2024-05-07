@@ -8,6 +8,13 @@ This package assumes you are already using [Prettier](https://prettier.io/).
 npm install -D @krakenjs/eslint-config-grumbler
 ```
 
+### Config Files
+
+- `eslintrc-browser` - browser-based rules + FlowType
+- `eslintrc-typescript-browser` - browser-based rules + TypeScript
+- `eslintrc-typescript` - TypeScript rules
+- `eslintrc-node` - node.js rules
+
 ### Usage
 
 1. Create a `.eslintrc.js` file at the root of your package.
