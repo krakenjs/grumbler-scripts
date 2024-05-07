@@ -1,5 +1,11 @@
 # @krakenjs/babel-config-grumbler
 
+## 8.2.0
+
+### Minor Changes
+
+- 1dbc45e: reverting PR #78
+
 ## 8.1.2
 
 ### Patch Changes
