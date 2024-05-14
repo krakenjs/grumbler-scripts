@@ -72,7 +72,7 @@ export const WEBPACK_CONFIG_TEST : WebpackConfig = getWebpackConfig({
 
 ```
 {
-    "extends": "@krakenjs/grumbler-scripts/config/tsconfig.json"
+    "extends": "@krakenjs/typescript-config-grumbler/tsconfig.json"
 }
 ```
 
