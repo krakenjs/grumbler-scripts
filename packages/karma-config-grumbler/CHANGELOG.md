@@ -1,5 +1,11 @@
 # @krakenjs/karma-config-grumbler
 
+## 8.1.4
+
+### Patch Changes
+
+- @krakenjs/webpack-config-grumbler@8.1.4
+
 ## 8.1.3
 
 ### Patch Changes

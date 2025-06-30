@@ -1,5 +1,11 @@
 # @krakenjs/babel-config-grumbler
 
+## 8.3.0
+
+### Minor Changes
+
+- f23b393: Removes dependancies that are unused and have critical security vulnerabilities
+
 ## 8.2.0
 
 ### Minor Changes
